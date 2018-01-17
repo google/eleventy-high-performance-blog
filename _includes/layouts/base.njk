@@ -11,7 +11,7 @@
 		<header>
 			<a href="/""><img src="/img/logo.png" class="logo"></a>
 			<ul class="nav">
-				{%- for nav in collections.nav -%}
+				{%- for nav in collections.nav | reverse -%}
 				<li class="nav-item"><a href="{{ nav.url | url }}">{{ nav.data.navtitle }}</a></li>
 				{%- endfor -%}
 		</header>
