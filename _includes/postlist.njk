@@ -2,7 +2,7 @@
 <ul>
 {%- for post in posts -%}
 	<li{% if post.url == url %} class="post-active"{% endif %}>
-		<a href="{{ post.url | absoluteUrl }}">{{ post.data.title }}</a>
+		<a href="{{ post.url | url }}">{{ post.data.title }}</a>
 		Tags: {{ post.data.tags | join(", ") }}
 		{%- if post.url == url %}
 		(You are here)

@@ -12,7 +12,7 @@
 			<a href="/""><img src="/img/logo.png" class="logo"></a>
 			<ul class="nav">
 				{%- for nav in collections.nav -%}
-				<li class="nav-item"><a href="{{ nav.url | absoluteUrl }}">{{ nav.data.navtitle }}</a></li>
+				<li class="nav-item"><a href="{{ nav.url | url }}">{{ nav.data.navtitle }}</a></li>
 				{%- endfor -%}
 		</header>
 
@@ -20,7 +20,7 @@
 
 		<footer>
 			<p><em><a href="/feed/">Subscribe to my feed</a></em></p>
-			<p><em>Current page: <code>{{ page.url }}</code></em></p>
+			<p><em>Current page: <code>{{ page.url | url }}</code></em></p>
 		</footer>
 	</body>
 </html>

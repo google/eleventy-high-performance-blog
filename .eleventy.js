@@ -31,7 +31,7 @@ module.exports = function(config) {
 	    rssDate: dateObj => {
 	      return dateToISO(dateObj);
 	    },
-      absoluteUrl: url => {
+      url: url => {
         // If your blog lives in a subdirectory, change this:
         let rootDir = "/";
         if( !url || url === "/" ) {
