@@ -1,28 +1,28 @@
 # eleventy-base-blog
 
-A starter repository for eleventy static site generator projects.
+A starter repository showing how to build a blog with the [Eleventy](https://github.com/11ty/eleventy) static site generator.
 
 ## Getting Started
 
-1. Clone this repository:
+### 1. Clone this repository:
 
 ```
 git clone https://github.com/11ty/eleventy-base-blog.git my-blog-name
 ```
 
-2. Navigate to the directory
+### 2. Navigate to the directory
 
 ```
 cd my-blog-name
 ```
 
-3. Install dependencies
+### 3. Install dependencies
 
 ```
 npm install
 ```
 
-4. Run Eleventy
+### 4. Run Eleventy
 
 ```
 npx eleventy
