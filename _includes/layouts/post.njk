@@ -1,0 +1,12 @@
+---
+layout: layouts/base.njk
+templateClass: tmpl-post
+---
+<h1>{{ title }}</h1>
+
+{{ layoutContent | safe }}
+
+<h2>Posts: </h2>
+
+{% import "postlist.njk" as postsm %}
+{{ postsm.list(collections.post, page.url) }}

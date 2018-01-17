@@ -1,0 +1,37 @@
+p {
+	max-width: 37.5em; /* 600px /16 */
+}
+
+/* Logo */
+.logo {
+	max-width: 12.5em; /* 200px /16 */
+}
+.tmpl-page .logo,
+.tmpl-post .logo {
+	max-width: 8.75em; /* 140px /16 */
+}
+@media (min-width: 31.25em) { /* 500px */
+	.tmpl-page .logo,
+	.tmpl-post .logo {
+		position: absolute;
+		right: 1em;
+		top: 1em;
+	}
+	.tmpl-page body,
+	.tmpl-post body {
+		padding-right: 10em; /* 160px /16 */
+	}
+}
+/* Nav */
+.nav {
+	padding: 0;
+	list-style: none;
+}
+.nav-item {
+	display: inline-block;
+	margin-right: 1em;
+}
+/* Posts list */
+.post-active {
+	font-weight: bold;
+}

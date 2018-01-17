@@ -1,0 +1,9 @@
+---
+layout: layouts/home.njk
+title: My Blog
+tags: nav
+navtitle: Home
+---
+{% import "postlist.njk" as postsm %}
+{{ postsm.list(collections.post, page) }}
+
