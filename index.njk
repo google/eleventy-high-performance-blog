@@ -1,9 +1,13 @@
 ---
 layout: layouts/home.njk
-title: My Blog
 tags: nav
 navtitle: Home
 ---
-{% import "postlist.njk" as postsm %}
-{{ postsm.list(collections.post) }}
+
+<div class="next-steps">
+	Now edit the <code>_data/metadata.json</code> with your blog’s information—and delete this message from <code>index.njk</code>.
+</div>
+
+{% set postslist = collections.post %}
+{% include "postslist.njk" %}
 

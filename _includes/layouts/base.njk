@@ -3,24 +3,28 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>{{ title }}</title>
+		<title>{{ title or metadata.title }}</title>
 		<link rel="stylesheet" href="/css/index.css">
 		<link rel="stylesheet" href="/posts/posts.css">
 		<link rel="alternate" href="/feed/" type="application/atom+xml" title="{{ title }}">
 	</head>
 	<body>
 		<header>
-			<a href="/"><img src="/img/logo.png" class="logo"></a>
+			<h1 class="home"><a href="/">{{ metadata.title }}</a></h1>
 			<ul class="nav">
 				{%- for nav in collections.nav | reverse -%}
-				<li class="nav-item"><a href="{{ nav.url | url }}">{{ nav.data.navtitle }}</a></li>
+				<li class="nav-item{% if nav.url == page.url %} nav-item-active{% endif %}"><a href="{{ nav.url | url }}">{{ nav.data.navtitle }}</a></li>
 				{%- endfor -%}
+			</ul>
 		</header>
 
-		{{ layoutContent | safe }}
+		<main>
+			{{ layoutContent | safe }}
+		</main>
 
 		<footer>
-			<p><em>Current page: <code>{{ page.url | url }}</code></em></p>
 		</footer>
+
+		<!-- Current page: {{ page.url | url }} -->
 	</body>
 </html>

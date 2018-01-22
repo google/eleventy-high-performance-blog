@@ -1,11 +1,13 @@
 {
-	"title": "Eleventy, the Blog",
-	"subtitle": "This is a sample project to showcase the Eleventy Static Site Generator.",
-	"feedurl": "https://11ty.io/feed/",
-	"url": "https://11ty.io/",
-	"id": "https://11ty.io/",
+	"title": "Your Blog Name",
+	"url": "https://myurl.com/",
+	"feed": {
+		"subtitle": "I am writing about my experiences as a naval navel-gazer.",
+		"url": "https://myurl.com/feed/",
+		"id": "https://myurl.com/"
+	},
 	"author": {
-		"name": "Zach Leatherman",
-		"email": "zachleat@zachleat.com"
+		"name": "Your Name Here",
+		"email": "youremailaddress@example.com"
 	}
 }

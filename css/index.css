@@ -1,37 +1,127 @@
+:root {
+	--red: #C5004A;
+	--darkred: #7F0036;
+	--lightgray: #e0e0e0;
+	--gray: #C0C0C0;
+	--darkgray: #666;
+	--navy: #17050F;
+	--blue: #082840;
+	--white: #fff;
+}
+* {
+	box-sizing: border-box;
+}
+html,
+body {
+	padding: 0;
+	margin: 0;
+	font-family: sans-serif;
+}
 p {
 	max-width: 37.5em; /* 600px /16 */
 }
+a[href] {
+	color: var(--blue);
+}
+a[href]:visited {
+	color: var(--navy);
+}
+main {
+	padding: 1rem;
+}
+main :first-child {
+	margin-top: 0;
+}
+header {
+	border-bottom: 1px dashed var(--lightgray);
+}
+header:after {
+	content: "";
+	display: table;
+	clear: both;
+}
 
-/* Logo */
-.logo {
-	max-width: 12.5em; /* 200px /16 */
+/* Header */
+.home {
+	padding: 0 1rem;
+	float: left;
+	margin: 1rem 0; /* 16px /16 */
+	font-size: 1em; /* 16px /16 */
 }
-.tmpl-page .logo,
-.tmpl-post .logo {
-	max-width: 8.75em; /* 140px /16 */
+.home :link:not(:hover) {
+	text-decoration: none;
 }
-@media (min-width: 31.25em) { /* 500px */
-	.tmpl-page .logo,
-	.tmpl-post .logo {
-		position: absolute;
-		right: 1em;
-		top: 1em;
-	}
-	.tmpl-page body,
-	.tmpl-post body {
-		padding-right: 10em; /* 160px /16 */
-	}
-}
+
 /* Nav */
 .nav {
 	padding: 0;
 	list-style: none;
+	float: left;
+	margin-left: 1em;
 }
 .nav-item {
 	display: inline-block;
 	margin-right: 1em;
 }
+.nav-item a[href]:not(:hover) {
+	text-decoration: none;
+}
+.nav-item-active {
+	font-weight: 700;
+	text-decoration: underline;
+}
+
 /* Posts list */
-.post-active {
+.postlist {
+	list-style: none;
+	padding: 0;
+}
+.postlist-item {
+	counter-increment: start-from -1;
+}
+.postlist-item:before {
+	display: inline-block;
+	pointer-events: none;
+	content: "" counter(start-from, decimal-leading-zero) ". ";
+	line-height: 100%;
+	text-align: right;
+}
+.postlist-date,
+.postlist-item:before {
+	font-size: 0.8125em; /* 13px /16 */
+	color: var(--darkgray);
+}
+.postlist-date {
+	word-spacing: -0.5px;
+}
+.postlist-link {
+	display: inline-block;
+	padding: 0.25em 0.1875em; /* 4px 3px /16 */
+}
+.postlist-item-active .postlist-link {
 	font-weight: bold;
+}
+.tmpl-home .postlist-link {
+	font-size: 1.1875em; /* 19px /16 */
+	font-weight: 700;
+}
+
+
+/* Tags */
+.tag {
+	display: inline-block;
+	vertical-align: text-top;
+	text-transform: uppercase;
+	font-size: 0.625em; /* 10px /16 */
+	padding: 2px 4px;
+	margin-left: 0.8em; /* 8px /10 */
+	background-color: var(--red);
+	color: var(--white);
+	border-radius: 0.25em; /* 3px /12 */
+}
+
+/* Next steps */
+.next-steps {
+	background-color: #ffc;
+	padding: 0.375em 0.625em; /* 6px 10px /16 */
 }
