@@ -45,7 +45,7 @@ module.exports = function(eleventyConfig) {
     ],
 
     // if your site lives in a subdirectory, change this
-    urlPrefix: "/eleventy-base-blog/",
+    pathPrefix: "/eleventy-base-blog/",
 
     markdownTemplateEngine: "liquid",
     htmlTemplateEngine: "njk",
