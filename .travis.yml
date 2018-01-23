@@ -3,6 +3,6 @@ node_js:
   - 8
 deploy:
   provider: script
-  script: node ./node_modules/@11ty/eleventy/cmd.js
+  script: npm install @11ty/eleventy && node ./node_modules/@11ty/eleventy/cmd.js
   on:
     branch: master
