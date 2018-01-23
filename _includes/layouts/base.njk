@@ -4,13 +4,13 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>{{ title or metadata.title }}</title>
-		<link rel="stylesheet" href="{{ '/css/index.css' | url }}">
-		<link rel="stylesheet" href="{{ '/css/prism-base16-monokai.dark.css' | url }}">
-		<link rel="alternate" href="{{ '/feed/' | url }}" type="application/atom+xml" title="{{ title }}">
+		<link rel="stylesheet" href="{{ 'css/index.css' | url }}">
+		<link rel="stylesheet" href="{{ 'css/prism-base16-monokai.dark.css' | url }}">
+		<link rel="alternate" href="{{ 'feed/' | url }}" type="application/atom+xml" title="{{ title }}">
 	</head>
 	<body>
 		<header>
-			<h1 class="home"><a href="{{ '/' | url }}">{{ metadata.title }}</a></h1>
+			<h1 class="home"><a href="{{ '' | url }}">{{ metadata.title }}</a></h1>
 			<ul class="nav">
 				{%- for nav in collections.nav | reverse -%}
 				<li class="nav-item{% if nav.url == page.url %} nav-item-active{% endif %}"><a href="{{ nav.url | url }}">{{ nav.data.navtitle }}</a></li>
