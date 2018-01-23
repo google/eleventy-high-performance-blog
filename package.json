@@ -23,6 +23,7 @@
   "homepage": "https://github.com/11ty/eleventy-base-blog#readme",
   "devDependencies": {
     "@11ty/eleventy": "file:../eleventy",
-    "luxon": "^0.3.1"
+    "luxon": "^0.3.1",
+    "prismjs": "^1.10.0"
   }
 }

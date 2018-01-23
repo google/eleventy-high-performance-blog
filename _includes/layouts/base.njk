@@ -1,11 +1,11 @@
 <!doctype html>
-<html lang="en"{% if templateClass %} class="{{ templateClass }}"{% endif %}>
+<html lang="en">
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>{{ title or metadata.title }}</title>
 		<link rel="stylesheet" href="/css/index.css">
-		<link rel="stylesheet" href="/posts/posts.css">
+		<link rel="stylesheet" href="/css/prism-base16-monokai.dark.css">
 		<link rel="alternate" href="/feed/" type="application/atom+xml" title="{{ title }}">
 	</head>
 	<body>
@@ -18,7 +18,7 @@
 			</ul>
 		</header>
 
-		<main>
+		<main{% if templateClass %} class="{{ templateClass }}"{% endif %}>
 			{{ layoutContent | safe }}
 		</main>
 

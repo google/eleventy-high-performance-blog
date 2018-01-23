@@ -17,8 +17,14 @@ body {
 	margin: 0;
 	font-family: sans-serif;
 }
-p {
+p,
+.tmpl-post li,
+img {
 	max-width: 37.5em; /* 600px /16 */
+}
+p,
+.tmpl-post li {
+	line-height: 1.45;
 }
 a[href] {
 	color: var(--blue);
@@ -39,6 +45,30 @@ header:after {
 	content: "";
 	display: table;
 	clear: both;
+}
+pre,
+code {
+	font-family: Consolas, Menlo, Monaco, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", "Courier New", Courier, monospace;
+	line-height: 1.5;
+}
+pre {
+	font-size: 14px;
+	line-height: 1.375;
+	direction: ltr;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	-moz-tab-size: 2;
+	-o-tab-size: 2;
+	tab-size: 2;
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+	padding: 1em;
+	margin: .5em 0;
+	background-color: #f6f6f6;
 }
 
 /* Header */
@@ -120,8 +150,8 @@ header:after {
 	border-radius: 0.25em; /* 3px /12 */
 }
 
-/* Next steps */
-.next-steps {
+/* Warning */
+.warning {
 	background-color: #ffc;
 	padding: 0.375em 0.625em; /* 6px 10px /16 */
 }

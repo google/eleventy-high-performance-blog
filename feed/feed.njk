@@ -7,13 +7,13 @@ permalink: feed/atom.xml
 	<subtitle>{{ metadata.feed.subtitle }}</subtitle>
 	<link href="{{ metadata.feed.url }}" rel="self"/>
 	<link href="{{ metadata.url }}"/>
-	<updated>{{ collections.post | lastUpdatedDate }}</updated>
+	<updated>{{ collections.posts | rssLastUpdatedDate }}</updated>
 	<id>{{ metadata.feed.id }}</id>
 	<author>
 		<name>{{ metadata.author.name }}</name>
 		<email>{{ metadata.author.email }}</email>
 	</author>
-	{% for post in collections.post %}
+	{% for post in collections.posts %}
 	<entry>
 		<title>{{ post.data.title }}</title>
 		<link href="{{ metadata.url }}{{ post.url }}"/>
