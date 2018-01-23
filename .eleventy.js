@@ -1,5 +1,5 @@
 const { DateTime } = require("luxon");
-const liquidjsSyntaxHighlighter = require("./_src/eleventy-liquidjs-tag-highlight-prismjs");
+const liquidjsSyntaxHighlighter = require("./_src/eleventy-liquidjs-tag-highlight-plain");
 
 function dateToISO(dateObj) {
   return DateTime.fromJSDate(dateObj).toISO({ includeOffset: true, suppressMilliseconds: true });
