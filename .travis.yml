@@ -2,11 +2,7 @@ language: node_js
 node_js:
   - 8
 deploy:
-  provider: script
-  script: deploy.sh
-  on:
-    branch: master
-deploy:
+  script: npx eleventy
   local-dir: _site
   provider: pages
   skip-cleanup: true
