@@ -25,7 +25,9 @@ Specifically have a look at `.eleventy.js` to see if you want to configure any E
 npm install
 ```
 
-### 4. Run Eleventy
+### 4. Edit _data/metadata.json
+
+### 5. Run Eleventy
 
 ```
 npx eleventy
