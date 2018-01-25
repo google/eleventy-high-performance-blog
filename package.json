@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/11ty/eleventy-base-blog#readme",
   "devDependencies": {
-    "@11ty/eleventy": ">=0.2.9",
+    "@11ty/eleventy": ">=0.2.10",
     "luxon": "^0.3.1",
     "prismjs": "^1.10.0"
   }
