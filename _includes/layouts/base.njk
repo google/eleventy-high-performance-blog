@@ -6,7 +6,7 @@
 		<title>{{ title or metadata.title }}</title>
 		<link rel="stylesheet" href="{{ 'css/index.css' | url }}">
 		<link rel="stylesheet" href="{{ 'css/prism-base16-monokai.dark.css' | url }}">
-		<link rel="alternate" href="{{ 'feed/' | url }}" type="application/atom+xml" title="{{ title }}">
+		<link rel="alternate" href="{{ metadata.feed.path | url }}" type="application/atom+xml" title="{{ metadata.title }}">
 	</head>
 	<body>
 		<header>

@@ -3,7 +3,8 @@
 	"url": "https://myurl.com/",
 	"feed": {
 		"subtitle": "I am writing about my experiences as a naval navel-gazer.",
-		"url": "https://myurl.com/feed/",
+		"path": "feed/atom.xml",
+		"url": "https://myurl.com/feed/atom.xml",
 		"id": "https://myurl.com/"
 	},
 	"author": {
