@@ -17,6 +17,9 @@ body {
 	margin: 0;
 	font-family: sans-serif;
 }
+p:last-child {
+	margin-bottom: 0;
+}
 p,
 .tmpl-post li,
 img {
