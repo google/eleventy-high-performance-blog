@@ -1,5 +1,5 @@
 ---
 permalink: feed/.htaccess
 ---
-# For Apache, to show `atom.xml` when browsing to directory /feed/ (hide the file!)
-DirectoryIndex atom.xml
+# For Apache, to show `{{ metadata.feed.filename }}` when browsing to directory /feed/ (hide the file!)
+DirectoryIndex {{ metadata.feed.filename }}
