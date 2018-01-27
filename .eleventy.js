@@ -1,5 +1,5 @@
 const { DateTime } = require("luxon");
-const liquidjsSyntaxHighlighter = require("./_src/eleventy-liquidjs-tag-highlight-prismjs");
+const highlighters = require("./_src/eleventy-liquidjs-tag-highlight");
 
 function dateToISO(dateObj) {
   return DateTime.fromJSDate(dateObj).toISO({ includeOffset: true, suppressMilliseconds: true });
@@ -25,7 +25,7 @@ module.exports = function(eleventyConfig) {
   });
 
   // compatibility with existing {% highlight js %} and others
-  eleventyConfig.addLiquidTag("highlight", liquidjsSyntaxHighlighter);
+  eleventyConfig.addLiquidTag("highlight", highlighters.prismjs);
 
   // only content in the `posts/` directory
   eleventyConfig.addCollection("posts", function(collection) {
