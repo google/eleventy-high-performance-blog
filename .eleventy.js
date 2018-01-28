@@ -2,7 +2,7 @@ const { DateTime } = require("luxon");
 const metadata = require("./_data/metadata.json");
 const absoluteUrl = require("./_src/absoluteUrl");
 const HtmlToAbsoluteUrls = require("./_src/HtmlToAbsoluteUrls");
-const highlighters = require("./_src/eleventy-liquidjs-tag-highlight");
+const syntaxHighlighter = require("./_src/eleventy-liquidjs-tag-highlight-prismjs");
 
 function dateToISO(dateObj) {
   return DateTime.fromJSDate(dateObj).toISO({ includeOffset: true, suppressMilliseconds: true });
@@ -43,7 +43,7 @@ module.exports = function(eleventyConfig) {
   }, true);
 
   // compatibility with existing {% highlight js %} and others
-  eleventyConfig.addLiquidTag("highlight", highlighters.prismjs);
+  eleventyConfig.addLiquidTag("highlight", syntaxHighlighter);
 
   // only content in the `posts/` directory
   eleventyConfig.addCollection("posts", function(collection) {
