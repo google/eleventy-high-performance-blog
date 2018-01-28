@@ -5,8 +5,10 @@ const absoluteUrl = require("./AbsoluteUrl");
 module.exports = function(htmlContent, base) {
   let options = {
     eachURL: function(url, attr, element) {
+      url = url.trim();
+
     	// #anchor in-page
-    	if( url.trim().indexOf("#") === 0 ) {
+    	if( url.indexOf("#") === 0 ) {
     		return url;
     	}
 

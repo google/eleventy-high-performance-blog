@@ -13,13 +13,14 @@ permalink: feed/feed.xml
 		<name>{{ metadata.author.name }}</name>
 		<email>{{ metadata.author.email }}</email>
 	</author>
-	{% for post in collections.posts %}
+	{%- for post in collections.posts %}
+	{% set absolutePostUrl %}{{ post.url | url | absoluteUrl(metadata.url) }}{% endset %}
 	<entry>
 		<title>{{ post.data.title }}</title>
-		<link href="{{ post.url | absoluteUrl(metadata.url) }}"/>
+		<link href="{{ absolutePostUrl }}"/>
 		<updated>{{ post.date | rssDate }}</updated>
-		<id>{{ post.url | absoluteUrl(metadata.url) }}</id>
-		<content type="html">{{ post.templateContent | htmlToAbsoluteUrls(metadata.url) }}</content>
+		<id>{{ absolutePostUrl }}</id>
+		<content type="html">{{ post.templateContent | htmlToAbsoluteUrls(absolutePostUrl) }}</content>
 	</entry>
-	{% endfor %}
+	{%- endfor %}
 </feed>
