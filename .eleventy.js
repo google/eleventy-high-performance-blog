@@ -1,6 +1,6 @@
 const { DateTime } = require("luxon");
 const metadata = require("./_data/metadata.json");
-const absoluteUrl = require("./_src/absoluteUrl");
+const absoluteUrl = require("./_src/AbsoluteUrl");
 const HtmlToAbsoluteUrls = require("./_src/HtmlToAbsoluteUrls");
 const syntaxHighlighter = require("./_src/eleventy-liquidjs-tag-highlight-prismjs");
 
