@@ -21,9 +21,22 @@
     "url": "https://github.com/11ty/eleventy-base-blog/issues"
   },
   "homepage": "https://github.com/11ty/eleventy-base-blog#readme",
-  "devDependencies": {
-    "@11ty/eleventy": ">=0.2.11",
+  "dependencies": {
+    "@11ty/eleventy": "0.2.12",
     "luxon": "^0.3.1",
+    "posthtml": "^0.11.2",
+    "posthtml-urls": "^1.0.0",
     "prismjs": "^1.10.0"
+  },
+  "devDependencies": {
+    "ava": "^0.25.0"
+  },
+  "ava": {
+    "files": [
+      "_src/test/*.js"
+    ],
+    "source": [
+      "_src/**/*.{js,jsx}"
+    ]
   }
 }

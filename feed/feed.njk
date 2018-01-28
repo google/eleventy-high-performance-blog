@@ -16,10 +16,10 @@ permalink: feed/feed.xml
 	{% for post in collections.posts %}
 	<entry>
 		<title>{{ post.data.title }}</title>
-		<link href="{{ metadata.url }}{{ post.url }}"/>
+		<link href="{{ post.url | absoluteUrl(metadata.url) }}"/>
 		<updated>{{ post.date | rssDate }}</updated>
-		<id>{{ metadata.url }}{{ post.url }}</id>
-		<content type="html">{{ post.templateContent }}</content>
+		<id>{{ post.url | absoluteUrl(metadata.url) }}</id>
+		<content type="html">{{ post.templateContent | htmlToAbsoluteUrls(metadata.url) }}</content>
 	</entry>
 	{% endfor %}
 </feed>

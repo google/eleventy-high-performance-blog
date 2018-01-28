@@ -1,4 +1,7 @@
 const { DateTime } = require("luxon");
+const metadata = require("./_data/metadata.json");
+const absoluteUrl = require("./_src/absoluteUrl");
+const HtmlToAbsoluteUrls = require("./_src/HtmlToAbsoluteUrls");
 const highlighters = require("./_src/eleventy-liquidjs-tag-highlight");
 
 function dateToISO(dateObj) {
@@ -23,6 +26,21 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addFilter("readableDate", dateObj => {
     return DateTime.fromJSDate(dateObj).toFormat("dd LLL yyyy");
   });
+
+  eleventyConfig.addNunjucksFilter("absoluteUrl", function(href, base) {
+    return absoluteUrl(href, base);
+  });
+
+  eleventyConfig.addNunjucksFilter("htmlToAbsoluteUrls", function(htmlContent, base, callback) {
+    if(!htmlContent) {
+      callback(null, "");
+      return;
+    }
+
+    HtmlToAbsoluteUrls(htmlContent, base, callback).then(result => {
+      callback(null, result.html);
+    });
+  }, true);
 
   // compatibility with existing {% highlight js %} and others
   eleventyConfig.addLiquidTag("highlight", highlighters.prismjs);
