@@ -43,7 +43,7 @@ module.exports = function(eleventyConfig) {
   }, true);
 
   // compatibility with existing {% highlight js %} and others
-  eleventyConfig.addLiquidTag("highlight", highlighters.prismjs);
+  eleventyConfig.addLiquidTag("highlight", highlighters.plain);
 
   // only content in the `posts/` directory
   eleventyConfig.addCollection("posts", function(collection) {
