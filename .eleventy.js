@@ -37,7 +37,7 @@ module.exports = function(eleventyConfig) {
       return;
     }
 
-    HtmlToAbsoluteUrls(htmlContent, base, callback).then(result => {
+    HtmlToAbsoluteUrls(htmlContent, base).then(result => {
       callback(null, result.html);
     });
   }, true);
