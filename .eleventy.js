@@ -1,49 +1,16 @@
 const { DateTime } = require("luxon");
-const metadata = require("./_data/metadata.json");
-const absoluteUrl = require("./_src/AbsoluteUrl");
-const HtmlToAbsoluteUrls = require("./_src/HtmlToAbsoluteUrls");
-const syntaxHighlighter = require("./_src/eleventy-liquidjs-tag-highlight-prismjs");
-
-function dateToISO(dateObj) {
-  return DateTime.fromJSDate(dateObj).toISO({ includeOffset: true, suppressMilliseconds: true });
-}
+const pluginRss = require("@11ty/eleventy-plugin-rss");
+const pluginSyntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 
 module.exports = function(eleventyConfig) {
+  eleventyConfig.addPlugin(pluginRss);
+  eleventyConfig.addPlugin(pluginSyntaxHighlight);
+
   eleventyConfig.addLayoutAlias("post", "layouts/post.njk");
-
-  eleventyConfig.addFilter("rssLastUpdatedDate", collection => {
-    if( !collection.length ) {
-      throw new Error( "Collection is empty in lastUpdatedDate filter." );
-    }
-    // Newest date in the collection
-    return dateToISO(collection[ collection.length - 1 ].date);
-  });
-
-  eleventyConfig.addFilter("rssDate", dateObj => {
-    return dateToISO(dateObj);
-  });
 
   eleventyConfig.addFilter("readableDate", dateObj => {
     return DateTime.fromJSDate(dateObj).toFormat("dd LLL yyyy");
   });
-
-  eleventyConfig.addNunjucksFilter("absoluteUrl", function(href, base) {
-    return absoluteUrl(href, base);
-  });
-
-  eleventyConfig.addNunjucksFilter("htmlToAbsoluteUrls", function(htmlContent, base, callback) {
-    if(!htmlContent) {
-      callback(null, "");
-      return;
-    }
-
-    HtmlToAbsoluteUrls(htmlContent, base).then(result => {
-      callback(null, result.html);
-    });
-  }, true);
-
-  // compatibility with existing {% highlight js %} and others
-  eleventyConfig.addLiquidTag("highlight", syntaxHighlighter);
 
   // only content in the `posts/` directory
   eleventyConfig.addCollection("posts", function(collection) {
