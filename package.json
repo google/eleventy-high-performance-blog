@@ -4,8 +4,8 @@
   "description": "A starter repository for a blog web site using the Eleventy static site generator.",
   "scripts": {
     "build": "npx eleventy",
-    "build-debug": "DEBUG=* npx eleventy",
-    "build-debug-watch": "DEBUG=* npx eleventy --watch"
+    "watch": "npx eleventy --watch",
+    "debug": "DEBUG=* npx eleventy"
   },
   "repository": {
     "type": "git",
