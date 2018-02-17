@@ -19,14 +19,14 @@ module.exports = function(eleventyConfig) {
     });
   });
 
+  eleventyConfig.addPassthroughCopy("img");
+  eleventyConfig.addPassthroughCopy("css");
+
   return {
     templateFormats: [
       "md",
       "njk",
-      "html",
-      "png",
-      "jpg",
-      "css"
+      "html"
     ],
 
     // If your site lives in a different subdirectory, change this.

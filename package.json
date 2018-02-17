@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/11ty/eleventy-base-blog#readme",
   "dependencies": {
-    "@11ty/eleventy": "0.2.13",
+    "@11ty/eleventy": "0.2.14",
     "@11ty/eleventy-plugin-rss": "^1.0.1",
     "@11ty/eleventy-plugin-syntaxhighlight": "^1.0.0",
     "luxon": "^0.3.1",
