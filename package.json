@@ -22,9 +22,9 @@
   },
   "homepage": "https://github.com/11ty/eleventy-base-blog#readme",
   "dependencies": {
-    "@11ty/eleventy": "0.2.14",
-    "@11ty/eleventy-plugin-rss": "^1.0.1",
-    "@11ty/eleventy-plugin-syntaxhighlight": "^1.0.0",
+    "@11ty/eleventy": "^0.3.1",
+    "@11ty/eleventy-plugin-rss": "^1.0.2",
+    "@11ty/eleventy-plugin-syntaxhighlight": "^1.0.3",
     "luxon": "^0.3.1",
     "prismjs": "^1.10.0"
   }
