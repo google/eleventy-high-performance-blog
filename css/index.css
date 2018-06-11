@@ -168,6 +168,11 @@ pre {
 	background-color: var(--red);
 	color: var(--white);
 	border-radius: 0.25em; /* 3px /12 */
+  text-decoration: none;
+}
+a[href].tag,
+a[href].tag:visited {
+  color: #fff;
 }
 
 /* Warning */
