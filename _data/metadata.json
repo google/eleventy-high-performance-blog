@@ -11,5 +11,9 @@
   "author": {
     "name": "Your Name Here",
     "email": "youremailaddress@example.com"
-  }
+  },
+  "tagPages": [
+    "another-tag",
+    "second-tag"
+  ]
 }
