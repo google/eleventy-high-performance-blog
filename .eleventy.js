@@ -22,6 +22,24 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("img");
   eleventyConfig.addPassthroughCopy("css");
 
+  /* Markdown Plugins */
+  let markdownIt = require("markdown-it");
+  let markdownItAnchor = require("markdown-it-anchor");
+  let options = {
+    html: true,
+    breaks: true,
+    linkify: true
+  };
+  let opts = {
+    permalink: true,
+    permalinkClass: "direct-link",
+    permalinkSymbol: "#"
+  };
+
+  eleventyConfig.setLibrary("md", markdownIt(options)
+    .use(markdownItAnchor, opts)
+  );
+
   return {
     templateFormats: [
       "md",
