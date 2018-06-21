@@ -1,8 +1,13 @@
 ---
 pagination:
-  data: metadata.tagPages
+  data: collections
   size: 1
   alias: tag
+  filter:
+    - all
+    - nav
+    - post
+    - posts
 permalink: /tags/{{ tag }}/
 layout: layouts/home.njk
 ---

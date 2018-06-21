@@ -1,10 +1,10 @@
 <ol class="postlist" style="counter-reset: start-from {{ postslist.length + 1 }}">
 {% for post in postslist | reverse %}
 	<li class="postlist-item{% if post.url == url %} postlist-item-active{% endif %}">
-		<a href="{{ post.url | url }}" class="postlist-link">{{ post.data.title }}</a>
+		<a href="{{ post.url | url }}" class="postlist-link">{% if post.data.title %}{{ post.data.title }}{% else %}<code>{{ post.url }}</code>{% endif %}</a>
 		<span class="postlist-date">{{ post.date | readableDate }}</span>
 		{% for tag in post.data.tags %}
-      {%- if tag != "post" and metadata.tagPages.indexOf(tag) > -1 -%}
+      {%- if tag != "post" -%}
       {% set tagUrl %}/tags/{{ tag }}/{% endset %}
       <a href="{{ tagUrl | url }}" class="tag">{{ tag }}</a>
       {%- endif -%}
