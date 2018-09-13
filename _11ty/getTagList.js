@@ -7,7 +7,7 @@ module.exports = function(collection) {
         tags = [tags];
       }
 
-      tags.filter(function(item) {
+      tags = tags.filter(function(item) {
         switch(item) {
           // this list should match the `filter` list in tags.njk
           case "all":
@@ -19,6 +19,7 @@ module.exports = function(collection) {
 
         return true;
       });
+
       tagSet.add(...tags);
     }
   });
