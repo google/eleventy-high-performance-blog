@@ -20,7 +20,9 @@ module.exports = function(collection) {
         return true;
       });
 
-      tagSet.add(...tags);
+      for (const tag of tags) {
+        set.add(tag);
+      }
     }
   });
 
