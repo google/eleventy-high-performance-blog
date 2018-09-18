@@ -21,7 +21,7 @@ module.exports = function(collection) {
       });
 
       for (const tag of tags) {
-        set.add(tag);
+        tagSet.add(tag);
       }
     }
   });
