@@ -12,6 +12,11 @@ module.exports = function(eleventyConfig) {
     return DateTime.fromJSDate(dateObj).toFormat("dd LLL yyyy");
   });
 
+  // Get the first `n` elements of a collection.
+  eleventyConfig.addFilter("head", (array, n) => {
+    return array.slice(0, n);
+  });
+
   // only content in the `posts/` directory
   eleventyConfig.addCollection("posts", function(collection) {
     return collection.getAllSorted().filter(function(item) {
