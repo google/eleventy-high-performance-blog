@@ -17,6 +17,11 @@ module.exports = function(eleventyConfig) {
     return array.slice(0, n);
   });
 
+  // https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#valid-date-string
+  eleventyConfig.addFilter('htmlDateString', (dateObj) => {
+    return DateTime.fromJSDate(dateObj).toFormat('yyyy-LL-dd');
+  });
+
   // only content in the `posts/` directory
   eleventyConfig.addCollection("posts", function(collection) {
     return collection.getAllSorted().filter(function(item) {
