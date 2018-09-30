@@ -10,4 +10,4 @@ navtitle: Home
 {% set postslist = collections.posts | head(-3) %}
 {% include "postslist.njk" %}
 
-<p>More posts can be found in <a href="/posts/">the archive</a>.</p>
+<p>More posts can be found in <a href="{{ '/posts/' | url }}">the archive</a>.</p>
