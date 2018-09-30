@@ -4,5 +4,10 @@ tags:
   - nav
 navtitle: Home
 ---
-{% set postslist = collections.posts %}
+
+<h1>Latest 2 blog posts</h1>
+
+{% set postslist = collections.posts | head(2) %}
 {% include "postslist.njk" %}
+
+<p>More posts can be found in <a href="/posts/">the blog archive</a>.</p>
