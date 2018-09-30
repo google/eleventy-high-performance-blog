@@ -1,5 +1,6 @@
 ---
 title: This is my third post.
+date: 2018-08-24
 tags:
   - post
   - second-tag
