@@ -9,6 +9,10 @@
     "url": "https://myurl.com/feed/feed.xml",
     "id": "https://myurl.com/"
   },
+  "jsonfeed": {
+    "path": "/feed/feed.json",
+    "url": "https://myurl.com/feed/feed.json"
+  },
   "author": {
     "name": "Your Name Here",
     "email": "youremailaddress@example.com"
