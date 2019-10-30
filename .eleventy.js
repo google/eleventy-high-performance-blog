@@ -19,6 +19,16 @@ module.exports = function(eleventyConfig) {
     return DateTime.fromJSDate(dateObj, {zone: 'utc'}).toFormat('yyyy-LL-dd');
   });
 
+  // Content for jsonfeed
+  eleventyConfig.addFilter('jsonContent', content => {
+    if (content) {
+      content = content.replace(/(\r\n|\n|\r)/gm, "");
+      content = content.replace(/\t/g, "\\t");
+      content = content.replace(/"/g, '\\"');
+    }
+    return content;
+  });
+
   // Get the first `n` elements of a collection.
   eleventyConfig.addFilter("head", (array, n) => {
     if( n < 0 ) {
