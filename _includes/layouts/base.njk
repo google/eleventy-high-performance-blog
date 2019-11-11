@@ -12,7 +12,8 @@
   <body>
     <header>
       <h1 class="home"><a href="{{ '/' | url }}">{{ metadata.title }}</a></h1>
-      <!-- Read more about `eleventy-navigation` at https://github.com/11ty/eleventy-navigation -->
+
+      {#- Read more about `eleventy-navigation` at https://github.com/11ty/eleventy-navigation #}
       {{ collections.all | eleventyNavigation | eleventyNavigationToHtml({
         listClass: "nav",
         listItemClass: "nav-item",
