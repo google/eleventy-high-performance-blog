@@ -12,11 +12,13 @@
   <body>
     <header>
       <h1 class="home"><a href="{{ '/' | url }}">{{ metadata.title }}</a></h1>
-      <ul class="nav">
-        {%- for nav in collections.nav | reverse -%}
-        <li class="nav-item{% if nav.url == page.url %} nav-item-active{% endif %}"><a href="{{ nav.url | url }}">{{ nav.data.navtitle }}</a></li>
-        {%- endfor -%}
-      </ul>
+      <!-- Read more about `eleventy-navigation` at https://github.com/11ty/eleventy-navigation -->
+      {{ collections.all | eleventyNavigation | eleventyNavigationToHtml({
+        listClass: "nav",
+        listItemClass: "nav-item",
+        activeListItemClass: "nav-item-active",
+        activeKey: eleventyNavigation.key
+      }) | safe }}
     </header>
 
     <main{% if templateClass %} class="{{ templateClass }}"{% endif %}>
