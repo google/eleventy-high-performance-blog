@@ -18,7 +18,7 @@ These builders are amazing—try them out to get your own Eleventy site in a few
 
 ## Getting Started
 
-### 1. Clone this repository:
+### 1. Clone this Repository
 
 ```
 git clone https://github.com/11ty/eleventy-base-blog.git my-blog-name
