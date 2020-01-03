@@ -62,12 +62,9 @@ module.exports = function(eleventyConfig) {
           res.end();
         });
       },
-    ghostMode: {
-      clicks: false,
-      forms: false,
-      scroll: false,
     },
-    }
+    ui: false,
+    ghostMode: false
   });
 
   return {
