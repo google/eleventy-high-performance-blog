@@ -2,10 +2,15 @@ const { DateTime } = require("luxon");
 const fs = require("fs");
 const pluginRss = require("@11ty/eleventy-plugin-rss");
 const pluginSyntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
+const pluginNavigation = require("@11ty/eleventy-navigation");
+const markdownIt = require("markdown-it");
+const markdownItAnchor = require("markdown-it-anchor");
 
 module.exports = function(eleventyConfig) {
   eleventyConfig.addPlugin(pluginRss);
   eleventyConfig.addPlugin(pluginSyntaxHighlight);
+  eleventyConfig.addPlugin(pluginNavigation);
+
   eleventyConfig.setDataDeepMerge(true);
 
   eleventyConfig.addLayoutAlias("post", "layouts/post.njk");
@@ -33,24 +38,19 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("img");
   eleventyConfig.addPassthroughCopy("css");
 
-  /* Markdown Plugins */
-  let markdownIt = require("markdown-it");
-  let markdownItAnchor = require("markdown-it-anchor");
-  let options = {
+  /* Markdown Overrides */
+  let markdownLibrary = markdownIt({
     html: true,
     breaks: true,
     linkify: true
-  };
-  let opts = {
+  }).use(markdownItAnchor, {
     permalink: true,
     permalinkClass: "direct-link",
     permalinkSymbol: "#"
-  };
+  });
+  eleventyConfig.setLibrary("md", markdownLibrary);
 
-  eleventyConfig.setLibrary("md", markdownIt(options)
-    .use(markdownItAnchor, opts)
-  );
-
+  // Browsersync Overrides
   eleventyConfig.setBrowserSyncConfig({
     callbacks: {
       ready: function(err, browserSync) {
@@ -61,7 +61,12 @@ module.exports = function(eleventyConfig) {
           res.write(content_404);
           res.end();
         });
-      }
+      },
+    ghostMode: {
+      clicks: false,
+      forms: false,
+      scroll: false,
+    },
     }
   });
 
@@ -74,15 +79,20 @@ module.exports = function(eleventyConfig) {
     ],
 
     // If your site lives in a different subdirectory, change this.
-    // Leading or trailing slashes are all normalized away, so don’t worry about it.
+    // Leading or trailing slashes are all normalized away, so don’t worry about those.
+
     // If you don’t have a subdirectory, use "" or "/" (they do the same thing)
-    // This is only used for URLs (it does not affect your file structure)
-    pathPrefix: "/",
+    // This is only used for link URLs (it does not affect your file structure)
+    // Best paired with the `url` filter: https://www.11ty.io/docs/filters/url/
+
+    // You can also pass this in on the command line using `--pathprefix`
+    // pathPrefix: "/",
 
     markdownTemplateEngine: "liquid",
     htmlTemplateEngine: "njk",
     dataTemplateEngine: "njk",
-    passthroughFileCopy: true,
+
+    // These are all optional, defaults are shown:
     dir: {
       input: ".",
       includes: "_includes",
