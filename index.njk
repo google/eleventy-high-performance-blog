@@ -8,7 +8,7 @@ eleventyNavigation:
 <h1>Latest 3 Posts</h1>
 
 {% set postslist = collections.posts | head(-3) %}
-{% set counterOffset = collections.posts | length %}
+{% set postslistCounter = collections.posts | length %}
 {% include "postslist.njk" %}
 
 <p>More posts can be found in <a href="{{ '/posts/' | url }}">the archive</a>.</p>
