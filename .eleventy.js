@@ -20,13 +20,11 @@ module.exports = function(eleventyConfig) {
   });
 
   // Content for jsonfeed
-  eleventyConfig.addFilter('jsonContent', content => {
-    if (content) {
-      content = content.replace(/(\r\n|\n|\r)/gm, "");
-      content = content.replace(/\t/g, "\\t");
-      content = content.replace(/"/g, '\\"');
+  eleventyConfig.addFilter('jsonStringify', content => {
+    if (!content) {
+      content = "";
     }
-    return content;
+    return JSON.stringify(content);
   });
 
   // Get the first `n` elements of a collection.
