@@ -6,7 +6,7 @@
     {% for tag in post.data.tags %}
       {%- if collections.tagList.indexOf(tag) != -1 -%}
       {% set tagUrl %}/tags/{{ tag }}/{% endset %}
-      <a href="{{ tagUrl | url }}" class="tag">{{ tag }}</a>
+      <a href="{{ tagUrl | url }}" class="post-tag">{{ tag }}</a>
       {%- endif -%}
     {% endfor %}
   </li>
