@@ -24,14 +24,6 @@ module.exports = function(eleventyConfig) {
     return DateTime.fromJSDate(dateObj, {zone: 'utc'}).toFormat('yyyy-LL-dd');
   });
 
-  // Content for jsonfeed
-  eleventyConfig.addFilter('jsonStringify', content => {
-    if (!content) {
-      content = "";
-    }
-    return JSON.stringify(content);
-  });
-
   // Get the first `n` elements of a collection.
   eleventyConfig.addFilter("head", (array, n) => {
     if( n < 0 ) {

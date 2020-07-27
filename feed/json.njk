@@ -20,7 +20,7 @@ eleventyExcludeFromCollections: true
       "id": "{{ absolutePostUrl }}",
       "url": "{{ absolutePostUrl }}",
       "title": "{{ post.data.title }}",
-      "content_html": {{ post.templateContent | jsonStringify | safe }},
+      "content_html": {% if post.templateContent %}{{ post.templateContent | dump | safe }}{% else %}""{% endif %},
       "date_published": "{{ post.date | rssDate }}",
       "tags": [
         {%- for c in post.data.category %}
