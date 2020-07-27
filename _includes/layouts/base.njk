@@ -23,6 +23,8 @@
     </header>
 
     <main{% if templateClass %} class="{{ templateClass }}"{% endif %}>
+
+      <!-- Delete this message -->
       <div class="warning">
         <ol>
           <li>Edit the <code>_data/metadata.json</code> with your blog’s information.</li>
@@ -31,6 +33,7 @@
         </ol>
         <p><em>This is an <a href="https://www.11ty.dev/">Eleventy project</a> created from the <a href="https://github.com/11ty/eleventy-base-blog"><code>eleventy-base-blog</code> repo</a>.</em></p>
       </div>
+      <!-- Stop deleting -->
 
       {{ content | safe }}
     </main>
