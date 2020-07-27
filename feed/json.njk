@@ -1,5 +1,6 @@
 ---
-permalink: feed/feed.json
+# Metadata comes from _data/metadata.json
+permalink: "{{ metadata.jsonfeed.path }}"
 eleventyExcludeFromCollections: true
 ---
 {
@@ -13,8 +14,8 @@ eleventyExcludeFromCollections: true
     "url": "{{ metadata.author.url }}"
   },
   "items": [
-    {%- for post in collections.posts %}
-    {% set absolutePostUrl %}{{ post.url | url | absoluteUrl(metadata.url) }}{% endset -%}
+    {%- for post in collections.posts | reverse %}
+    {%- set absolutePostUrl %}{{ post.url | url | absoluteUrl(metadata.url) }}{% endset -%}
     {
       "id": "{{ absolutePostUrl }}",
       "url": "{{ absolutePostUrl }}",
