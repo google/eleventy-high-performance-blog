@@ -21,15 +21,7 @@ eleventyExcludeFromCollections: true
       "url": "{{ absolutePostUrl }}",
       "title": "{{ post.data.title }}",
       "content_html": {% if post.templateContent %}{{ post.templateContent | dump | safe }}{% else %}""{% endif %},
-      "date_published": "{{ post.date | rssDate }}",
-      "tags": [
-        {%- for c in post.data.category %}
-        "{{ c }}"
-        {%- if not loop.last -%}
-        ,
-        {%- endif -%}
-        {%- endfor %}
-      ]
+      "date_published": "{{ post.date | rssDate }}"
     }
     {%- if not loop.last -%}
     ,
