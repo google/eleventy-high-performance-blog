@@ -1,4 +1,9 @@
-# eleventy-base-blog
+# eleventy-high-performance-blog
+
+Initial fork. No material changes performed yet.
+
+This is not an officially supported Google product" in an appropriate location such as the project's README file
+
 
 A starter repository showing how to build a blog with the [Eleventy](https://github.com/11ty/eleventy) static site generator.
 
