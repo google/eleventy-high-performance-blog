@@ -1,20 +1,24 @@
 {
-  "title": "Your Blog Name",
-  "url": "https://example.com/",
-  "description": "I am writing about my experiences as a naval navel-gazer.",
+  "title": "Title of the website. Update me.",
+  "url": "https://update-me.com",
+  "domain": "update-me.com",
+  "description": "Description of the website. Update me.",
+  "genre": "Insert a schema.org genre",
   "feed": {
-    "subtitle": "I am writing about my experiences as a naval navel-gazer.",
+    "subtitle": "Subtitle. Update me.",
     "filename": "feed.xml",
     "path": "/feed/feed.xml",
-    "id": "https://example.com/"
+    "id": "https://update-me.com"
   },
   "jsonfeed": {
     "path": "/feed/feed.json",
-    "url": "https://example.com/feed/feed.json"
+    "url": "https://update-me.com/feed/feed.json"
   },
   "author": {
-    "name": "Your Name Here",
-    "email": "youremailaddress@example.com",
-    "url": "https://example.com/about-me/"
+    "name": "Author Name. Update me.",
+    "twitterHandle": "update_me"
+  },
+  "publisher": {
+    "name": "Publisher name. Update me."
   }
 }

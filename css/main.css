@@ -1,0 +1,431 @@
+/* Color customization */
+:root {
+  --primary: #f9c412;
+  --primary-dark: #E7BF60;
+}
+
+.test-dead-code-eimination-sentinel {
+  color: red;
+}
+
+share-widget {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  opacity: 0.9;
+}
+
+share-widget div {
+  width: 100%;
+  height: 30px;
+  background-image: url('/img/share.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-bottom: 10px;
+}
+
+.apple share-widget div {
+  background-image: url('/img/share-apple.svg');
+}
+
+share-widget button {
+  margin: 0;
+}
+
+share-widget button:active {
+  transform: scale(1.2);
+}
+
+dialog {
+  background-color: #8dff80;
+  position: fixed;
+  opacity: 0.9;
+}
+
+img[align="left"] {
+  width: auto;
+  height: 16rem;
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+}
+
+dl {
+  clear: both;
+  display: block!important;
+}
+
+header aside {
+  font-style: italic;
+}
+
+#nav {
+  z-index: 2;
+  position: relative;
+}
+
+#reading-progress {
+  z-index: 1;
+  background-color: var(--primary);
+  width: 100vw;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  transform: translate(-100vw, 0);
+  will-change: transform;
+  pointer-events: none;
+}
+
+#posts li {
+  margin-bottom: 0.5em;
+}
+
+/* https://github.com/rsms/inter/blob/master/LICENSE.txt
+
+Copyright (c) 2016-2020 The Inter Project Authors.
+"Inter" is trademark of Rasmus Andersson.
+https://github.com/rsms/inter
+
+This Font Software is licensed under the SIL Open Font License, Version 1.1.
+This license is copied below, and is also available with a FAQ at:
+http://scripts.sil.org/OFL
+
+-----------------------------------------------------------
+SIL OPEN FONT LICENSE Version 1.1 - 26 February 2007
+-----------------------------------------------------------
+
+PREAMBLE
+The goals of the Open Font License (OFL) are to stimulate worldwide
+development of collaborative font projects, to support the font creation
+efforts of academic and linguistic communities, and to provide a free and
+open framework in which fonts may be shared and improved in partnership
+with others.
+
+The OFL allows the licensed fonts to be used, studied, modified and
+redistributed freely as long as they are not sold by themselves. The
+fonts, including any derivative works, can be bundled, embedded,
+redistributed and/or sold with any software provided that any reserved
+names are not used by derivative works. The fonts and derivatives,
+however, cannot be released under any other type of license. The
+requirement for fonts to remain under this license does not apply
+to any document created using the fonts or their derivatives.
+
+DEFINITIONS
+"Font Software" refers to the set of files released by the Copyright
+Holder(s) under this license and clearly marked as such. This may
+include source files, build scripts and documentation.
+
+"Reserved Font Name" refers to any names specified as such after the
+copyright statement(s).
+
+"Original Version" refers to the collection of Font Software components as
+distributed by the Copyright Holder(s).
+
+"Modified Version" refers to any derivative made by adding to, deleting,
+or substituting -- in part or in whole -- any of the components of the
+Original Version, by changing formats or by porting the Font Software to a
+new environment.
+
+"Author" refers to any designer, engineer, programmer, technical
+writer or other person who contributed to the Font Software.
+
+PERMISSION AND CONDITIONS
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of the Font Software, to use, study, copy, merge, embed, modify,
+redistribute, and sell modified and unmodified copies of the Font
+Software, subject to the following conditions:
+
+1) Neither the Font Software nor any of its individual components,
+in Original or Modified Versions, may be sold by itself.
+
+2) Original or Modified Versions of the Font Software may be bundled,
+redistributed and/or sold with any software, provided that each copy
+contains the above copyright notice and this license. These can be
+included either as stand-alone text files, human-readable headers or
+in the appropriate machine-readable metadata fields within text or
+binary files as long as those fields can be easily viewed by the user.
+
+3) No Modified Version of the Font Software may use the Reserved Font
+Name(s) unless explicit written permission is granted by the corresponding
+Copyright Holder. This restriction only applies to the primary font name as
+presented to the users.
+
+4) The name(s) of the Copyright Holder(s) or the Author(s) of the Font
+Software shall not be used to promote, endorse or advertise any
+Modified Version, except to acknowledge the contribution(s) of the
+Copyright Holder(s) and the Author(s) or with their explicit written
+permission.
+
+5) The Font Software, modified or unmodified, in part or in whole,
+must be distributed entirely under this license, and must not be
+distributed under any other license. The requirement for fonts to
+remain under this license does not apply to any document created
+using the Font Software.
+
+TERMINATION
+This license becomes null and void if any of the above conditions are
+not met.
+
+DISCLAIMER
+THE FONT SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT
+OF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL THE
+COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+INCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL
+DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM
+OTHER DEALINGS IN THE FONT SOFTWARE.
+
+*/
+@font-face {
+  font-family: 'Inter UI';
+  font-style:  normal;
+  font-weight: 100;
+  src: url("/fonts/Inter-Thin.woff2") format("woff2"),
+       url("/fonts/Inter-Thin.woff") format("woff");
+}
+@font-face {
+  font-family: 'Inter UI';
+  font-style:  italic;
+  font-weight: 100;
+  src: url("/fonts/Inter-ThinItalic.woff2") format("woff2"),
+       url("/fonts/Inter-ThinItalic.woff") format("woff");
+}
+
+@font-face {
+  font-family: 'Inter UI';
+  font-style:  normal;
+  font-weight: 200;
+  src: url("/fonts/Inter-ExtraLight.woff2") format("woff2"),
+       url("/fonts/Inter-ExtraLight.woff") format("woff");
+}
+@font-face {
+  font-family: 'Inter UI';
+  font-style:  italic;
+  font-weight: 200;
+  src: url("/fonts/Inter-ExtraLightItalic.woff2") format("woff2"),
+       url("/fonts/Inter-ExtraLightItalic.woff") format("woff");
+}
+
+@font-face {
+  font-family: 'Inter UI';
+  font-style:  normal;
+  font-weight: 300;
+  src: url("/fonts/Inter-Light.woff2") format("woff2"),
+       url("/fonts/Inter-Light.woff") format("woff");
+}
+@font-face {
+  font-family: 'Inter UI';
+  font-style:  italic;
+  font-weight: 300;
+  src: url("/fonts/Inter-LightItalic.woff2") format("woff2"),
+       url("/fonts/Inter-LightItalic.woff") format("woff");
+}
+
+@font-face {
+  font-family: 'Inter UI';
+  font-style:  normal;
+  font-weight: 400;
+  src: url("/fonts/Inter-Regular.woff2") format("woff2"),
+       url("/fonts/Inter-Regular.woff") format("woff");
+}
+@font-face {
+  font-family: 'Inter UI';
+  font-style:  italic;
+  font-weight: 400;
+  src: url("/fonts/Inter-Italic.woff2") format("woff2"),
+       url("/fonts/Inter-Italic.woff") format("woff");
+}
+
+@font-face {
+  font-family: 'Inter UI';
+  font-style:  normal;
+  font-weight: 500;
+  src: url("/fonts/Inter-Medium.woff2") format("woff2"),
+       url("/fonts/Inter-Medium.woff") format("woff");
+}
+@font-face {
+  font-family: 'Inter UI';
+  font-style:  italic;
+  font-weight: 500;
+  src: url("/fonts/Inter-MediumItalic.woff2") format("woff2"),
+       url("/fonts/Inter-MediumItalic.woff") format("woff");
+}
+
+@font-face {
+  font-family: 'Inter UI';
+  font-style:  normal;
+  font-weight: 600;
+  src: url("/fonts/Inter-SemiBold.woff2") format("woff2"),
+       url("/fonts/Inter-SemiBold.woff") format("woff");
+}
+@font-face {
+  font-family: 'Inter UI';
+  font-style:  italic;
+  font-weight: 600;
+  src: url("/fonts/Inter-SemiBoldItalic.woff2") format("woff2"),
+       url("/fonts/Inter-SemiBoldItalic.woff") format("woff");
+}
+
+@font-face {
+  font-family: 'Inter UI';
+  font-style:  normal;
+  font-weight: 700;
+  src: url("/fonts/Inter-Bold.woff2") format("woff2"),
+       url("/fonts/Inter-Bold.woff") format("woff");
+}
+@font-face {
+  font-family: 'Inter UI';
+  font-style:  italic;
+  font-weight: 700;
+  src: url("/fonts/Inter-BoldItalic.woff2") format("woff2"),
+       url("/fonts/Inter-BoldItalic.woff") format("woff");
+}
+
+@font-face {
+  font-family: 'Inter UI';
+  font-style:  normal;
+  font-weight: 800;
+  src: url("/fonts/Inter-ExtraBold.woff2") format("woff2"),
+       url("/fonts/Inter-ExtraBold.woff") format("woff");
+}
+@font-face {
+  font-family: 'Inter UI';
+  font-style:  italic;
+  font-weight: 800;
+  src: url("/fonts/Inter-ExtraBoldItalic.woff2") format("woff2"),
+       url("/fonts/Inter-ExtraBoldItalic.woff") format("woff");
+}
+
+@font-face {
+  font-family: 'Inter UI';
+  font-style:  normal;
+  font-weight: 900;
+  src: url("/fonts/Inter-Black.woff2") format("woff2"),
+       url("/fonts/Inter-Black.woff") format("woff");
+}
+@font-face {
+  font-family: 'Inter UI';
+  font-style:  italic;
+  font-weight: 900;
+  src: url("/fonts/Inter-BlackItalic.woff2") format("woff2"),
+       url("/fonts/Inter-BlackItalic.woff") format("woff");
+}
+
+/* --------------------------------------------------------------------------
+Single variable font.
+
+Note that you may want to do something like this to make sure you're serving
+constant fonts to older browsers:
+html {
+  font-family: 'Inter UI', sans-serif;
+}
+@supports (font-variation-settings: normal) {
+  html {
+    font-family: 'Inter UI var', sans-serif;
+  }
+}
+
+BUGS:
+- Safari 12.0 will default to italic instead of regular when font-weight
+  is provided in a @font-face declaration.
+  Workaround: Use "Inter UI var alt" for Safari, or explicitly set
+  `font-variation-settings:"slnt" DEGREE`.
+*/
+@font-face {
+  font-family: 'Inter UI var';
+  font-weight: 100 900;
+  font-style: oblique 0deg 10deg;
+  src: url("/fonts/Inter.var.woff2") format("woff2");
+}
+
+/* --------------------------------------------------------------------------
+
+"Inter UI var alt" is recommended for Safari and Edge, for reliable italics.
+
+@supports (font-variation-settings: normal) {
+  html {
+    font-family: 'Inter UI var alt', sans-serif;
+  }
+}
+
+*/
+@font-face {
+  font-family: 'Inter UI var alt';
+  font-weight: 100 900;
+  font-style: normal;
+  font-named-instance: 'Regular';
+  src: url("/fonts/Inter-roman.var.woff2") format("woff2");
+}
+@font-face {
+  font-family: 'Inter UI var alt';
+  font-weight: 100 900;
+  font-style: italic;
+  font-named-instance: 'Italic';
+  src: url("/fonts/Inter-italic.var.woff2") format("woff2");
+}
+
+/* 
+
+The Bahunya CSS framework https://kimeiga.github.io/bahunya/
+
+https://github.com/Kimeiga/bahunya/blob/master/LICENSE
+
+MIT License
+
+Copyright (c) 2018 Hakan Alpay
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+*/
+
+html{line-height:1.15;-webkit-text-size-adjust:100%}body{margin:0}h1{font-size:2em;margin:.67em 0}hr{box-sizing:content-box;height:0;overflow:visible}pre{font-family:monospace,monospace;font-size:1em}a{background-color:transparent}abbr[title]{border-bottom:none;text-decoration:underline;text-decoration:underline dotted}b,strong{font-weight:700}code,kbd,samp{font-family:monospace,monospace;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}img{border-style:none}button,input,optgroup,select,textarea{font-family:inherit;font-size:100%;line-height:1.15;margin:0}button,input{overflow:visible}button,select{text-transform:none}[type=button],[type=reset],[type=submit],button{-webkit-appearance:button}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button::-moz-focus-inner{border-style:none;padding:0}[type=button]:-moz-focusring,[type=reset]:-moz-focusring,[type=submit]:-moz-focusring,button:-moz-focusring{outline:1px dotted ButtonText}fieldset{padding:.35em .75em .625em}legend{box-sizing:border-box;color:inherit;display:table;max-width:100%;padding:0;white-space:normal}progress{vertical-align:baseline}textarea{overflow:auto}[type=checkbox],[type=radio]{box-sizing:border-box;padding:0}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}[type=search]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}details{display:block}summary{display:list-item}[hidden],template{display:none}h1{font-size:3em;line-height:1.25;margin-bottom:.5em}h2{font-size:2.5em;line-height:1.2;margin-bottom:.6em}h3{font-size:2em;line-height:1.125;margin-bottom:.75em}h4{font-size:1.5em;margin-bottom:1em}h4,h5{line-height:1.5em}h5{font-size:1.25em;margin-bottom:1.2em}h6{font-size:1em;line-height:1.5em;margin-bottom:1.5em}body,ol,p,pre,ul{font-size:1em;line-height:1.5}ol,p,pre,ul{margin-bottom:1.5em}h1{font-size:2.074rem}h1,h2{line-height:2.4rem;margin-bottom:1.36rem}h2{font-size:1.728rem}h3{font-size:1.4rem}h3,h4{line-height:1.6rem;margin-bottom:1.36rem}h4{font-size:1.2rem}h5,h6{font-size:1rem;line-height:1.6rem;margin-bottom:1.36rem}body,ol,p,pre,ul{font-size:1rem;line-height:1.6}ol,p,pre,ul{margin-bottom:1.36rem}@media (min-width:600px){h1{font-size:4.3978rem;line-height:4.4rem}h1,h2{margin-bottom:1.496rem}h2{font-size:3.1097rem;line-height:3.52rem}h3{font-size:2.1989rem;line-height:2.64rem;margin-bottom:1.496rem}h4{font-size:1.5554rem}h4,h5{line-height:1.76rem;margin-bottom:1.496rem}h5,h6{font-size:1.1rem}h6{line-height:1.76rem;margin-bottom:1.496rem}body,ol,p,pre,ul{font-size:1.1rem;line-height:1.6}ol,p,pre,ul{margin-bottom:1.496rem}}@media (min-width:1200px){h1{font-size:6.0756rem;line-height:6.72rem}h1,h2{margin-bottom:1.632rem}h2{font-size:4.05rem;line-height:4.8rem}h3{font-size:2.7rem;line-height:2.88rem;margin-bottom:1.632rem}h4{font-size:1.8rem}h4,h5{line-height:1.92rem;margin-bottom:1.632rem}h5,h6{font-size:1.2rem}h6{line-height:1.92rem;margin-bottom:1.632rem}body,ol,p,pre,ul{font-size:1.2rem;line-height:1.6}ol,p,pre,ul{margin-bottom:1.632rem}}th{font-weight:600}td,th{border-bottom:1px solid #595959;overflow:auto;padding:.75em;text-align:left;vertical-align:top}thead th{border-bottom:1px solid #f9c412}table{display:table}code,pre,table{overflow-x:auto}pre{font-family:Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace}pre code:not([class]){padding:1.5em;overflow-x:scroll}code,kbd{border-radius:.3em;color:#e2777a;padding:0 .3em;font-family:Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace;font-size:90%}code,kbd{background:#2d2d2d}kbd{color:#7ec699}mark{background:#f9c412;padding:0 .3em}h1,h2,h3,h4,h5,h6{font-family:Inter UI,sans-serif}h2,h4,h6{font-style:italic}a{color:#f9c412;text-decoration:none}a:hover{text-decoration:underline}small{color:#ccc}hr{border-bottom:1px solid #eee}
+figcaption{color:#ccc;margin-top:.75em;font-size:80%}dt{font-weight:600}@media (max-width:767px){fieldset{min-width:0}fieldset *{flex-grow:1;page-break-before:auto}x:-moz-any-link{display:table-cell}}html{font-family:Inter UI,sans-serif}@supports (font-variation-settings:normal){html{font-family:Inter UI var alt,sans-serif}}form{padding:1.5em 1.5em 0;border:.2rem solid #202020;margin-bottom:1.5em}form small{font-style:italic}fieldset{padding:0;margin:0}fieldset legend{font-size:150%;margin-bottom:.75em}button,input,select,textarea{border-radius:.3em;display:inline-block;padding:.75em;max-width:100%}button+input[type=checkbox],button+input[type=radio],button+label,input+input[type=checkbox],input+input[type=radio],input+label,select+input[type=checkbox],select+input[type=radio],select+label,textarea+input[type=checkbox],textarea+input[type=radio],textarea+label{page-break-before:always}input,select,textarea{margin-bottom:1.5em}textarea{min-height:7.5em;min-width:15em}label{display:inline-block}label+*{page-break-before:always}fieldset>*{display:block}input,select{display:inline}fieldset>*,form>:not(fieldset){margin-right:.75em}button,input[type=reset],input[type=submit]{background:#f2f2f2;color:#191919;cursor:pointer;display:inline-block;padding:.75em 1.5em;text-align:center;margin:0 .75em 1.5em 0}button:hover,input[type=reset]:hover,input[type=submit]:hover{background:#d9d9d9;color:#000}button[disabled],input[type=reset][disabled],input[type=submit][disabled]{background:#e6e6e6;color:#404040;cursor:not-allowed}button:not([disabled]),button[type=submit],input[type=submit]{background:#f9c412;color:#181818}button:not([disabled]):hover,button[type=submit]:hover,input[type=submit]:hover{background:#ba9005;color:#000}input[type=color],input[type=date],input[type=datetime-local],input[type=datetime],input[type=email],input[type=file],input[type=month],input[type=number],input[type=password],input[type=phone],input[type=range],input[type=search],input[type=tel],input[type=text],input[type=time],input[type=url],input[type=week],select,textarea{border:1px solid #595959;padding:.75em}input[type=checkbox],input[type=radio]{flex-grow:0;margin:.75em .375em .75em 0;vertical-align:middle}input[type=checkbox]+label,input[type=radio]+label{page-break-before:avoid}select[multiple]{min-width:15em}*{border:0;box-sizing:border-box}img{max-width:100%}body{font-family:Inter UI,sans-serif;background:#181818;color:#eee}section{margin-left:auto;margin-right:auto;width:900px}#menu-toggle{display:none}header label{display:block}#menu-toggle:checked~a{display:block;padding:.75em 0;margin:0 1.5em;text-align:center;border-bottom:1px solid #ccc}#menu-toggle:checked~a:last-of-type{padding-bottom:0;border:0}#menu-toggle:checked~label{border-bottom:1px solid #aaa;padding-bottom:.75em}#menu-toggle:not(:checked)~a{display:none}header{padding:4.5em 1.5em 3em;width:37.5em;margin:0 auto;text-align:center;max-width:100%;display:flex;align-items:center;flex-direction:column}header p{margin-top:0}header nav{position:fixed;top:0;left:0;width:100vw;padding:.375em 1.5em;background:hsla(0,0%,100%,.9);font-weight:200;text-align:right}header nav h1{float:left;font-size:inherit;line-height:inherit;margin:0;text-align:left}header nav a{font-weight:700;text-decoration:none;font-family:Inter UI,sans-serif;color:#181818;margin-left:1.5em}header nav a:first-of-type{margin-left:auto}header nav a:last-of-type{margin-right:1.5em}header nav label{color:#000;cursor:pointer;margin:0;font-style:normal;text-align:right}main{max-width:70rem;margin:0 auto;border-top:.5px solid #ccc}footer{background:rgba(0,0,0,.8);color:#fff;padding:3em;text-align:center}footer>*{margin:1.5em}footer nav a img{vertical-align:middle}footer nav,footer p{font-size:90%}article{max-width:100%;padding:1.5em;width:37.5em;margin:0 auto}ol,ul{margin-top:0}li dl,li ol,li ul{margin-bottom:0}dl{display:inline-block;margin:0 0 1.5em}dt{padding-top:.75em;padding-left:.75em}dd{padding-bottom:.75em;margin-left:2.25em}dd+dt{border-top:1px solid #f9c412}blockquote{border-left:1px solid #f9c412;padding:0 1.5em;margin:1.5em 0 1.5em 1.5em}blockquote footer{background:none;display:block;color:#ccc;padding:.75em 0;font-size:90%;text-align:start}img{height:auto;margin:0 auto}figure{margin:1.5em}figure img{display:block}code[class*=language-],pre[class*=language-]{color:#ccc;background:none;font-family:Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.5;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}pre[class*=language-]{padding:1em;margin:.5em 0;overflow:auto}:not(pre)>code[class*=language-],pre[class*=language-]{background:#2d2d2d}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal}.token.block-comment,.token.cdata,.token.comment,.token.doctype,.token.prolog{color:#999}.token.punctuation{color:#ccc}.token.attr-name,.token.deleted,.token.namespace,.token.tag{color:#e2777a}.token.function-name{color:#6196cc}.token.boolean,.token.function,.token.number{color:#f08d49}.token.class-name,.token.constant,.token.property,.token.symbol{color:#f8c555}.token.atrule,.token.builtin,.token.important,.token.keyword,.token.selector{color:#cc99cd}.token.attr-value,.token.char,.token.regex,.token.string,.token.variable{color:#7ec699}.token.entity,.token.operator,.token.url{color:#67cdcc}.token.bold,.token.important{font-weight:700}.token.italic{font-style:italic}.token.entity{cursor:help}.token.inserted{color:green}
+
+input[type=submit],
+button[type=submit],
+button:not([disabled]) {
+  background: var(--primary);
+}
+input[type=submit]:hover,
+button[type=submit]:hover,
+button:not([disabled]):hover {
+  background: var(--primary-dark);
+}
+
+dd + dt {
+  border-top: 1px solid var(--primary);
+}
+
+blockquote {
+  border-left: 1px solid var(--primary);
+}
+
+mark {
+  background: var(--primary);
+}
+
+a {
+  color: var(--primary);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}

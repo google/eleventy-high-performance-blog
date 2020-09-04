@@ -1,0 +1,36 @@
+{
+  "name": "eleventy-plugin-local-images",
+  "version": "0.4.0",
+  "description": "a plugin to grab remote images and serve them locally",
+  "main": ".eleventy.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/robb0wen/eleventy-plugin-local-images.git"
+  },
+  "keywords": [
+    "eleventy",
+    "images",
+    "assets",
+    "performance"
+  ],
+  "author": {
+    "name": "Robb Owen",
+    "email": "hello@robbowen.digital",
+    "url": "https://robbowen.digital"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/robb0wen/eleventy-plugin-local-images/issues"
+  },
+  "homepage": "https://github.com/robb0wen/eleventy-plugin-local-images#readme",
+  "dependencies": {
+    "file-type": "^12.0.1",
+    "fs-extra": "^8.1.0",
+    "jsdom": "^15.1.1",
+    "node-fetch": "^2.6.0",
+    "shorthash": "0.0.2"
+  }
+}

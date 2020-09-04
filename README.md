@@ -1,83 +1,127 @@
 # eleventy-high-performance-blog
 
-Initial fork. No material changes performed yet.
+A starter repository showing how to build a blog with the Eleventy static site generator implementing a wide range of performance best practices.
 
-This is not an officially supported Google product" in an appropriate location such as the project's README file
+Based on the awesome [eleventy-base-blog](https://github.com/11ty/eleventy-base-blog).
+
+## Dev
 
 
-A starter repository showing how to build a blog with the [Eleventy](https://github.com/11ty/eleventy) static site generator.
-
-[![Build Status](https://travis-ci.org/11ty/eleventy-base-blog.svg?branch=master)](https://travis-ci.org/11ty/eleventy-base-blog)
-
-## Demos
-
-* [Netlify](https://eleventy-base-blog.netlify.com/)
-* [GitHub Pages](https://11ty.github.io/eleventy-base-blog/)
-* [Remix on Glitch](https://glitch.com/~11ty-eleventy-base-blog)
-
-## Deploy this to your own site
-
-These builders are amazing—try them out to get your own Eleventy site in a few clicks!
-
-* [Get your own Eleventy web site on Netlify](https://app.netlify.com/start/deploy?repository=https://github.com/11ty/eleventy-base-blog)
-* [Get your own Eleventy web site on Vercel](https://vercel.com/import/project?template=11ty%2Feleventy-base-blog)
-
-## Getting Started
-
-### 1. Clone this Repository
-
+### Build, serve, watch and test
 ```
-git clone https://github.com/11ty/eleventy-base-blog.git my-blog-name
+npm run watch
 ```
 
-
-### 2. Navigate to the directory
-
+### Build and test
 ```
-cd my-blog-name
+npm run build
 ```
 
-Specifically have a look at `.eleventy.js` to see if you want to configure any Eleventy options differently.
+### Performance outcomes
 
-### 3. Install dependencies
+- Perfect score in applicable lighthouse audits (including accessibility).
+- Single HTTP request to [First Contentful Paint](https://web.dev/first-contentful-paint/).
+- Very optimized [Largest Contentful Paint](https://web.dev/lcp/) (score depends on image usage, but images are optimized).
+- 0 [Cumulative Layout Shift](https://web.dev/cls/).
+- ~0 [First Input Delay](https://web.dev/fid/)
 
-```
-npm install
+### Performance optimizations
+
+#### Images
+
+- Immutable URLs.
+- Downloads remote images and stores/serves them locally.
+- Generates multiple sizes of each image and uses them in **`srcset`**.
+- Generates a **blurry placeholder** for each image (without adding an HTML element or using JS).
+- **Lazy loads** images (using [native `loading=lazy`](https://web.dev/native-lazy-loading/)).
+- **Async decodes** images (using `decoding=async`).
+- **Avoids CLS impact** of images by inferring and providing width and height (Supported in Chrome, Firefox and Safari 14+).
+
+#### CSS
+
+- Defaults to the compact "classless" [Bahunya CSS framework](https://kimeiga.github.io/bahunya/).
+- Inlines CSS.
+- Dead-code-eliminates / tree-shakes / purges (pick your favorite word) unused CSS on a per-page basis with [PurgeCSS](https://purgecss.com/).
+- Minified CSS with [csso](https://www.npmjs.com/package/csso).
+
+#### Miscellaneous
+
+- Immutable URLs for JS.
+- Sets immutable caching headers for images, fonts, and JS (CSS is inlined). Currently implements for Netflify `_headers` file.
+- Minifies HTML and optimizes it for compression. Uses [html-minifier](https://www.npmjs.com/package/html-minifier) with aggressive options.
+- Uses [rollup](https://rollupjs.org/) to bundle JS and minifies it with [terser](https://terser.org/).
+- Prefetches same-origin navigations when a navigation is likely.
+- If an AMP files is present, [optimizes it](https://amp.dev/documentation/guides-and-tutorials/optimize-and-measure/optimize_amp/).
+
+#### Fonts
+
+- Serves fonts from same origin.
+- Preloads fonts.
+- Makes fonts `display:swap`.
+
+#### Analytics
+
+- Supports locally serving Google Analytics's JS and proxying it's hit requests to a Netlify proxy (other proxies could be easily added)
+- Support for noscript hit requests.
+- Avoids blocking onload on analytics requests.
+
+#### Opportunities (not-yet-implemented)
+
+- Transcode images to webp.
+- Transcode images to avif.
+
+### DX features
+
+- Uses 🚨 as favicon during local development.
+- Supports a range of default tests.
+- Runs build and tests on `git push`.
+- Sourcemap generated for JS.
+
+### Customization
+
+- Knock yourself out. This is a template repository.
+- For a simple color override, adjust these CSS variables at the top of `css/main.css`.
+
+```css
+:root {
+  --primary: #E7BF60;
+  --primary-dark: #f9c412;
+}
 ```
 
-### 4. Edit _data/metadata.json
+### SEO & Social
 
-### 5. Run Eleventy
+- Share button prefering `navigator.share()` and falling back to Twitter. Using OS-like share-icon.
+- Support for OGP metadata.
+- Support for Twitter metadata.
+- Support for schema.org JSON-LD.
+- Sitemap.xml generation.
 
-```
-npx eleventy
-```
+### Largely useless glitter
 
-Or build and host locally for local development
-```
-npx eleventy --serve
-```
+- Read time estimate.
+- Animated scroll progress bar…
+- …with an optimized implementation that should never cause a layout.
 
-Or build automatically when a template changes:
-```
-npx eleventy --watch
-```
+### Security
 
-Or in debug mode:
-```
-DEBUG=* npx eleventy
-```
+Generates a strong CSP for the base template.
 
-### Implementation Notes
+- Default src is self
+- Disallows plugins.
+- Generates hash based CSP for the JS used on the site.
 
-* `about/index.md` shows how to add a content page.
-* `posts/` has the blog posts but really they can live in any directory. They need only the `post` tag to be added to this collection.
-* Add the `nav` tag to add a template to the top level site navigation. For example, this is in use on `index.njk` and `about/index.md`.
-* Content can be any template format (blog posts needn’t be markdown, for example). Configure your supported templates in `.eleventy.js` -> `templateFormats`.
-	* Because `css` and `png` are listed in `templateFormats` but are not supported template types, any files with these extensions will be copied without modification to the output (while keeping the same directory structure).
-* The blog post feed template is in `feed/feed.njk`. This is also a good example of using a global data files in that it uses `_data/metadata.json`.
-* This example uses three layouts:
-  * `_includes/layouts/base.njk`: the top level HTML structure
-  * `_includes/layouts/home.njk`: the home page template (wrapped into `base.njk`)
-  * `_includes/layouts/post.njk`: the blog post template (wrapped into `base.njk`)
-* `_includes/postlist.njk` is a Nunjucks include and is a reusable component used to display a list of all the posts. `index.njk` has an example of how to use it.
+### Build performance
+
+- Downloaded remote images, and generated sizes are cached in the local filesystem…
+- …and SHOULD be committed to git.
+- `.persistimages.sh` helps with this.
+
+### Update Twitter-based comments
+```
+UPDATE_TWEETS=1 npm run build
+```
+### Turn on debug mode
+```
+DEBUG=* npm run build
+```

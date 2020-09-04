@@ -1,44 +1,85 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" domain="{{ metadata.domain }}">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title or metadata.title }}</title>
-    <meta name="description" content="{{ description or metadata.description }}">
-    <link rel="stylesheet" href="{{ '/css/index.css' | url }}">
-    <link rel="stylesheet" href="{{ '/css/prism-base16-monokai.dark.css' | url }}">
+    <meta http-equiv="Content-Security-Policy" content="{{ csp.regular | safe }}">
+    {% if isdevelopment %}
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    {% else %}
+    <link rel="icon" href="{{ '/img/favicon/favicon-192x192.png' | addHash }}" type="image/png">
+    {% endif %}
+    <meta name="theme-color" content="#f9c412">
+    <title>{{ renderData.title or title or metadata.title | escape }}</title>
+    <meta property="og:title" content="{{ renderData.title or title or metadata.title | escape  }}">
+    {% set desc = renderData.description or description %}
+    {% if not desc %}
+      {% set desc = content | striptags | truncate(140) %}
+    {% endif %}
+    {% if desc %}
+      <meta name="description" content="{{ desc | escape  }}">
+      <meta property="og:description" content="{{ desc | escape }}">
+    {% endif %}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@{{ metadata.author.twitterHandle }}">
+    <meta name="twitter:creator" content="@{{ metadata.author.twitterHandle }}">
+    {% if image %}
+      <meta property="og:image" content="{{ image | absoluteUrl(metadata.url) }}">
+    {% endif %}
+    
+    <link rel="canonical" href="{{ metadata.url }}{{ canonicalUrl or page.url }}">
     <link rel="alternate" href="{{ metadata.feed.path | url }}" type="application/atom+xml" title="{{ metadata.title }}">
-    <link rel="alternate" href="{{ metadata.jsonfeed.path | url }}" type="application/json" title="{{ metadata.title }}">
+
+    <link rel="preconnect" href="/" crossorigin>
+    <link rel="preload" href="/fonts/Inter-Bold.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/Inter-BoldItalic.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/Inter-ExtraLight.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/Inter-Italic.woff2" as="font" type="font/woff2" crossorigin>
+    
+    <script async defer src="{{ "/js/min.js" | addHash }}"></script>
+    <script async defer src="{{ "/js/cached.js" | addHash }}"></script>
+    <!-- Notably iOS UAs also contain Mac OS X -->
+    <script csp-hash>if (/Mac OS X/.test(navigator.userAgent))document.documentElement.classList.add('apple')
+    </script>
+    <!-- css is inserted by optimize-html custom plugin -->
   </head>
   <body>
     <header>
-      <h1 class="home"><a href="{{ '/' | url }}">{{ metadata.title }}</a></h1>
-
-      {#- Read more about `eleventy-navigation` at https://www.11ty.dev/docs/plugins/navigation/ #}
-      <ul class="nav">
-      {%- for entry in collections.all | eleventyNavigation %}
-        <li class="nav-item{% if entry.url == page.url %} nav-item-active{% endif %}"><a href="{{ entry.url | url }}">{{ entry.title }}</a></li>
-      {%- endfor %}
-      </ul>
+      <nav>
+        <div id="nav">
+          <h1><a href="{{ '/' | url }}" title="Homepage">{{ metadata.title }}</a></h1>
+          {#- Read more about `eleventy-navigation` at https://www.11ty.dev/docs/plugins/navigation/ #}
+          {%- for entry in collections.all | eleventyNavigation %}
+            <a href="{{ entry.url | url }}">{{ entry.title }}</a>
+          {%- endfor %}
+        </div>
+        <div id="reading-progress" aria-hidden="true"></div>
+      </nav>
+      <h1>{{ title }}</h1>
+      {% block extraArticleHeader %}{% endblock %}
+      <dialog id="message"></dialog>
+      <noscript>
+        <img src="/.netlify/functions/ga?v=1&_v=j83&t=pageview&dr=https%3A%2F%2Fno-script.com&_s=1&dh={{ metadata.domain | encodeURIComponent }}&dp={{ page.url | encodeURIComponent }}&ul=en-us&de=UTF-8&dt={{title|encodeURIComponent}}&tid=UA-141920860-1" width="1" height="1"
+        style="display:none" alt="">
+      </noscript>
     </header>
 
-    <main{% if templateClass %} class="{{ templateClass }}"{% endif %}>
+    <main>
+      <article>
+        {% block article %}
+          {{ content | safe }}
+        {% endblock %}
 
-      <!-- Delete this message -->
-      <div class="warning">
-        <ol>
-          <li>Edit the <code>_data/metadata.json</code> with your blog’s information.</li>
-          <li>(Optional) Edit <code>.eleventy.js</code> with your <a href="https://www.11ty.dev/docs/config/">configuration preferences</a>.</li>
-          <li>Delete this message from <code>_includes/layouts/base.njk</code>.</li>
-        </ol>
-        <p><em>This is an <a href="https://www.11ty.dev/">Eleventy project</a> created from the <a href="https://github.com/11ty/eleventy-base-blog"><code>eleventy-base-blog</code> repo</a>.</em></p>
-      </div>
-      <!-- Stop deleting -->
-
-      {{ content | safe }}
+        {% if page.url.indexOf("/posts/") > -1 %}
+          <p>Published <time datetime="{{ page.date | htmlDateString }}">{{ page.date | readableDate }}</time></p>
+        {% endif %}
+      </article>
     </main>
 
-    <footer></footer>
+    <footer>
+      <a href="/about/">{{ metadata.author.name }}</a>
+    </footer>
 
     <!-- Current page: {{ page.url | url }} -->
   </body>

@@ -1,14 +1,21 @@
 ---
 permalink: /sitemap.xml
 eleventyExcludeFromCollections: true
+siteWideUpdate: 2020-07-12
 ---
 <?xml version="1.0" encoding="utf-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 {%- for page in collections.all %}
   {% set absoluteUrl %}{{ page.url | url | absoluteUrl(metadata.url) }}{% endset %}
+  {% set pageDate = page.date | htmlDateString %}
+  {% set siteWide = siteWideUpdate| htmlDateString %}
+  {% set lastmod = siteWide %}
+  {% if pageDate > lastmod %}
+    {% set lastmod = pageDate %}
+  {% endif %}
   <url>
     <loc>{{ absoluteUrl }}</loc>
-    <lastmod>{{ page.date | htmlDateString }}</lastmod>
+    <lastmod>{{ lastmod }}</lastmod>
   </url>
 {%- endfor %}
 </urlset>

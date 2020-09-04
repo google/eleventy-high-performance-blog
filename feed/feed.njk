@@ -1,6 +1,5 @@
 ---
-# Metadata comes from _data/metadata.json
-permalink: "{{ metadata.feed.path | url }}"
+permalink: feed/feed.xml
 eleventyExcludeFromCollections: true
 ---
 <?xml version="1.0" encoding="utf-8"?>
@@ -16,14 +15,19 @@ eleventyExcludeFromCollections: true
 		<name>{{ metadata.author.name }}</name>
 		<email>{{ metadata.author.email }}</email>
 	</author>
-	{%- for post in collections.posts | reverse %}
+	{%- for post in collections.posts %}
 	{% set absolutePostUrl %}{{ post.url | url | absoluteUrl(metadata.url) }}{% endset %}
 	<entry>
 		<title>{{ post.data.title }}</title>
 		<link href="{{ absolutePostUrl }}"/>
 		<updated>{{ post.date | rssDate }}</updated>
 		<id>{{ absolutePostUrl }}</id>
-		<content type="html">{{ post.templateContent | htmlToAbsoluteUrls(absolutePostUrl) }}</content>
+		<content type="html">
+		  {{ post.templateContent | htmlToAbsoluteUrls(absolutePostUrl) }}
+			{% set titleUrlEncoded = post.data.title|encodeURIComponent %}
+			{% set urlUrlEncoded = post.url | encodeURIComponent %}
+			{{'<img src="' + metadata.url +  '/.netlify/functions/ga?v=1&_v=j83&t=pageview&dr=https%3A%2F%2Frss-feed-reader.com&_s=1&dh=' + metadata.domain + '&dp=' + urlUrlEncoded + '&ul=en-us&de=UTF-8&dt=' + titleUrlEncoded + '&tid=UA-141920860-1" width="1" height="1" style="display:none" alt="">'}}
+		</content>
 	</entry>
 	{%- endfor %}
 </feed>
