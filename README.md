@@ -43,6 +43,7 @@ npm run build
 ## Customize
 
 - Search for "Update me" across files in your editor to find all the site specific things you should update.
+- Update the favicons in 'img/favicon/'.
 - Otherwise: Knock yourself out. This is a template repository.
 - For a simple color override, adjust these CSS variables at the top of `css/main.css`.
 
