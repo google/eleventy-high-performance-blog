@@ -2,9 +2,14 @@ const assert = require("assert").strict;
 const expect = require("expect.js");
 const { JSDOM } = require("jsdom");
 const readFileSync = require("fs").readFileSync;
+const metadata = require("../_data/metadata.json");
 
 describe("check build output for a generic post", () => {
   describe("sample post", () => {
+    const POST_FILENAME = "_site/posts/firstpost/index.html";
+    const URL = metadata.url;
+    const POST_URL = URL + "/posts/firstpost/";
+
     let dom;
     let html;
     let doc;
@@ -19,24 +24,21 @@ describe("check build output for a generic post", () => {
     }
 
     before(() => {
-      html = readFileSync("_site/posts/design-docs-at-google/index.html");
+      html = readFileSync(POST_FILENAME);
       dom = new JSDOM(html);
       doc = dom.window.document;
     });
 
     it("should have metadata", () => {
-      assert.equal(select("title"), "Design Docs at Google");
+      assert.equal(select("title"), "This is my first post.");
       assert.equal(
         select("meta[property='og:image']", "content"),
-        "https://www.industrialempathy.com/img/remote/ZCBwPv.jpg"
+        "https://update-me.com/img/remote/ZayYlG.jpg"
       );
-      assert.equal(
-        select("link[rel='canonical']", "href"),
-        "https://www.industrialempathy.com/posts/design-docs-at-google/"
-      );
+      assert.equal(select("link[rel='canonical']", "href"), POST_URL);
       assert.equal(
         select("meta[name='description']", "content"),
-        "One of the key elements of Google's software engineering culture is the use of defining software designs through design docs. These are..."
+        "This is a post on My Blog about agile frameworks."
       );
     });
 
@@ -66,27 +68,24 @@ describe("check build output for a generic post", () => {
     });
 
     it("should have a share widget", () => {
-      expect(select("share-widget button", "href")).to.equal(
-        "https://www.industrialempathy.com/posts/design-docs-at-google/"
-      );
+      expect(select("share-widget button", "href")).to.equal(POST_URL);
     });
 
     it("should have a header", () => {
-      expect(select("header > h1")).to.equal("Design Docs at Google");
-      expect(select("header aside")).to.match(/11 min read./);
+      expect(select("header > h1")).to.equal("This is my first post.");
+      expect(select("header aside")).to.match(/\d+ min read./);
       expect(select("header dialog", "id")).to.equal("message");
     });
 
     it("should have a published date", () => {
-      expect(select("article time")).to.equal("06 Jul 2020");
-      expect(select("article time", "datetime")).to.equal("2020-07-06");
+      expect(select("article time")).to.equal("01 May 2018");
+      expect(select("article time", "datetime")).to.equal("2018-05-01");
     });
 
     it("should link to twitter with noopener", () => {
       const twitterLinks = Array.from(doc.querySelectorAll("a")).filter((a) =>
         a.href.startsWith("https://twitter.com")
       );
-      expect(twitterLinks.length).to.be.greaterThan(1);
       for (let a of twitterLinks) {
         expect(a.rel).to.contain("noopener");
         expect(a.target).to.equal("_blank");
@@ -99,18 +98,16 @@ describe("check build output for a generic post", () => {
           doc.querySelectorAll("article :not(aside) img")
         );
         const metaImage = select("meta[property='og:image']", "content");
-        expect(images.length).to.equal(2);
+        expect(images.length).to.greaterThan(0);
         const img = images[0];
-        expect(img.src).to.equal("/img/remote/ZCBwPv.jpg");
-        expect(metaImage).to.equal(
-          "https://www.industrialempathy.com" + img.src
-        );
+        expect(img.src).to.equal("/img/remote/ZayYlG.jpg");
+        expect(metaImage).to.equal(URL + img.src);
         expect(img.srcset).to.equal(
-          "/img/remote/ZCBwPv-1920w.jpg 1920w, /img/remote/ZCBwPv-1280w.jpg 1280w, /img/remote/ZCBwPv-640w.jpg 640w, /img/remote/ZCBwPv-320w.jpg 320w"
+          "/img/remote/ZayYlG-1920w.jpg 1920w, /img/remote/ZayYlG-1280w.jpg 1280w, /img/remote/ZayYlG-640w.jpg 640w, /img/remote/ZayYlG-320w.jpg 320w"
         );
         expect(img.sizes).to.equal("(max-width: 608px) 100vw, 608px");
-        expect(img.height).to.equal(488);
-        expect(img.width).to.equal(600);
+        expect(img.height).to.equal(850);
+        expect(img.width).to.equal(1280);
         expect(img.getAttribute("loading")).to.equal("lazy");
         expect(img.getAttribute("decoding")).to.equal("async");
         // JSDom fails to parse the style attribute properly
@@ -124,25 +121,19 @@ describe("check build output for a generic post", () => {
           doc.querySelectorAll("article :not(aside) img")
         );
         const obj = JSON.parse(json);
-        expect(obj.url).to.equal(
-          "https://www.industrialempathy.com/posts/design-docs-at-google/"
-        );
+        expect(obj.url).to.equal(POST_URL);
         expect(obj.description).to.equal(
-          "One of the key elements of Google&#39;s software engineering culture is the use of defining software designs through design docs. These are..."
+          "Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster..."
         );
-        expect(obj.image.length).to.equal(2);
+        expect(obj.image.length).to.be.greaterThan(0);
         obj.image.forEach((url, index) => {
-          expect(url).to.equal(
-            "https://www.industrialempathy.com" + images[index].src
-          );
+          expect(url).to.equal(URL + images[index].src);
         });
       });
 
       it("should have paragraphs", () => {
-        const images = Array.from(
-          doc.querySelectorAll("article :not(aside) p")
-        );
-        expect(images.length).to.equal(11);
+        const images = Array.from(doc.querySelectorAll("article > p"));
+        expect(images.length).to.greaterThan(0);
       });
     });
   });

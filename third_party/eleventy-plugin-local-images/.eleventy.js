@@ -103,7 +103,7 @@ const processImageAttr = async (img, attribute) => {
         // Update the image with the new file path
         let href = urlJoin(assetPath, hashedFilename);
         if (attribute == "content") {
-          href = `${metadata.domain}${href}`;
+          href = `${metadata.url}${href}`;
         }
         img.setAttribute(attribute, href);
       }
