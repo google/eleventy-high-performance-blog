@@ -38,9 +38,8 @@ describe("check build output for a generic post", () => {
 
     it("should have metadata", () => {
       assert.equal(select("title"), "This is my first post.");
-      assert.equal(
-        select("meta[property='og:image']", "content"),
-        "https://update-me.com/img/remote/ZayYlG.jpg"
+      expect(select("meta[property='og:image']", "content")).to.match(
+        /\/img\/remote\/\w+.jpg/
       );
       assert.equal(select("link[rel='canonical']", "href"), POST_URL);
       assert.equal(
@@ -107,10 +106,10 @@ describe("check build output for a generic post", () => {
         const metaImage = select("meta[property='og:image']", "content");
         expect(images.length).to.greaterThan(0);
         const img = images[0];
-        expect(img.src).to.equal("/img/remote/ZayYlG.jpg");
+        expect(img.src).to.match(/\/img\/remote\/\w+\.jpg/);
         expect(metaImage).to.equal(URL + img.src);
-        expect(img.srcset).to.equal(
-          "/img/remote/ZayYlG-1920w.jpg 1920w, /img/remote/ZayYlG-1280w.jpg 1280w, /img/remote/ZayYlG-640w.jpg 640w, /img/remote/ZayYlG-320w.jpg 320w"
+        expect(img.srcset).to.match(
+          /\/img\/remote\/\w+-1920w.jpg 1920w, \/img\/remote\/\w+-1280w.jpg 1280w, \/img\/remote\/\w+-640w.jpg 640w, \/img\/remote\/\w+-320w.jpg 320w/
         );
         expect(img.sizes).to.equal("(max-width: 608px) 100vw, 608px");
         expect(img.height).to.equal(850);
