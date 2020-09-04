@@ -106,11 +106,6 @@ npm run build
 - Support for noscript hit requests.
 - Avoids blocking onload on analytics requests.
 
-#### Opportunities (not-yet-implemented)
-
-- Transcode images to webp.
-- Transcode images to avif.
-
 ### DX features
 
 - Uses 🚨 as favicon during local development.
@@ -145,6 +140,11 @@ Generates a strong CSP for the base template.
 - Downloaded remote images, and generated sizes are cached in the local filesystem…
 - …and SHOULD be committed to git.
 - `.persistimages.sh` helps with this.
+
+### Opportunities (not-yet-implemented)
+
+- Transcode images to webp.
+- Transcode images to avif.
 
 ## Disclaimer
 
