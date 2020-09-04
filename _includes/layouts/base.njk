@@ -1,5 +1,7 @@
 <!doctype html>
-<html lang="en" domain="{{ metadata.domain }}">
+<html lang="en" 
+    domain="{{ metadata.domain }}" 
+    ga-id="{{ metadata.googleAnalyticsId }}">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -60,7 +62,7 @@
       {% block extraArticleHeader %}{% endblock %}
       <dialog id="message"></dialog>
       <noscript>
-        <img src="/.netlify/functions/ga?v=1&_v=j83&t=pageview&dr=https%3A%2F%2Fno-script.com&_s=1&dh={{ metadata.domain | encodeURIComponent }}&dp={{ page.url | encodeURIComponent }}&ul=en-us&de=UTF-8&dt={{title|encodeURIComponent}}&tid=UA-141920860-1" width="1" height="1"
+        <img src="/.netlify/functions/ga?v=1&_v=j83&t=pageview&dr=https%3A%2F%2Fno-script.com&_s=1&dh={{ metadata.domain | encodeURIComponent }}&dp={{ page.url | encodeURIComponent }}&ul=en-us&de=UTF-8&dt={{title|encodeURIComponent}}&tid={{metadata.googleAnalyticsId}}" width="1" height="1"
         style="display:none" alt="">
       </noscript>
     </header>

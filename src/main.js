@@ -69,7 +69,7 @@ window.ga =
     (ga.q = ga.q || []).push(arguments);
   };
 ga.l = +new Date();
-ga("create", "UA-141920860-1", "auto");
+ga("create", document.documentElement.getAttribute("ga-id"), "auto");
 ga("set", "transport", "beacon");
 var timeout = setTimeout(
   (onload = function () {
