@@ -16,12 +16,11 @@ share-widget {
 }
 
 share-widget div {
-  width: 100%;
+  width: 30px;
   height: 30px;
   background-image: url('/img/share.svg');
   background-repeat: no-repeat;
   background-position: center;
-  margin-bottom: 10px;
 }
 
 .apple share-widget div {

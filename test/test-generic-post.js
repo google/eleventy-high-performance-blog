@@ -4,6 +4,13 @@ const { JSDOM } = require("jsdom");
 const readFileSync = require("fs").readFileSync;
 const metadata = require("../_data/metadata.json");
 
+/**
+ * These tests kind of suck and they are kind of useful.
+ *
+ * They suck, because they need to be changed when the hardcoded post changes.
+ * They are useful because I tend to break the things they test al the time.
+ */
+
 describe("check build output for a generic post", () => {
   describe("sample post", () => {
     const POST_FILENAME = "_site/posts/firstpost/index.html";

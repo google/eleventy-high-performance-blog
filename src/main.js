@@ -33,13 +33,6 @@ function share(anchor) {
 }
 expose("share", share);
 
-function clap(button) {
-  button.querySelector("b").textContent =
-    parseInt(button.querySelector("b").textContent, 10) + 1;
-  share(button);
-}
-expose("clap", clap);
-
 function message(msg) {
   var dialog = document.getElementById("message");
   dialog.textContent = msg;
