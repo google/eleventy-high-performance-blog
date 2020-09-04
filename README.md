@@ -6,7 +6,9 @@ A starter repository showing how to build a blog with the Eleventy static site g
 
 Based on the awesome [eleventy-base-blog](https://github.com/11ty/eleventy-base-blog).
 
-**[Demo](https://eleventy-high-performance-blog-sample.industrialempathy.com/)**
+## Demo
+
+* [Netlify Demo](https://eleventy-high-performance-blog-sample.industrialempathy.com/)
 
 ## Getting Started
 
