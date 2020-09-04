@@ -65,7 +65,7 @@ npm run build
 - Single HTTP request to [First Contentful Paint](https://web.dev/first-contentful-paint/).
 - Very optimized [Largest Contentful Paint](https://web.dev/lcp/) (score depends on image usage, but images are optimized).
 - 0 [Cumulative Layout Shift](https://web.dev/cls/).
-- ~0 [First Input Delay](https://web.dev/fid/)
+- ~0 [First Input Delay](https://web.dev/fid/).
 
 ### Performance optimizations
 
@@ -132,7 +132,7 @@ npm run build
 
 Generates a strong CSP for the base template.
 
-- Default src is self
+- Default-src is self.
 - Disallows plugins.
 - Generates hash based CSP for the JS used on the site.
 
