@@ -4,18 +4,56 @@ A starter repository showing how to build a blog with the Eleventy static site g
 
 Based on the awesome [eleventy-base-blog](https://github.com/11ty/eleventy-base-blog).
 
-## Dev
+**[Demo](https://eleventy-high-performance-blog-sample.industrialempathy.com/)**
 
+## Getting Started
 
-### Build, serve, watch and test
+### 1. Generate a new repository from this repository template
+
+Click the [Use this template button](https://github.com/google/eleventy-high-performance-blog/generate).
+
+### 2. Clone your new repository
+
+```
+git clone https://github.com/YOUR_REPO
+```
+
+### 3. Navigate to the directory
+
+```
+cd my-blog-name
+```
+
+### 4. Install dependencies
+
+```
+npm install
+```
+
+### 5. Build, serve, watch and test
 ```
 npm run watch
 ```
 
-### Build and test
+### 6. Build and test
 ```
 npm run build
 ```
+
+## Customize
+
+- Search for "Update me" across files in your editor to find all the site specific things you should update.
+- Otherwise: Knock yourself out. This is a template repository.
+- For a simple color override, adjust these CSS variables at the top of `css/main.css`.
+
+```css
+:root {
+  --primary: #E7BF60;
+  --primary-dark: #f9c412;
+}
+```
+
+## Features
 
 ### Performance outcomes
 
@@ -77,18 +115,6 @@ npm run build
 - Runs build and tests on `git push`.
 - Sourcemap generated for JS.
 
-### Customization
-
-- Knock yourself out. This is a template repository.
-- For a simple color override, adjust these CSS variables at the top of `css/main.css`.
-
-```css
-:root {
-  --primary: #E7BF60;
-  --primary-dark: #f9c412;
-}
-```
-
 ### SEO & Social
 
 - Share button prefering `navigator.share()` and falling back to Twitter. Using OS-like share-icon.
@@ -117,11 +143,6 @@ Generates a strong CSP for the base template.
 - …and SHOULD be committed to git.
 - `.persistimages.sh` helps with this.
 
-### Update Twitter-based comments
-```
-UPDATE_TWEETS=1 npm run build
-```
-### Turn on debug mode
-```
-DEBUG=* npm run build
-```
+## Disclaimer
+
+This is not an officially supported Google product, but rather @cramforce's private project.
