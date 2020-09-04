@@ -148,4 +148,4 @@ Generates a strong CSP for the base template.
 
 ## Disclaimer
 
-This is not an officially supported Google product, but rather @cramforce's private project.
+This is not an officially supported Google product, but rather [Malte's](https://twitter.com/cramforce)'s private best-effort open-source project.
