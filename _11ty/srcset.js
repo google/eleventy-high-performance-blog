@@ -41,7 +41,9 @@ async function resize(filename, width) {
   }
   await sharp("_site" + filename)
     .resize(width)
-    .jpeg()
+    .jpeg({
+      quality: 60,
+    })
     .toFile("_site" + out);
   return out;
 }
