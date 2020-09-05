@@ -1,6 +1,7 @@
 {
-  "name": "eleventy-base-blog",
+  "name": "eleventy-high-performance-blog",
   "version": "5.0.2",
+  "license": "MIT",
   "description": "A starter repository for a blog web site using the Eleventy static site generator.",
   "scripts": {
     "build": "npm run js-build && eleventy && npm run test",
