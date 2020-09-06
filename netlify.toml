@@ -4,7 +4,7 @@
   command = "[ \"$METADATA_JSON\" ] && echo $METADATA_JSON > _data/metadata.json; npm run build"
   functions = "functions/"
 
-[headers]]
+[[headers]]
   for = "*.avif"
     [headers.values]
       Content-Type = "image/avif"
