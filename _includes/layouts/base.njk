@@ -32,13 +32,7 @@
     <link rel="canonical" href="{{ metadata.url }}{{ canonicalUrl or page.url }}">
     <link rel="alternate" href="{{ metadata.feed.path | url }}" type="application/atom+xml" title="{{ metadata.title }}">
 
-    <link rel="preconnect" href="/" crossorigin>
-    <link rel="preload" href="/fonts/Inter-Bold.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/fonts/Inter-BoldItalic.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/fonts/Inter-ExtraLight.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/fonts/Inter-Italic.woff2" as="font" type="font/woff2" crossorigin>
-    
+    <link rel="preconnect" href="/" crossorigin>  
     <script async defer src="{{ "/js/min.js" | addHash }}"></script>
     <script async defer src="{{ "/js/cached.js" | addHash }}"></script>
     <!-- Notably iOS UAs also contain Mac OS X -->

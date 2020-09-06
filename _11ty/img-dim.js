@@ -51,17 +51,32 @@ const processImage = async (img) => {
         src
       )}")`
     );
-  }
-  if (!img.getAttribute("srcset")) {
-    img.setAttribute("srcset", await srcset(src));
-    img.setAttribute(
-      "sizes",
-      img.getAttribute("align")
-        ? "(max-width: 608px) 50vw, 187px"
-        : "(max-width: 608px) 100vw, 608px"
-    );
+    const doc = img.ownerDocument;
+    const picture = doc.createElement("picture");
+    const webp = doc.createElement("source");
+    const jpeg = doc.createElement("source");
+    await setSrcset(webp, src, "webp");
+    webp.setAttribute("type", "image/webp");
+    await setSrcset(jpeg, src, "jpeg");
+    jpeg.setAttribute("type", "image/jpeg");
+    picture.appendChild(webp);
+    picture.appendChild(jpeg);
+    img.parentElement.replaceChild(picture, img);
+    picture.appendChild(img);
+  } else if (!img.getAttribute("srcset")) {
+    await setSrcset(img, src, "jpeg");
   }
 };
+
+async function setSrcset(img, src, format) {
+  img.setAttribute("srcset", await srcset(src, format));
+  img.setAttribute(
+    "sizes",
+    img.getAttribute("align")
+      ? "(max-width: 608px) 50vw, 187px"
+      : "(max-width: 608px) 100vw, 608px"
+  );
+}
 
 const dimImages = async (rawContent, outputPath) => {
   let content = rawContent;

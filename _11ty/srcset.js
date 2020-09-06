@@ -29,25 +29,37 @@ const sharp = require("sharp");
 
 const widths = [1920, 1280, 640, 320];
 
-module.exports = async function srcset(filename) {
-  const names = await Promise.all(widths.map((w) => resize(filename, w)));
+const extension = {
+  jpeg: "jpg",
+  webp: "webp",
+};
+
+module.exports = async function srcset(filename, format) {
+  const names = await Promise.all(
+    widths.map((w) => resize(filename, w, format))
+  );
   return names.map((n, i) => `${n} ${widths[i]}w`).join(", ");
 };
 
-async function resize(filename, width) {
-  const out = sizedName(filename, width);
+async function resize(filename, width, format) {
+  const out = sizedName(filename, width, format);
   if (await exists("_site" + out)) {
     return out;
   }
   await sharp("_site" + filename)
     .resize(width)
-    .jpeg({
+    [format]({
       quality: 60,
+      reductionEffort: 6,
     })
     .toFile("_site" + out);
   return out;
 }
 
-function sizedName(filename, width, opt_extra) {
-  return filename.replace(/\.\w+$/, (ext) => "-" + width + "w" + ".jpg");
+function sizedName(filename, width, format) {
+  const ext = extension[format];
+  if (!ext) {
+    throw new Error(`Unknown format ${format}`);
+  }
+  return filename.replace(/\.\w+$/, (_) => "-" + width + "w" + "." + ext);
 }

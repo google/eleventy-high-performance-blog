@@ -107,17 +107,32 @@ describe("check build output for a generic post", () => {
     describe("body", () => {
       it("should have images", () => {
         const images = Array.from(
-          doc.querySelectorAll("article :not(aside) img")
+          doc.querySelectorAll("article :not(aside) picture img")
+        );
+        const pictures = Array.from(
+          doc.querySelectorAll("article :not(aside) picture")
         );
         const metaImage = select("meta[property='og:image']", "content");
         expect(images.length).to.greaterThan(0);
+        expect(pictures.length).to.greaterThan(0);
         const img = images[0];
+        const picture = pictures[0];
+        const sources = picture.querySelectorAll("source");
+        expect(sources).to.have.length(2);
         expect(img.src).to.match(/\/img\/remote\/\w+\.jpg/);
         expect(metaImage).to.equal(URL + img.src);
-        expect(img.srcset).to.match(
+        const webp = sources[0];
+        const jpg = sources[1];
+        expect(jpg.srcset).to.match(
           /\/img\/remote\/\w+-1920w.jpg 1920w, \/img\/remote\/\w+-1280w.jpg 1280w, \/img\/remote\/\w+-640w.jpg 640w, \/img\/remote\/\w+-320w.jpg 320w/
         );
-        expect(img.sizes).to.equal("(max-width: 608px) 100vw, 608px");
+        expect(webp.srcset).to.match(
+          /\/img\/remote\/\w+-1920w.webp 1920w, \/img\/remote\/\w+-1280w.webp 1280w, \/img\/remote\/\w+-640w.webp 640w, \/img\/remote\/\w+-320w.webp 320w/
+        );
+        expect(jpg.type).to.equal("image/jpeg");
+        expect(webp.type).to.equal("image/webp");
+        expect(jpg.sizes).to.equal("(max-width: 608px) 100vw, 608px");
+        expect(webp.sizes).to.equal("(max-width: 608px) 100vw, 608px");
         expect(img.height).to.equal(850);
         expect(img.width).to.equal(1280);
         expect(img.getAttribute("loading")).to.equal("lazy");
