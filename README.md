@@ -73,9 +73,9 @@ npm run build
 
 #### Images
 
-- Transcodes images to [AVIF](https://en.wikipedia.org/wiki/AV1#AV1_Image_File_Format_(AVIF)) (the latest widely supported next-gen image codec) and [webp](https://developers.google.com/speed/webp) and generates `picture` element.
 - Generates multiple sizes of each image and uses them in **`srcset`**.
 - Generates a **blurry placeholder** for each image (without adding an HTML element or using JS).
+- Transcodes images to [AVIF](https://en.wikipedia.org/wiki/AV1#AV1_Image_File_Format_(AVIF)) (currently off-by-default due to instabillity of the encoder) and [webp](https://developers.google.com/speed/webp) and generates `picture` element.
 - **Lazy loads** images (using [native `loading=lazy`](https://web.dev/native-lazy-loading/)).
 - **Async decodes** images (using `decoding=async`).
 - **Avoids CLS impact** of images by inferring and providing width and height (Supported in Chrome, Firefox and Safari 14+).

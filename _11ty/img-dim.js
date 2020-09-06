@@ -25,6 +25,8 @@ const sizeOf = promisify(require("image-size"));
 const blurryPlaceholder = require("./blurry-placeholder");
 const srcset = require("./srcset");
 
+const ACTIVATE_AVIF = false;
+
 /**
  * Sets `width` and `height` on each image, adds blurry placeholder
  * and generates a srcset if none present.
@@ -56,13 +58,17 @@ const processImage = async (img) => {
     const avif = doc.createElement("source");
     const webp = doc.createElement("source");
     const jpeg = doc.createElement("source");
-    await setSrcset(avif, src, "avif");
+    if (ACTIVATE_AVIF) {
+      await setSrcset(avif, src, "avif");
+    }
     avif.setAttribute("type", "image/avif");
     await setSrcset(webp, src, "webp");
     webp.setAttribute("type", "image/webp");
     await setSrcset(jpeg, src, "jpeg");
     jpeg.setAttribute("type", "image/jpeg");
-    picture.appendChild(avif);
+    if (ACTIVATE_AVIF) {
+      picture.appendChild(avif);
+    }
     picture.appendChild(webp);
     picture.appendChild(jpeg);
     img.parentElement.replaceChild(picture, img);
