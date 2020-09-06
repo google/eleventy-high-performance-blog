@@ -8,4 +8,4 @@
   for = "*.avif"
     [headers.values]
       Content-Type = "image/avif"
-      Content -Disposition = "inline"
+      Content-Disposition = "inline"
