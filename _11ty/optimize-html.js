@@ -40,6 +40,7 @@ const csso = require("csso");
 const purifyCss = async (rawContent, outputPath) => {
   let content = rawContent;
   if (
+    outputPath &&
     outputPath.endsWith(".html") &&
     !isAmp(content) &&
     !/data-style-override/.test(content)
@@ -82,7 +83,7 @@ const purifyCss = async (rawContent, outputPath) => {
 
 const minifyHtml = (rawContent, outputPath) => {
   let content = rawContent;
-  if (outputPath.endsWith(".html") && !isAmp(content)) {
+  if (outputPath && outputPath.endsWith(".html") && !isAmp(content)) {
     content = minify(content, {
       removeAttributeQuotes: true,
       collapseBooleanAttributes: true,
@@ -99,7 +100,7 @@ const minifyHtml = (rawContent, outputPath) => {
 
 const optimizeAmp = async (rawContent, outputPath) => {
   let content = rawContent;
-  if (outputPath.endsWith(".html") && isAmp(content)) {
+  if (outputPath && outputPath.endsWith(".html") && isAmp(content)) {
     content = await ampOptimizer.transformHtml(content);
   }
   return content;
