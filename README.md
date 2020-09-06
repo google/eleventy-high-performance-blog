@@ -73,14 +73,14 @@ npm run build
 
 #### Images
 
-- Immutable URLs.
-- Transcode images to webp and generates `picture` element.
-- Downloads remote images and stores/serves them locally.
 - Generates multiple sizes of each image and uses them in **`srcset`**.
 - Generates a **blurry placeholder** for each image (without adding an HTML element or using JS).
 - **Lazy loads** images (using [native `loading=lazy`](https://web.dev/native-lazy-loading/)).
 - **Async decodes** images (using `decoding=async`).
 - **Avoids CLS impact** of images by inferring and providing width and height (Supported in Chrome, Firefox and Safari 14+).
+- Transcodes images to [webp](https://developers.google.com/speed/webp) and generates `picture` element.
+- Downloads remote images and stores/serves them locally.
+- Immutable URLs.
 
 #### CSS
 
