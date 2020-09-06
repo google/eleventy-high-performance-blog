@@ -45,6 +45,7 @@
   },
   "dependencies": {
     "@ampproject/toolbox-optimizer": "^2.5.5",
+    "@saschazar/wasm-avif": "^1.0.0",
     "clean-css": "^4.2.3",
     "concurrently": "^5.2.0",
     "csp-hash-generator": "0.0.3",
