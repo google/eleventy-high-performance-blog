@@ -53,12 +53,16 @@ const processImage = async (img) => {
     );
     const doc = img.ownerDocument;
     const picture = doc.createElement("picture");
+    const avif = doc.createElement("source");
     const webp = doc.createElement("source");
     const jpeg = doc.createElement("source");
+    await setSrcset(avif, src, "avif");
+    avif.setAttribute("type", "image/avif");
     await setSrcset(webp, src, "webp");
     webp.setAttribute("type", "image/webp");
     await setSrcset(jpeg, src, "jpeg");
     jpeg.setAttribute("type", "image/jpeg");
+    picture.appendChild(avif);
     picture.appendChild(webp);
     picture.appendChild(jpeg);
     img.parentElement.replaceChild(picture, img);

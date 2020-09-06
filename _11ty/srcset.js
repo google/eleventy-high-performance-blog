@@ -22,6 +22,7 @@
 const { promisify } = require("util");
 const exists = promisify(require("fs").exists);
 const sharp = require("sharp");
+const avif = require("./avif");
 
 /**
  * Generates sensible sizes for each image for use in a srcset.
@@ -32,6 +33,7 @@ const widths = [1920, 1280, 640, 320];
 const extension = {
   jpeg: "jpg",
   webp: "webp",
+  avif: "avif",
 };
 
 module.exports = async function srcset(filename, format) {
@@ -46,13 +48,18 @@ async function resize(filename, width, format) {
   if (await exists("_site" + out)) {
     return out;
   }
-  await sharp("_site" + filename)
-    .resize(width)
-    [format]({
-      quality: 60,
-      reductionEffort: 6,
-    })
-    .toFile("_site" + out);
+  if (format == "avif") {
+    await avif("_site" + filename, "_site" + out, width);
+  } else {
+    await sharp("_site" + filename)
+      .resize(width)
+      [format]({
+        quality: 60,
+        reductionEffort: 6,
+      })
+      .toFile("_site" + out);
+  }
+
   return out;
 }
 
