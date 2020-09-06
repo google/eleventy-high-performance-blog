@@ -74,6 +74,7 @@ npm run build
 #### Images
 
 - Immutable URLs.
+- Transcode images to webp and generates `picture` element.
 - Downloads remote images and stores/serves them locally.
 - Generates multiple sizes of each image and uses them in **`srcset`**.
 - Generates a **blurry placeholder** for each image (without adding an HTML element or using JS).
@@ -100,7 +101,6 @@ npm run build
 #### Fonts
 
 - Serves fonts from same origin.
-- Preloads fonts.
 - Makes fonts `display:swap`.
 
 #### Analytics
@@ -146,7 +146,6 @@ Generates a strong CSP for the base template.
 
 ### Opportunities (not-yet-implemented)
 
-- Transcode images to webp.
 - Transcode images to avif.
 
 ## Disclaimer
