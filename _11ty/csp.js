@@ -41,7 +41,7 @@ function quote(str) {
 const addCspHash = async (rawContent, outputPath) => {
   let content = rawContent;
 
-  if (outputPath.endsWith(".html")) {
+  if (outputPath && outputPath.endsWith(".html")) {
     const dom = new JSDOM(content);
     const cspAble = [
       ...dom.window.document.querySelectorAll("script[csp-hash]"),

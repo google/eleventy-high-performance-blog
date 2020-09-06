@@ -29,7 +29,7 @@ const BASE_URL = require("../_data/metadata.json").url;
 const jsonLd = (rawContent, outputPath) => {
   let content = rawContent;
 
-  if (outputPath.endsWith(".html")) {
+  if (outputPath && outputPath.endsWith(".html")) {
     const dom = new JSDOM(content);
     const jsonLd = dom.window.document.querySelector(
       "script[type='application/ld+json']"

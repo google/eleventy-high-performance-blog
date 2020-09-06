@@ -85,7 +85,7 @@ async function setSrcset(img, src, format) {
 const dimImages = async (rawContent, outputPath) => {
   let content = rawContent;
 
-  if (outputPath.endsWith(".html")) {
+  if (outputPath && outputPath.endsWith(".html")) {
     const dom = new JSDOM(content);
     const images = [...dom.window.document.querySelectorAll("img,amp-img")];
 

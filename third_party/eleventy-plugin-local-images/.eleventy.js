@@ -117,7 +117,7 @@ const grabRemoteImages = async (rawContent, outputPath) => {
   let { selector = "img" } = config;
   let content = rawContent;
 
-  if (outputPath.endsWith(".html")) {
+  if (outputPath && outputPath.endsWith(".html")) {
     const dom = new JSDOM(content);
     const images = [...dom.window.document.querySelectorAll(selector)];
 
