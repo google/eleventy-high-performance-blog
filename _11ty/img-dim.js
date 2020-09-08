@@ -36,13 +36,16 @@ const ACTIVATE_AVIF = false;
 
 const processImage = async (img) => {
   const src = img.getAttribute("src");
+  const dimensions = await sizeOf("_site/" + src);
   if (!img.getAttribute("width")) {
     if (/^(https?\:|\/\/)/i.test(src)) {
       return;
     }
-    const dimensions = await sizeOf("_site/" + src);
     img.setAttribute("width", dimensions.width);
     img.setAttribute("height", dimensions.height);
+  }
+  if (dimensions.type == "svg") {
+    return;
   }
   if (img.tagName == "IMG") {
     img.setAttribute("decoding", "async");
