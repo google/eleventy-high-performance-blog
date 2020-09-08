@@ -24,6 +24,7 @@ const { promisify } = require("util");
 const sizeOf = promisify(require("image-size"));
 const blurryPlaceholder = require("./blurry-placeholder");
 const srcset = require("./srcset");
+const path = require("path");
 
 const ACTIVATE_AVIF = false;
 
@@ -34,13 +35,25 @@ const ACTIVATE_AVIF = false;
  * blog layout.
  */
 
-const processImage = async (img) => {
-  const src = img.getAttribute("src");
-  const dimensions = await sizeOf("_site/" + src);
+const processImage = async (img, outputPath) => {
+  let src = img.getAttribute("src");
+  if (/^(https?\:\/\/|\/\/)/i.test(src)) {
+    return;
+  }
+  if (/^\.+\//.test(src)) {
+    // resolve relative URL
+    src =
+      "/" +
+      path.relative("./_site/", path.resolve(path.dirname(outputPath), src));
+  }
+  let dimensions;
+  try {
+    dimensions = await sizeOf("_site/" + src);
+  } catch (e) {
+    console.warn(e.message, src);
+    return;
+  }
   if (!img.getAttribute("width")) {
-    if (/^(https?\:|\/\/)/i.test(src)) {
-      return;
-    }
     img.setAttribute("width", dimensions.width);
     img.setAttribute("height", dimensions.height);
   }
@@ -99,7 +112,7 @@ const dimImages = async (rawContent, outputPath) => {
     const images = [...dom.window.document.querySelectorAll("img,amp-img")];
 
     if (images.length > 0) {
-      await Promise.all(images.map((i) => processImage(i)));
+      await Promise.all(images.map((i) => processImage(i, outputPath)));
       content = dom.serialize();
     }
   }
