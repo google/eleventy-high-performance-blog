@@ -4,3 +4,4 @@ package-lock.json
 .DS_Store
 js/min.js
 js/min.js.map
+.vscode/

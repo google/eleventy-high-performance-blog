@@ -92,7 +92,7 @@ npm run build
 #### Miscellaneous
 
 - Immutable URLs for JS.
-- Sets immutable caching headers for images, fonts, and JS (CSS is inlined). Currently implements for Netflify `_headers` file.
+- Sets immutable caching headers for images, fonts, and JS (CSS is inlined). Currently implements for Netlify `_headers` file.
 - Minifies HTML and optimizes it for compression. Uses [html-minifier](https://www.npmjs.com/package/html-minifier) with aggressive options.
 - Uses [rollup](https://rollupjs.org/) to bundle JS and minifies it with [terser](https://terser.org/).
 - Prefetches same-origin navigations when a navigation is likely.
@@ -142,7 +142,7 @@ Generates a strong CSP for the base template.
 
 - Downloaded remote images, and generated sizes are cached in the local filesystem…
 - …and SHOULD be committed to git.
-- `.persistimages.sh` helps with this. 
+- `.persistimages.sh` helps with this.
 
 ## Disclaimer
 
