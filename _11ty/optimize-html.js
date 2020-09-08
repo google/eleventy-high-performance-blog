@@ -92,6 +92,7 @@ const minifyHtml = (rawContent, outputPath) => {
       sortAttributes: true,
       html5: true,
       decodeEntities: true,
+      removeOptionalTags: true,
     });
   }
   return content;
