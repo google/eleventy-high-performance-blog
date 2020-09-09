@@ -9,7 +9,7 @@ describe("check build output for homepage", () => {
     const FILENAME = "_site/index.html";
 
     if (!existsSync(FILENAME)) {
-      it("WARNING skipping tests because FILENAME does not exist", () => { });
+      it("WARNING skipping tests because FILENAME does not exist", () => {});
       return;
     }
 
