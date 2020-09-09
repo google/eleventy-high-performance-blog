@@ -4,7 +4,7 @@
   command = "[ \"$METADATA_JSON\" ] && echo $METADATA_JSON > _data/metadata.json; npm run build"
   functions = "functions/"
 
-[plugins]
+[[plugins]]
   package = "@netlify/plugin-functions-install-core"
 
 [[headers]]
