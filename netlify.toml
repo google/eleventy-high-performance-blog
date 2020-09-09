@@ -4,6 +4,8 @@
   command = "[ \"$METADATA_JSON\" ] && echo $METADATA_JSON > _data/metadata.json; npm run build"
   functions = "functions/"
 
+[plugins] package = "@netlify/plugin-functions-install-core"
+
 [[headers]]
   for = "*.avif"
     [headers.values]
