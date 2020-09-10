@@ -9,6 +9,7 @@ Based on the awesome [eleventy-base-blog](https://github.com/11ty/eleventy-base-
 ## Demo
 
 * [Netlify Demo](https://eleventy-high-performance-blog-sample.industrialempathy.com/)
+* [Original site this template was based on](https://www.industrialempathy.com/)
 
 ## Getting Started
 
