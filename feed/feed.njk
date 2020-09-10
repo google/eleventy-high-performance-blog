@@ -24,9 +24,11 @@ eleventyExcludeFromCollections: true
 		<id>{{ absolutePostUrl }}</id>
 		<content type="html">
 		  {{ post.templateContent | htmlToAbsoluteUrls(absolutePostUrl) }}
-			{% set titleUrlEncoded = post.data.title|encodeURIComponent %}
-			{% set urlUrlEncoded = post.url | encodeURIComponent %}
-			{{'<img src="' + metadata.url +  '/.netlify/functions/ga?v=1&_v=j83&t=pageview&dr=https%3A%2F%2Frss-feed-reader.com&_s=1&dh=' + metadata.domain + '&dp=' + urlUrlEncoded + '&ul=en-us&de=UTF-8&dt=' + titleUrlEncoded + '&tid=' + metadata.googleAnalyticsId + '" width="1" height="1" style="display:none" alt="">'}}
+			{% if googleanalytics %}
+				{% set titleUrlEncoded = post.data.title|encodeURIComponent %}
+				{% set urlUrlEncoded = post.url | encodeURIComponent %}
+				{{'<img src="' + metadata.url +  '/.netlify/functions/ga?v=1&_v=j83&t=pageview&dr=https%3A%2F%2Frss-feed-reader.com&_s=1&dh=' + metadata.domain + '&dp=' + urlUrlEncoded + '&ul=en-us&de=UTF-8&dt=' + titleUrlEncoded + '&tid=' + googleanalytics + '" width="1" height="1" style="display:none" alt="">'}}
+			{% endif %}
 		</content>
 	</entry>
 	{%- endfor %}
