@@ -57,7 +57,7 @@ describe("check build output for a generic post", () => {
     it("should have inlined css", () => {
       const css = select("style");
       expect(css).to.match(/header nav/);
-      expect(css).to.not.match(/test-dead-code-eimination-sentinel/);
+      expect(css).to.not.match(/test-dead-code-elimination-sentinel/);
     });
 
     it("should have a good CSP", () => {

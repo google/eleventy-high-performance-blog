@@ -23,7 +23,10 @@
 // https://github.com/ampproject/amp-toolbox/blob/0c8755016ae825b11b63b98be83271fd14cc0486/packages/optimizer/lib/transformers/AddBlurryImagePlaceholders.js
 
 const { promisify } = require("util");
-const jimp = require("jimp");
+const sharp = require("sharp");
+const sizeOf = promisify(require("image-size"));
+const DatauriParser = require("datauri/parser");
+const parser = new DatauriParser();
 const readFile = promisify(require("fs").readFile);
 const writeFile = promisify(require("fs").writeFile);
 const exists = promisify(require("fs").exists);
@@ -53,16 +56,16 @@ async function getCachedDataURI(src) {
 }
 
 async function getDataURI(src) {
-  const image = await jimp.read(src);
-  const imgDimension = getBitmapDimensions_(
-    image.bitmap.width,
-    image.bitmap.height
-  );
-  image.resize(imgDimension.width, imgDimension.height, jimp.RESIZE_BEZIER);
+  const info = await sizeOf(src);
+  const imgDimension = getBitmapDimensions_(info.width, info.height);
+  const buffer = await sharp(src)
+    .resize(imgDimension.width, imgDimension.height)
+    .png()
+    .toBuffer();
   const result = {
-    src: await image.getBase64Async("image/png"),
-    width: image.bitmap.width,
-    height: image.bitmap.height,
+    src: parser.format(".png", buffer).content,
+    width: info.width,
+    height: info.height,
   };
   return result;
 }

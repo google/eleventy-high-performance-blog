@@ -7,11 +7,11 @@
     "build": "npm run js-build && eleventy && npm run test",
     "watch": "concurrently \"eleventy --serve\" \"npm run js-build-watch\" \"npm run test-watch\"",
     "serve": "eleventy --serve",
-    "js-build": "./node_modules/rollup/dist/bin/rollup -c rollup.config.js",
-    "js-build-watch": "./node_modules/rollup/dist/bin/rollup -c rollup.config.js -w",
+    "js-build": "rollup -c rollup.config.js",
+    "js-build-watch": "rollup -c rollup.config.js -w",
     "debug": "DEBUG=* eleventy && npm run test",
-    "test": "./node_modules/mocha/bin/mocha test/test*.js",
-    "test-watch": "./node_modules/mocha/bin/mocha test/test*.js --watch"
+    "test": "mocha test/test*.js",
+    "test-watch": "mocha test/test*.js --watch"
   },
   "pre-push": [
     "build"
@@ -50,11 +50,11 @@
     "concurrently": "^5.2.0",
     "csp-hash-generator": "0.0.3",
     "csso": "^4.0.3",
+    "datauri": "^3.0.0",
     "expect.js": "^0.3.1",
     "hasha": "^5.2.0",
     "html-minifier": "^4.0.0",
     "image-size": "^0.8.3",
-    "jimp": "^0.14.0",
     "lru-cache": "^5.1.1",
     "mocha": "^8.1.3",
     "purge-from-html": "^1.0.3",
