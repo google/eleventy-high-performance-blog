@@ -22,7 +22,6 @@
 const { JSDOM } = require("jsdom");
 const cspHashGen = require("csp-hash-generator");
 const syncPackage = require("browser-sync/package.json");
-console.log(syncPackage);
 
 /**
  * Substitute the magic `HASHES` string in the CSP with the actual values of the
