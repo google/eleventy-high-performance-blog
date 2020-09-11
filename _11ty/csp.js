@@ -21,6 +21,8 @@
 
 const { JSDOM } = require("jsdom");
 const cspHashGen = require("csp-hash-generator");
+const syncPackage = require("browser-sync/package.json");
+console.log(syncPackage);
 
 /**
  * Substitute the magic `HASHES` string in the CSP with the actual values of the
@@ -31,8 +33,13 @@ const cspHashGen = require("csp-hash-generator");
 // Allow the auto-reload script in local dev. Would be good to get rid of this magic
 // string which would break on ungrades of 11ty.
 const AUTO_RELOAD_SCRIPTS = [
-  quote("sha256-ThhI8UaSFEbbl6cISiZpnJ4Z44uNSq2tPKgyRTD3LyU="),
-  quote("sha256-d8xVpEfOlXT388lPL445U0wcaE4cweRSVh5BQpm9scE="),
+  quote(
+    cspHashGen(
+      "//<![CDATA[\n    document.write(\"<script async src='/browser-sync/browser-sync-client.js?v=" +
+        syncPackage.version +
+        '\'><\\/script>".replace("HOST", location.hostname));\n//]]>'
+    )
+  ),
 ];
 
 function quote(str) {
