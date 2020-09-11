@@ -30,9 +30,10 @@ const cspHashGen = require("csp-hash-generator");
 
 // Allow the auto-reload script in local dev. Would be good to get rid of this magic
 // string which would break on ungrades of 11ty.
-const AUTO_RELOAD_SCRIPT = quote(
-  "sha256-ThhI8UaSFEbbl6cISiZpnJ4Z44uNSq2tPKgyRTD3LyU="
-);
+const AUTO_RELOAD_SCRIPTS = [
+  quote("sha256-ThhI8UaSFEbbl6cISiZpnJ4Z44uNSq2tPKgyRTD3LyU="),
+  quote("sha256-d8xVpEfOlXT388lPL445U0wcaE4cweRSVh5BQpm9scE="),
+];
 
 function quote(str) {
   return `'${str}'`;
@@ -53,7 +54,7 @@ const addCspHash = async (rawContent, outputPath) => {
       return quote(hash);
     });
     if (isDevelopmentMode()) {
-      hashes.push(AUTO_RELOAD_SCRIPT);
+      hashes.push.apply(hashes, AUTO_RELOAD_SCRIPTS);
     }
 
     const csp = dom.window.document.querySelector(
