@@ -9,6 +9,7 @@ Based on the awesome [eleventy-base-blog](https://github.com/11ty/eleventy-base-
 ## Demo
 
 * [Netlify Demo](https://eleventy-high-performance-blog-sample.industrialempathy.com/)
+* [Original site this template was based on](https://www.industrialempathy.com/)
 
 ## Getting Started
 
@@ -48,7 +49,6 @@ npm run build
 
 - Search for "Update me" across files in your editor to find all the site specific things you should update.
 - Update the favicons in 'img/favicon/'.
-- If you don't want the (same-origin) Google Analytics integration, rip it out 😛.
 - Otherwise: Knock yourself out. This is a template repository.
 - For a simple color override, adjust these CSS variables at the top of `css/main.css`.
 
@@ -108,6 +108,7 @@ npm run build
 - Supports locally serving Google Analytics's JS and proxying it's hit requests to a Netlify proxy (other proxies could be easily added).
 - Support for noscript hit requests.
 - Avoids blocking onload on analytics requests.
+- To turn this on, specify `googleAnalyticsId` in `metadata.json`. 
 
 ### DX features
 

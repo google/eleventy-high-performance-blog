@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en" 
     domain="{{ metadata.domain }}" 
-    ga-id="{{ metadata.googleAnalyticsId }}">
+    ga-id="{{ googleanalytics }}">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -41,7 +41,9 @@
 
     <link rel="preconnect" href="/" crossorigin>  
     <script async defer src="{{ "/js/min.js" | addHash }}"></script>
+    {% if googleanalytics %}
     <script async defer src="{{ "/js/cached.js" | addHash }}"></script>
+    {% endif %}
     <!-- Notably iOS UAs also contain Mac OS X -->
     <script csp-hash>if (/Mac OS X/.test(navigator.userAgent))document.documentElement.classList.add('apple')
     </script>
@@ -62,10 +64,12 @@
       <h1>{{ title }}</h1>
       {% block extraArticleHeader %}{% endblock %}
       <dialog id="message"></dialog>
+      {% if googleanalytics %}
       <noscript>
-        <img src="/.netlify/functions/ga?v=1&_v=j83&t=pageview&dr=https%3A%2F%2Fno-script.com&_s=1&dh={{ metadata.domain | encodeURIComponent }}&dp={{ page.url | encodeURIComponent }}&ul=en-us&de=UTF-8&dt={{title|encodeURIComponent}}&tid={{metadata.googleAnalyticsId}}" width="1" height="1"
+        <img src="/.netlify/functions/ga?v=1&_v=j83&t=pageview&dr=https%3A%2F%2Fno-script.com&_s=1&dh={{ metadata.domain | encodeURIComponent }}&dp={{ page.url | encodeURIComponent }}&ul=en-us&de=UTF-8&dt={{title|encodeURIComponent}}&tid={{googleanalytics}}" width="1" height="1"
         style="display:none" alt="">
       </noscript>
+      {% endif %}
     </header>
 
     <main>

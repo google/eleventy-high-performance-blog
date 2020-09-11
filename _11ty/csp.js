@@ -21,6 +21,7 @@
 
 const { JSDOM } = require("jsdom");
 const cspHashGen = require("csp-hash-generator");
+const syncPackage = require("browser-sync/package.json");
 
 /**
  * Substitute the magic `HASHES` string in the CSP with the actual values of the
@@ -30,9 +31,15 @@ const cspHashGen = require("csp-hash-generator");
 
 // Allow the auto-reload script in local dev. Would be good to get rid of this magic
 // string which would break on ungrades of 11ty.
-const AUTO_RELOAD_SCRIPT = quote(
-  "sha256-ThhI8UaSFEbbl6cISiZpnJ4Z44uNSq2tPKgyRTD3LyU="
-);
+const AUTO_RELOAD_SCRIPTS = [
+  quote(
+    cspHashGen(
+      "//<![CDATA[\n    document.write(\"<script async src='/browser-sync/browser-sync-client.js?v=" +
+        syncPackage.version +
+        '\'><\\/script>".replace("HOST", location.hostname));\n//]]>'
+    )
+  ),
+];
 
 function quote(str) {
   return `'${str}'`;
@@ -53,7 +60,7 @@ const addCspHash = async (rawContent, outputPath) => {
       return quote(hash);
     });
     if (isDevelopmentMode()) {
-      hashes.push(AUTO_RELOAD_SCRIPT);
+      hashes.push.apply(hashes, AUTO_RELOAD_SCRIPTS);
     }
 
     const csp = dom.window.document.querySelector(
