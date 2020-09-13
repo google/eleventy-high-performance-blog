@@ -78,6 +78,7 @@ npm run build
 - Transcodes images to [AVIF](https://en.wikipedia.org/wiki/AV1#AV1_Image_File_Format_(AVIF)) (currently off-by-default due to instabillity of the encoder) and [webp](https://developers.google.com/speed/webp) and generates `picture` element.
 - **Lazy loads** images (using [native `loading=lazy`](https://web.dev/native-lazy-loading/)).
 - **Async decodes** images (using `decoding=async`).
+- **Lazy layout** of images and placeholders using [`content-visibility: auto`](https://web.dev/content-visibility/#skipping-rendering-work-with-content-visibility).
 - **Avoids CLS impact** of images by inferring and providing width and height (Supported in Chrome, Firefox and Safari 14+).
 - Downloads remote images and stores/serves them locally.
 - Immutable URLs.
