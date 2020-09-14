@@ -75,7 +75,7 @@ npm run build
 
 - Generates multiple sizes of each image and uses them in **`srcset`**.
 - Generates a **blurry placeholder** for each image (without adding an HTML element or using JS).
-- Transcodes images to [AVIF](https://en.wikipedia.org/wiki/AV1#AV1_Image_File_Format_(AVIF)) (currently off-by-default due to instabillity of the encoder) and [webp](https://developers.google.com/speed/webp) and generates `picture` element.
+- Transcodes images to [AVIF](https://en.wikipedia.org/wiki/AV1#AV1_Image_File_Format_(AVIF)) (currently off-by-default due to instability of the encoder) and [webp](https://developers.google.com/speed/webp) and generates `picture` element.
 - **Lazy loads** images (using [native `loading=lazy`](https://web.dev/native-lazy-loading/)).
 - **Async decodes** images (using `decoding=async`).
 - **Lazy layout** of images and placeholders using [`content-visibility: auto`](https://web.dev/content-visibility/#skipping-rendering-work-with-content-visibility).
@@ -120,7 +120,7 @@ npm run build
 
 ### SEO & Social
 
-- Share button prefering `navigator.share()` and falling back to Twitter. Using OS-like share-icon.
+- Share button preferring `navigator.share()` and falling back to Twitter. Using OS-like share-icon.
 - Support for OGP metadata.
 - Support for Twitter metadata.
 - Support for schema.org JSON-LD.
