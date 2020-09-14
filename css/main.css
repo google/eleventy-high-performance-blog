@@ -8,6 +8,35 @@
   color: red;
 }
 
+/*
+  Make image rasterization lazy. This means that e.g. the cost of the
+  blurry placeholder is never paid if images load before entering
+  the viewport.
+  Context
+  - https://web.dev/content-visibility/#skipping-rendering-work-with-content-visibility
+ */
+main img {
+  content-visibility: auto;
+}
+
+/* "Content-visibility: auto" move the images over the other elements
+   Set z-index to keep the nav over the rasterized images */
+header nav {
+  z-index: 1;
+}
+
+/*! purgecss start ignore */
+:root {
+  --main-width: calc(100vw - 3em);
+}
+
+@media (min-width: 37.5em) {
+  :root {
+    --main-width: calc(37.5em - 3em);
+  }
+}
+/*! purgecss end ignore */
+
 share-widget {
   position: fixed;
   right: 20px;
@@ -365,7 +394,7 @@ BUGS:
   src: url("/fonts/Inter-italic.var.woff2") format("woff2");
 }
 
-/* 
+/*
 
 The Bahunya CSS framework https://kimeiga.github.io/bahunya/
 

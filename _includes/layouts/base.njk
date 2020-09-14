@@ -1,7 +1,10 @@
 <!doctype html>
-<html lang="en" 
-    domain="{{ metadata.domain }}" 
-    ga-id="{{ googleanalytics }}">
+<html lang="en"
+    domain="{{ metadata.domain }}"
+    {% if googleanalytics %}
+    ga-id="{{ googleanalytics }}"
+    {% endif %}
+  >
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,9 +31,9 @@
     {% if image %}
       <meta property="og:image" content="{{ image | absoluteUrl(metadata.url) }}">
     {% endif %}
-    
+
     <link rel="canonical" href="{{ metadata.url }}{{ canonicalUrl or page.url }}">
-    <!-- This is a blog and so it SHOULD be safe and it is nice for the web 
+    <!-- This is a blog and so it SHOULD be safe and it is nice for the web
          to send referrers cross-origin.
          However, if you use sensitive data in URLs, consider changing this to
          a value like `origin-when-cross-origin`
@@ -39,7 +42,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
     <link rel="alternate" href="{{ metadata.feed.path | url }}" type="application/atom+xml" title="{{ metadata.title }}">
 
-    <link rel="preconnect" href="/" crossorigin>  
+    <link rel="preconnect" href="/" crossorigin>
     <script async defer src="{{ "/js/min.js" | addHash }}"></script>
     {% if googleanalytics %}
     <script async defer src="{{ "/js/cached.js" | addHash }}"></script>

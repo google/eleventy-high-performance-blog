@@ -1,3 +1,4 @@
+// Copy of https://www.google-analytics.com/analytics.js
 (function(){/*
 
  Copyright The Closure Library Authors.
