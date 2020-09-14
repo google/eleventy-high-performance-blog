@@ -63,11 +63,20 @@ const processImage = async (img, outputPath) => {
   if (img.tagName == "IMG") {
     img.setAttribute("decoding", "async");
     img.setAttribute("loading", "lazy");
+    // Contain the intrinsic to the `--main-width` (width of the main article body)
+    // and the aspect ratio times that size. But because images are `max-width: 100%`
+    // use the `min` operator to set the actual dimensions of the image as the
+    // ceiling 🤯.
+    const containSize = `min(var(--main-width), ${
+      dimensions.width
+    }px) min(calc(var(--main-width) * ${
+      dimensions.height / dimensions.width
+    }), ${dimensions.height}px)`;
     img.setAttribute(
       "style",
-      `background-size:cover;background-image:url("${await blurryPlaceholder(
-        src
-      )}")`
+      `background-size:cover;` +
+        `contain-intrinsic-size: ${containSize};` +
+        `background-image:url("${await blurryPlaceholder(src)}")`
     );
     const doc = img.ownerDocument;
     const picture = doc.createElement("picture");
