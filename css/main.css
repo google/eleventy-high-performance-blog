@@ -25,18 +25,6 @@ header nav {
   z-index: 1;
 }
 
-/*! purgecss start ignore */
-:root {
-  --main-width: calc(100vw - 3em);
-}
-
-@media (min-width: 37.5em) {
-  :root {
-    --main-width: calc(37.5em - 3em);
-  }
-}
-/*! purgecss end ignore */
-
 share-widget {
   position: fixed;
   right: 20px;
