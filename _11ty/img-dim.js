@@ -66,6 +66,7 @@ const processImage = async (img, outputPath) => {
     img.setAttribute(
       "style",
       `background-size:cover;` +
+        `aspect-ratio: ${dimensions.width} / ${dimensions.height};` +
         `background-image:url("${await blurryPlaceholder(src)}")`
     );
     const doc = img.ownerDocument;
