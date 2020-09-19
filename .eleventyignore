@@ -9,3 +9,4 @@ third_party
 functions
 test
 src
+.oryx_prod_node_modules/
