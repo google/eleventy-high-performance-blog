@@ -20,8 +20,9 @@
  */
 
 /**
- * Provides the default CSP.
+ * Provides the default CSP (Content Security Policy).
  * Inline scripts must have the `csp-hash` attribute to be allowed.
+ * Example: `<script csp-hash>console.log('Hello World')</script>`
  * For more info see https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP
  * or the comments at the end of the `CSP` const below.
  */
