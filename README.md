@@ -139,6 +139,7 @@ Generates a strong CSP for the base template.
 - Default-src is self.
 - Disallows plugins.
 - Generates hash based CSP for the JS used on the site.
+- To extend the CSP with new rules, see [CSP.js](https://github.com/google/eleventy-high-performance-blog/blob/main/_data/csp.js#L22)
 
 ### Build performance
 

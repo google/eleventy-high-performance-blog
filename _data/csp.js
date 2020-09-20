@@ -22,15 +22,9 @@
 /**
  * Provides the default CSP.
  * Inline scripts must have the `csp-hash` attribute to be allowed.
+ * For more info see https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP
+ * or the comments at the end of the `CSP` const below.
  */
-
-function quote(str) {
-  return `'${str}'`;
-}
-
-function serialize(csp) {
-  return csp.map((src) => src.join(" ")).join(";");
-}
 
 const SELF = quote("self");
 
@@ -46,7 +40,22 @@ const CSP = {
     ["style-src", quote("unsafe-inline")],
     // Images may also come from data-URIs.
     ["img-src", SELF, "data:"],
+
+    // To add new rules, add new array literals here or extend those above with
+    // additional allowed elements.
+    // Example for allowing YouTube iframe embeds
+    // ['iframe-src', 'https://www.youtube.com/embed/']
   ]),
 };
+
+// Quotes CSP "keywords" like `none` or `self`. This function does very little
+// but reads better than the inlined contents because of the nested quotes.
+function quote(str) {
+  return `'${str}'`;
+}
+
+function serialize(csp) {
+  return csp.map((src) => src.join(" ")).join(";");
+}
 
 module.exports = () => CSP;
