@@ -45,7 +45,7 @@ const CSP = {
     // To add new rules, add new array literals here or extend those above with
     // additional allowed elements.
     // Example for allowing YouTube iframe embeds
-    // ['iframe-src', 'https://www.youtube.com/embed/']
+    // ['frame-src', 'https://www.youtube.com/embed/']
   ]),
 };
 
