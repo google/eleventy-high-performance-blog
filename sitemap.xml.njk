@@ -7,11 +7,15 @@ siteWideUpdate: 2020-07-12
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 {%- for page in collections.all %}
   {% set absoluteUrl %}{{ page.url | url | absoluteUrl(metadata.url) }}{% endset %}
-  {% set pageDate = page.date | htmlDateString %}
-  {% set siteWide = siteWideUpdate| htmlDateString %}
+  {% set pageDate = page.date | sitemapDateTimeString %}
+  {% set lastModifiedDate = page.inputPath | lastModifiedDate  | sitemapDateTimeString %}
+  {% set siteWide = siteWideUpdate| sitemapDateTimeString %}
   {% set lastmod = siteWide %}
   {% if pageDate > lastmod %}
     {% set lastmod = pageDate %}
+  {% endif %}
+  {% if lastModifiedDate > lastmod %}
+    {% set lastmod = lastModifiedDate %}
   {% endif %}
   <url>
     <loc>{{ absoluteUrl }}</loc>
