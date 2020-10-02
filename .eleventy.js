@@ -89,9 +89,22 @@ module.exports = function (eleventyConfig) {
       .catch((error) => callback(error));
   });
 
-  eleventyConfig.addFilter("lastModifiedDate", function (filename) {
-    const stats = fs.statSync(filename);
-    return stats.mtime; // Date
+  eleventyConfig.addNunjucksAsyncFilter("lastModifiedDate", function (
+    filename,
+    callback
+  ) {
+    require("child_process").execFile(
+      "git",
+      ["log", "-1", "--format=%cd", filename],
+      (error, stdout) => {
+        if (error) {
+          console.error(error);
+          const stats = fs.statSync(filename);
+          callback(null, stats.mtime); // Date
+        }
+        callback(null, new Date(stdout));
+      }
+    );
   });
 
   eleventyConfig.addFilter("encodeURIComponent", function (str) {
