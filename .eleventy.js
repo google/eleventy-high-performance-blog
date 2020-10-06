@@ -44,7 +44,9 @@ const { DateTime } = require("luxon");
 const { promisify } = require("util");
 const fs = require("fs");
 const hasha = require("hasha");
-const readFile = promisify(require("fs").readFile);
+const readFile = promisify(fs.readFile);
+const stat = promisify(fs.stat);
+const execFile = promisify(require("child_process").execFile);
 const pluginRss = require("@11ty/eleventy-plugin-rss");
 const pluginSyntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 const pluginNavigation = require("@11ty/eleventy-navigation");
@@ -89,9 +91,40 @@ module.exports = function (eleventyConfig) {
       .catch((error) => callback(error));
   });
 
-  eleventyConfig.addFilter("lastModifiedDate", function (filename) {
-    const stats = fs.statSync(filename);
-    return stats.mtime; // Date
+  async function lastModifiedDate(filename) {
+    try {
+      const { stdout } = await execFile("git", [
+        "log",
+        "-1",
+        "--format=%cd",
+        filename,
+      ]);
+      return new Date(stdout);
+    } catch (e) {
+      console.error(e.message);
+      // Fallback to stat if git isn't working.
+      const stats = await stat(filename);
+      return stats.mtime; // Date
+    }
+  }
+  // Cache the lastModifiedDate call because shelling out to git is expensive.
+  // This means the lastModifiedDate will never change per single eleventy invocation.
+  const lastModifiedDateCache = new Map();
+  eleventyConfig.addNunjucksAsyncFilter("lastModifiedDate", function (
+    filename,
+    callback
+  ) {
+    const call = (result) => {
+      result.then((date) => callback(null, date));
+      result.catch((error) => callback(error));
+    };
+    const cached = lastModifiedDateCache.get(filename);
+    if (cached) {
+      return call(cached);
+    }
+    const promise = lastModifiedDate(filename);
+    lastModifiedDateCache.set(filename, promise);
+    call(promise);
   });
 
   eleventyConfig.addFilter("encodeURIComponent", function (str) {
