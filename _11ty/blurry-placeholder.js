@@ -109,7 +109,7 @@ module.exports = async function (src) {
                       <feFuncA type="discrete" tableValues="1 1"></feFuncA>
                     </feComponentTransfer>
                   </filter>
-                  <image filter="url(#b)" x="0" y="0"
+                  <image filter="url(#b)" preserveAspectRatio="none"
                     height="100%" width="100%"
                     xlink:href="${dataURI.src}">
                   </image>
