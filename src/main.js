@@ -63,7 +63,6 @@ function message(msg) {
   }, 3000);
 }
 
-const prefetched = [];
 function prefetch(e) {
   if (e.target.tagName != "A") {
     return;
@@ -74,13 +73,9 @@ function prefetch(e) {
   if (window.location.pathname === e.target.pathname) {
     return;
   }
-  if (prefetched.includes(e.target.href)) {
-    return;
-  }
   var l = document.createElement("link");
   l.rel = "prefetch";
   l.href = e.target.href;
-  prefetched.push(l.href);
   document.head.appendChild(l);
 }
 document.documentElement.addEventListener("mouseover", prefetch, {
