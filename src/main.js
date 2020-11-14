@@ -70,7 +70,13 @@ function prefetch(e) {
   if (e.target.origin != location.origin) {
     return;
   }
-  if (window.location.pathname === e.target.pathname) {
+  /**
+   * Return the given url with no fragment
+   * @param {string} url potentially containing a fragment
+   * @return {string} url without fragment
+   */
+  const removeUrlFragment = (url) => url.split("#")[0];
+  if (removeUrlFragment(window.location.href) === removeUrlFragment(e.target.href)) {
     return;
   }
   var l = document.createElement("link");
