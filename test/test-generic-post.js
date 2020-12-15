@@ -5,6 +5,7 @@ const readFileSync = require("fs").readFileSync;
 const existsSync = require("fs").existsSync;
 const metadata = require("../_data/metadata.json");
 const GA_ID = require("../_data/googleanalytics.js")();
+const CWV = require("../_data/webvitals.js")();
 
 /**
  * These tests kind of suck and they are kind of useful.
@@ -64,7 +65,8 @@ describe("check build output for a generic post", () => {
     it("should have script elements", () => {
       const scripts = doc.querySelectorAll("script[src]");
       let has_ga_id = GA_ID ? 1 : 0;
-      expect(scripts).to.have.length(has_ga_id + 1); // NOTE: update this when adding more <script>
+      let has_cwv = GA_ID && CWV ? 1 : 0; // sendToGoogleAnalytics() in base.njk assumes global ga() function exists
+      expect(scripts).to.have.length(has_ga_id + has_cwv + 1); // NOTE: update this when adding more <script>
       expect(scripts[0].getAttribute("src")).to.match(
         /^\/js\/min\.js\?hash=\w+/
       );
