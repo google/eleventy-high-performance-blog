@@ -48,6 +48,38 @@
     {% if googleanalytics %}
     <script async defer src="{{ "/js/cached.js" | addHash }}"></script>
     <script defer src="{{ "/js/web-vitals.js" | addHash }}"></script>
+    <script csp-hash>
+      addEventListener('DOMContentLoaded', () => {
+        // Function taken from https://github.com/GoogleChrome/web-vitals#using-analyticsjs
+        // To see report data in GA: Behavior > Events > Top Events > Select "Web Vitals" category
+        // CLS, LCP, and FID should appear (may take 24 hours or longer)
+        sendToGoogleAnalytics = ({name, delta, id}) => {
+          // Assumes the global `ga()` function exists, see:
+          // https://developers.google.com/analytics/devguides/collection/analyticsjs
+          ga('send', 'event', {
+            eventCategory: 'Web Vitals',
+            eventAction: name,
+            // Google Analytics metrics must be integers, so the value is rounded.
+            // For CLS the value is first multiplied by 1000 for greater precision
+            // (note: increase the multiplier for greater precision if needed).
+            eventValue: Math.round(name === 'CLS' ? delta * 1000 : delta),
+            // The `id` value will be unique to the current page load. When sending
+            // multiple values from the same page (e.g. for CLS), Google Analytics can
+            // compute a total by grouping on this ID (note: requires `eventLabel` to
+            // be a dimension in your report).
+            eventLabel: id,
+            // Use a non-interaction event to avoid affecting bounce rate.
+            nonInteraction: true,
+            // Use `sendBeacon()` if the browser supports it.
+            transport: 'beacon',
+          });
+        }
+
+        webVitals.getCLS(sendToGoogleAnalytics);
+        webVitals.getFID(sendToGoogleAnalytics);
+        webVitals.getLCP(sendToGoogleAnalytics);
+      });
+    </script>
     {% endif %}
     <!-- Notably iOS UAs also contain Mac OS X -->
     <script csp-hash>if (/Mac OS X/.test(navigator.userAgent))document.documentElement.classList.add('apple')
