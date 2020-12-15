@@ -47,6 +47,7 @@
     <script async defer src="{{ "/js/min.js" | addHash }}"></script>
     {% if googleanalytics %}
     <script async defer src="{{ "/js/cached.js" | addHash }}"></script>
+    <script defer src="{{ "/js/web-vitals.js" | addHash }}"></script>
     {% endif %}
     <!-- Notably iOS UAs also contain Mac OS X -->
     <script csp-hash>if (/Mac OS X/.test(navigator.userAgent))document.documentElement.classList.add('apple')
