@@ -33,7 +33,8 @@ module.exports = async function (inputFilename, outputFilename, targetWidth) {
   defaultOptions.maxQuantizerAlpha = 63;
 
   const inputInfo = await sharp(inputFilename)
-    .resize(targetWidth)
+  .rotate() // Manifest rotation from metadata  
+  .resize(targetWidth)
     .raw()
     .toBuffer({
       resolveWithObject: true,

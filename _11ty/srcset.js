@@ -52,6 +52,7 @@ async function resize(filename, width, format) {
     await avif("_site" + filename, "_site" + out, width);
   } else {
     await sharp("_site" + filename)
+      .rotate() // Manifest rotation from metadata
       .resize(width)
       [format]({
         quality: 60,

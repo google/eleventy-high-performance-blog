@@ -59,6 +59,7 @@ async function getDataURI(src) {
   const info = await sizeOf(src);
   const imgDimension = getBitmapDimensions_(info.width, info.height);
   const buffer = await sharp(src)
+    .rotate() // Manifest rotation from metadata
     .resize(imgDimension.width, imgDimension.height)
     .png()
     .toBuffer();
