@@ -25,16 +25,13 @@ module.exports = function () {
   // Check opt-in to send CWV metrics to GA.
   let sendWebVitals = metadata.sendWebVitals;
 
-  // Now check that web-vitals.js exists.
+  // Check that web-vitals.js exists.
   let cwvLibraryExists = false;
-
-  if (sendWebVitals) {
-    try {
-      require("../js/web-vitals.js").getCLS;
-      cwvLibraryExists = true;
-    } catch (error) {
-      console.error(error);
-    }
+  try {
+    require("../js/web-vitals.js").getCLS;
+    cwvLibraryExists = true;
+  } catch (error) {
+    console.error(error);
   }
  
   return cwvLibraryExists && sendWebVitals;
