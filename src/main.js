@@ -129,6 +129,12 @@ function ping(event) {
 }
 addEventListener("pagehide", ping);
 addEventListener("visibilitychange", ping);
+addEventListener("DOMContentLoaded", function() {
+  webVitals.getCLS(sendToGoogleAnalytics);
+  webVitals.getFID(sendToGoogleAnalytics);
+  webVitals.getLCP(sendToGoogleAnalytics);
+});
+
 addEventListener(
   "click",
   function (e) {
