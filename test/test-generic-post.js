@@ -65,7 +65,7 @@ describe("check build output for a generic post", () => {
     it("should have script elements", () => {
       const scripts = doc.querySelectorAll("script[src]");
       let has_ga_id = GA_ID ? 1 : 0;
-      let has_cwv = GA_ID && CWV ? 1 : 0; // sendToGoogleAnalytics() in base.njk assumes global ga() function exists
+      let has_cwv = CWV ? 1 : 0;
       expect(scripts).to.have.length(has_ga_id + has_cwv + 1); // NOTE: update this when adding more <script>
       expect(scripts[0].getAttribute("src")).to.match(
         /^\/js\/min\.js\?hash=\w+/
