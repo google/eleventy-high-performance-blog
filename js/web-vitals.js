@@ -7,7 +7,6 @@
   // To see report data in GA: Behavior > Events > Top Events > Select "Web Vitals" category
   // CLS, LCP, and FID should appear (may take 24 hours or longer)
   sendToGoogleAnalytics = ({name, delta, id}) => {
-    console.log(name, delta, id);
     // Assumes the global `ga()` function exists, see:
     // https://developers.google.com/analytics/devguides/collection/analyticsjs
     ga('send', 'event', {
