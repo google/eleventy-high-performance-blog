@@ -23,16 +23,14 @@ const metadata = require("./metadata.json");
 
 module.exports = function () {
   // Check opt-in to send CWV metrics to GA.
-  let sendWebVitals = metadata.sendWebVitals;
+  if (!metadata.sendWebVitals) return false;
 
   // Check that web-vitals.js exists.
-  let cwvLibraryExists = false;
   try {
     require("../js/web-vitals.js").getCLS;
-    cwvLibraryExists = true;
+    return true;
   } catch (error) {
     console.error(error);
+    return false;
   }
- 
-  return cwvLibraryExists && sendWebVitals;
 };
