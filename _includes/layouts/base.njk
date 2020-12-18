@@ -44,7 +44,9 @@
     <link rel="alternate" href="{{ metadata.feed.path | url }}" type="application/atom+xml" title="{{ metadata.title }}">
 
     <link rel="preconnect" href="/" crossorigin>
-    <script async defer src="{{ "/js/min.js" | addHash }}"></script>
+    <script async defer src="{{ "/js/min.js" | addHash }}"
+      {% if webvitals %}data-cwv-src="{{ "/js/web-vitals.js" | addHash }}"{% endif %}>
+    </script>
     {% if googleanalytics %}
       <script async defer src="{{ "/js/cached.js" | addHash }}"></script>
     {% endif %}
@@ -53,7 +55,7 @@
     </script>
     <!-- css is inserted by optimize-html custom plugin -->
   </head>
-  <body data-send-cwv="{{ webvitals }}">
+  <body>
     <header>
       <nav>
         <div id="nav">
