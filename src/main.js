@@ -148,10 +148,9 @@ const dynamicScriptInject = (src) => {
 };
 
 // Script web-vitals.js will be injected dynamically if user opts-in to sending CWV data.
-let sendWebVitals = document.body.attributes["data-send-cwv"].value;
-sendWebVitals = sendWebVitals == "true"; // Assign boolean value.
+const sendWebVitals = document.currentScript.getAttribute("data-cwv-src");
 
-if (sendWebVitals) {
+if (/web-vitals.js/.test(sendWebVitals)) {
   dynamicScriptInject(`${window.location.origin}/js/web-vitals.js`)
   .then(() => {
     webVitals.getCLS(sendToGoogleAnalytics);
