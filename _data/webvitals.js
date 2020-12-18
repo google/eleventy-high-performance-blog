@@ -23,14 +23,5 @@ const metadata = require("./metadata.json");
 
 module.exports = function () {
   // Check opt-in to send CWV metrics to GA.
-  if (!metadata.sendWebVitals) return false;
-
-  // Check that web-vitals.js exists.
-  try {
-    require("../js/web-vitals.js").getCLS;
-    return true;
-  } catch (error) {
-    console.error(error);
-    return false;
-  }
+  return metadata.sendWebVitals;
 };
