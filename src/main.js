@@ -129,11 +129,42 @@ function ping(event) {
 }
 addEventListener("pagehide", ping);
 addEventListener("visibilitychange", ping);
-addEventListener("DOMContentLoaded", function() {
-  webVitals.getCLS(sendToGoogleAnalytics);
-  webVitals.getFID(sendToGoogleAnalytics);
-  webVitals.getLCP(sendToGoogleAnalytics);
-});
+
+/**
+ * Injects a script into document.head
+ * @param {string} src path of script to be injected in <head>
+ * @return {Promise} Promise object that resolves on script load event
+ */
+const dynamicScriptInject = (src) => {
+  return new Promise((resolve, reject) => {
+    const script = document.createElement("script");
+    script.src = src;
+    script.type = "text/javascript";
+    document.head.appendChild(script);
+    script.addEventListener("load", () => {
+      resolve(script);
+    });
+    script.addEventListener("error", (event) => { 
+      reject(event.error);
+    });
+  })
+}
+
+// Script web-vitals.js will be injected dynamically if user opts-in to sending CWV data.
+let sendWebVitals = document.body.attributes["data-send-cwv"].value;
+sendWebVitals = sendWebVitals == "true"; // Assign boolean value.
+
+if (sendWebVitals) {
+  dynamicScriptInject(`${window.location.origin}/js/web-vitals.js`)
+  .then(() => {
+    webVitals.getCLS(sendToGoogleAnalytics);
+    webVitals.getFID(sendToGoogleAnalytics);
+    webVitals.getLCP(sendToGoogleAnalytics);
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+}
 
 addEventListener(
   "click",
