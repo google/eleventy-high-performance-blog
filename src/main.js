@@ -136,7 +136,7 @@ addEventListener("visibilitychange", ping);
  * @return {Promise} Promise object that resolves on script load event
  */
 const dynamicScriptInject = (src) => {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     const script = document.createElement("script");
     script.src = src;
     script.type = "text/javascript";
@@ -144,11 +144,8 @@ const dynamicScriptInject = (src) => {
     script.addEventListener("load", () => {
       resolve(script);
     });
-    script.addEventListener("error", (event) => { 
-      reject(event.error);
-    });
-  })
-}
+  });
+};
 
 // Script web-vitals.js will be injected dynamically if user opts-in to sending CWV data.
 let sendWebVitals = document.body.attributes["data-send-cwv"].value;
