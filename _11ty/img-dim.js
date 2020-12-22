@@ -26,8 +26,6 @@ const blurryPlaceholder = require("./blurry-placeholder");
 const srcset = require("./srcset");
 const path = require("path");
 
-const ACTIVATE_AVIF = false;
-
 /**
  * Sets `width` and `height` on each image, adds blurry placeholder
  * and generates a srcset if none present.
@@ -83,17 +81,13 @@ const processImage = async (img, outputPath) => {
     const avif = doc.createElement("source");
     const webp = doc.createElement("source");
     const jpeg = doc.createElement("source");
-    if (ACTIVATE_AVIF) {
-      await setSrcset(avif, src, "avif");
-    }
+    await setSrcset(avif, src, "avif");
     avif.setAttribute("type", "image/avif");
     await setSrcset(webp, src, "webp");
     webp.setAttribute("type", "image/webp");
     await setSrcset(jpeg, src, "jpeg");
     jpeg.setAttribute("type", "image/jpeg");
-    if (ACTIVATE_AVIF) {
-      picture.appendChild(avif);
-    }
+    picture.appendChild(avif);
     picture.appendChild(webp);
     picture.appendChild(jpeg);
     img.parentElement.replaceChild(picture, img);
