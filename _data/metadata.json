@@ -5,6 +5,7 @@
   "description": "Description of the website. Update me.",
   "genre": "Insert a schema.org genre",
   "googleAnalyticsId": "GA ID. Update me",
+  "sendWebVitals": false,
   "feed": {
     "subtitle": "Subtitle. Update me.",
     "filename": "feed.xml",

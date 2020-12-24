@@ -10,7 +10,7 @@ const GA_ID = require("../_data/googleanalytics.js")();
  * These tests kind of suck and they are kind of useful.
  *
  * They suck, because they need to be changed when the hardcoded post changes.
- * They are useful because I tend to break the things they test al the time.
+ * They are useful because I tend to break the things they test all the time.
  */
 
 describe("check build output for a generic post", () => {
