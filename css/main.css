@@ -19,6 +19,11 @@ main img {
   content-visibility: auto;
 }
 
+/* Avoid the header hiding the content on anchor scroll. */
+article * {
+  scroll-margin-top: 50px;
+}
+
 /* "Content-visibility: auto" move the images over the other elements
    Set z-index to keep the nav over the rasterized images */
 header nav {
