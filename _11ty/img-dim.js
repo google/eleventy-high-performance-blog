@@ -43,6 +43,9 @@ const processImage = async (img, outputPath) => {
     src =
       "/" +
       path.relative("./_site/", path.resolve(path.dirname(outputPath), src));
+    if (path.sep == "\\") {
+      src = src.replace(/\\/g, "/");
+    }
   }
   let dimensions;
   try {
