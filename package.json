@@ -44,7 +44,7 @@
     "shorthash": "0.0.2"
   },
   "dependencies": {
-    "@ampproject/toolbox-optimizer": "^2.5.5",
+    "@ampproject/toolbox-optimizer": "^2.7.5",
     "clean-css": "^4.2.3",
     "concurrently": "^5.2.0",
     "csp-hash-generator": "0.0.3",
@@ -56,12 +56,12 @@
     "image-size": "^0.8.3",
     "lru-cache": "^5.1.1",
     "mocha": "^8.1.3",
+    "phin": "^3.5.0",
     "purge-from-html": "^1.0.3",
     "purgecss": "^2.3.0",
+    "querystring": "^0.2.0",
     "rollup": "^2.23.0",
     "sharp": "^0.27.0",
-    "twitter": "^1.7.1",
-    "phin": "^3.5.0",
-    "querystring": "^0.2.0"
+    "twitter": "^1.7.1"
   }
 }
