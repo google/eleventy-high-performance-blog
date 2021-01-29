@@ -73,6 +73,7 @@ dialog {
   background-color: #8dff80;
   position: fixed;
   opacity: 0.9;
+  z-index: 1000;
 }
 
 img[align="left"] {
