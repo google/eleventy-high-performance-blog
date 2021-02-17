@@ -35,6 +35,11 @@ const extension = {
   avif: "avif",
 };
 
+const quality = {
+  avif: 40,
+  default: 60,
+};
+
 module.exports = async function srcset(filename, format) {
   const names = await Promise.all(
     widths.map((w) => resize(filename, w, format))
@@ -51,7 +56,7 @@ async function resize(filename, width, format) {
     .rotate() // Manifest rotation from metadata
     .resize(width)
     [format]({
-      quality: 60,
+      quality: quality[format] || quality.default,
       reductionEffort: 6,
     })
     .toFile("_site" + out);
