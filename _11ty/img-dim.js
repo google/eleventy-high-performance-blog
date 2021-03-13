@@ -25,6 +25,7 @@ const sizeOf = promisify(require("image-size"));
 const blurryPlaceholder = require("./blurry-placeholder");
 const srcset = require("./srcset");
 const path = require("path");
+const { gif2mp4 } = require("./video-gif");
 
 /**
  * Sets `width` and `height` on each image, adds blurry placeholder
@@ -59,6 +60,25 @@ const processImage = async (img, outputPath) => {
     img.setAttribute("height", dimensions.height);
   }
   if (dimensions.type == "svg") {
+    return;
+  }
+  if (dimensions.type == "gif") {
+    const videoSrc = await gif2mp4(src);
+    const video = img.ownerDocument.createElement(
+      /AMP/i.test(img.tagName) ? "amp-video" : "video"
+    );
+    [...img.attributes].map(({ name, value }) => {
+      video.setAttribute(name, value);
+    });
+    video.src = videoSrc;
+    video.setAttribute("autoplay", "");
+    video.setAttribute("muted", "");
+    video.setAttribute("loop", "");
+    if (!video.getAttribute("aria-label")) {
+      video.setAttribute("aria-label", img.getAttribute("alt"));
+      video.removeAttribute("alt");
+    }
+    img.parentElement.replaceChild(video, img);
     return;
   }
   if (img.tagName == "IMG") {

@@ -1001,7 +1001,8 @@ select[multiple] {
   border: 0;
   box-sizing: border-box;
 }
-img {
+img,
+video {
   max-width: 100%;
 }
 body {
@@ -1152,7 +1153,8 @@ blockquote footer {
   font-size: 90%;
   text-align: start;
 }
-img {
+img,
+video {
   height: auto;
   margin: 0 auto;
 }
