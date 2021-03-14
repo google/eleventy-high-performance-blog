@@ -113,7 +113,7 @@ npm run build
 - Supports sending [Core Web Vitals](https://web.dev/vitals/) metrics to Google Analytics as [events](https://github.com/GoogleChrome/web-vitals#send-the-results-to-google-analytics).
 - Support for noscript hit requests.
 - Avoids blocking onload on analytics requests.
-- To turn this on, specify `googleAnalyticsId` in `metadata.json`.
+- To turn this on, specify `googleAnalyticsId` in `metadata.json`. (Note, that this is not compatible with the not-yet-commonly used version 4 of Google Analytics.)
 
 ### DX features
 
