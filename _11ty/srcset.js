@@ -44,7 +44,10 @@ module.exports = async function srcset(filename, format) {
   const names = await Promise.all(
     widths.map((w) => resize(filename, w, format))
   );
-  return names.map((n, i) => `${n} ${widths[i]}w`).join(", ");
+  return {
+    srcset: names.map((n, i) => `${n} ${widths[i]}w`).join(", "),
+    fallback: names[0],
+  };
 };
 
 async function resize(filename, width, format) {

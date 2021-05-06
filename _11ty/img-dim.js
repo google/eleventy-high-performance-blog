@@ -98,26 +98,30 @@ const processImage = async (img, outputPath) => {
     avif.setAttribute("type", "image/avif");
     await setSrcset(webp, src, "webp");
     webp.setAttribute("type", "image/webp");
-    await setSrcset(jpeg, src, "jpeg");
+    const fallback = await setSrcset(jpeg, src, "jpeg");
     jpeg.setAttribute("type", "image/jpeg");
     picture.appendChild(avif);
     picture.appendChild(webp);
     picture.appendChild(jpeg);
     img.parentElement.replaceChild(picture, img);
     picture.appendChild(img);
+    img.setAttribute("src", fallback);
   } else if (!img.getAttribute("srcset")) {
-    await setSrcset(img, src, "jpeg");
+    const fallback = await setSrcset(img, src, "jpeg");
+    img.setAttribute("src", fallback);
   }
 };
 
 async function setSrcset(img, src, format) {
-  img.setAttribute("srcset", await srcset(src, format));
+  const setInfo = await srcset(src, format);
+  img.setAttribute("srcset", setInfo.srcset);
   img.setAttribute(
     "sizes",
     img.getAttribute("align")
       ? "(max-width: 608px) 50vw, 187px"
       : "(max-width: 608px) 100vw, 608px"
   );
+  return setInfo.fallback;
 }
 
 const dimImages = async (rawContent, outputPath) => {
