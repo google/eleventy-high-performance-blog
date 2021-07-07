@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 Google Inc
+ * Copyright (c) 2021 Google Inc
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -20,57 +20,44 @@
  */
 
 const { promisify } = require("util");
+const { join } = require("path");
+const shell = require("any-shell-escape");
 const exists = promisify(require("fs").exists);
-const sharp = require("sharp");
+const exec = promisify(require("child_process").exec);
+const pathToFfmpeg = require("ffmpeg-static");
 
-/**
- * Generates sensible sizes for each image for use in a srcset.
- */
-
-const widths = [1920, 1280, 640, 320];
-
-const extension = {
-  jpeg: "jpg",
-  webp: "webp",
-  avif: "avif",
-};
-
-const quality = {
-  avif: 40,
-  default: 60,
-};
-
-module.exports = async function srcset(filename, format) {
-  const names = await Promise.all(
-    widths.map((w) => resize(filename, w, format))
-  );
-  return {
-    srcset: names.map((n, i) => `${n} ${widths[i]}w`).join(", "),
-    fallback: names[0],
-  };
-};
-
-async function resize(filename, width, format) {
-  const out = sizedName(filename, width, format);
-  if (await exists("_site" + out)) {
-    return out;
+exports.gif2mp4 = async function (filename) {
+  const dest = mp4Name(filename);
+  const exists = promisify(require("fs").exists);
+  if (await exists(dest)) {
+    return dest;
   }
-  await sharp("_site" + filename)
-    .rotate() // Manifest rotation from metadata
-    .resize(width)
-    [format]({
-      quality: quality[format] || quality.default,
-      reductionEffort: 6,
-    })
-    .toFile("_site" + out);
-
-  return out;
-}
-
-function sizedName(filename, width, format) {
-  const ext = extension[format];
-  if (!ext) {
-    throw new Error(`Unknown format ${format}`);
+  const command = shell([
+    pathToFfmpeg,
+    // See https://engineering.giphy.com/how-to-make-gifs-with-ffmpeg/
+    "-y",
+    "-v",
+    "error",
+    "-i",
+    join("_site", filename),
+    "-filter_complex",
+    "[0:v] fps=15",
+    "-vsync",
+    0,
+    "-f",
+    "mp4",
+    "-pix_fmt",
+    "yuv420p",
+    join("_site", dest),
+  ]);
+  try {
+    await exec(command);
+  } catch (e) {
+    throw new Error(`Failed executing ${command} with ${e.stderr}`);
   }
-  return filename.replace(/\.\w+$/, (_) => "-" + width + "w" + "." + ext);
+  return dest;
+};
+
+function mp4Name(filename) {
+  return filename.replace(/\.\w+$/, (_) => ".mp4");
 }

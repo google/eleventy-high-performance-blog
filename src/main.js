@@ -70,6 +70,15 @@ function prefetch(e) {
   if (e.target.origin != location.origin) {
     return;
   }
+  /**
+   * Return the given url with no fragment
+   * @param {string} url potentially containing a fragment
+   * @return {string} url without fragment
+   */
+  const removeUrlFragment = (url) => url.split("#")[0];
+  if (removeUrlFragment(window.location.href) === removeUrlFragment(e.target.href)) {
+    return;
+  }
   var l = document.createElement("link");
   l.rel = "prefetch";
   l.href = e.target.href;
@@ -120,6 +129,39 @@ function ping(event) {
 }
 addEventListener("pagehide", ping);
 addEventListener("visibilitychange", ping);
+
+/**
+ * Injects a script into document.head
+ * @param {string} src path of script to be injected in <head>
+ * @return {Promise} Promise object that resolves on script load event
+ */
+const dynamicScriptInject = (src) => {
+  return new Promise((resolve) => {
+    const script = document.createElement("script");
+    script.src = src;
+    script.type = "text/javascript";
+    document.head.appendChild(script);
+    script.addEventListener("load", () => {
+      resolve(script);
+    });
+  });
+};
+
+// Script web-vitals.js will be injected dynamically if user opts-in to sending CWV data.
+const sendWebVitals = document.currentScript.getAttribute("data-cwv-src");
+
+if (/web-vitals.js/.test(sendWebVitals)) {
+  dynamicScriptInject(`${window.location.origin}/js/web-vitals.js`)
+  .then(() => {
+    webVitals.getCLS(sendToGoogleAnalytics);
+    webVitals.getFID(sendToGoogleAnalytics);
+    webVitals.getLCP(sendToGoogleAnalytics);
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+}
+
 addEventListener(
   "click",
   function (e) {

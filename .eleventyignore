@@ -1,5 +1,6 @@
 .DS_Store
 .github/
+.netlify/
 _site/
 node_modules/
 package-lock.json

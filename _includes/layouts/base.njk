@@ -44,9 +44,11 @@
     <link rel="alternate" href="{{ metadata.feed.path | url }}" type="application/atom+xml" title="{{ metadata.title }}">
 
     <link rel="preconnect" href="/" crossorigin>
-    <script async defer src="{{ "/js/min.js" | addHash }}"></script>
+    <script async defer src="{{ "/js/min.js" | addHash }}"
+      {% if webvitals %}data-cwv-src="{{ "/js/web-vitals.js" | addHash }}"{% endif %}>
+    </script>
     {% if googleanalytics %}
-    <script async defer src="{{ "/js/cached.js" | addHash }}"></script>
+      <script async defer src="{{ "/js/cached.js" | addHash }}"></script>
     {% endif %}
     <!-- Notably iOS UAs also contain Mac OS X -->
     <script csp-hash>if (/Mac OS X/.test(navigator.userAgent))document.documentElement.classList.add('apple')
@@ -82,7 +84,7 @@
           {{ content | safe }}
         {% endblock %}
 
-        {% if page.url.indexOf("/posts/") > -1 %}
+        {% if page.url and page.url.indexOf("/posts/") > -1 %}
           <p>Published <time datetime="{{ page.date | htmlDateString }}">{{ page.date | readableDate }}</time></p>
         {% endif %}
       </article>

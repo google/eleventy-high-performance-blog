@@ -10,7 +10,7 @@ const GA_ID = require("../_data/googleanalytics.js")();
  * These tests kind of suck and they are kind of useful.
  *
  * They suck, because they need to be changed when the hardcoded post changes.
- * They are useful because I tend to break the things they test al the time.
+ * They are useful because I tend to break the things they test all the time.
  */
 
 describe("check build output for a generic post", () => {
@@ -148,11 +148,11 @@ describe("check build output for a generic post", () => {
         const img = images[0];
         const picture = pictures[0];
         const sources = Array.from(picture.querySelectorAll("source"));
-        expect(sources).to.have.length(2);
-        expect(img.src).to.match(/\/img\/remote\/\w+\.jpg/);
-        expect(metaImage).to.equal(URL + img.src);
-        // Comment back in when avif is stable enough.
-        //const avif = sources.shift();
+        expect(sources).to.have.length(3);
+        expect(img.src).to.match(/^\/img\/remote\/\w+-1920w\.jpg$/);
+        expect(metaImage).to.match(new RegExp(URL));
+        expect(metaImage).to.match(/\/img\/remote\/\w+\.jpg$/);
+        const avif = sources.shift();
         const webp = sources.shift();
         const jpg = sources.shift();
         expect(jpg.srcset).to.match(
@@ -161,9 +161,9 @@ describe("check build output for a generic post", () => {
         expect(webp.srcset).to.match(
           /\/img\/remote\/\w+-1920w.webp 1920w, \/img\/remote\/\w+-1280w.webp 1280w, \/img\/remote\/\w+-640w.webp 640w, \/img\/remote\/\w+-320w.webp 320w/
         );
-        //expect(avif.srcset).to.match(
-        //  /\/img\/remote\/\w+-1920w.avif 1920w, \/img\/remote\/\w+-1280w.avif 1280w, \/img\/remote\/\w+-640w.avif 640w, \/img\/remote\/\w+-320w.avif 320w/
-        //);
+        expect(avif.srcset).to.match(
+          /\/img\/remote\/\w+-1920w.avif 1920w, \/img\/remote\/\w+-1280w.avif 1280w, \/img\/remote\/\w+-640w.avif 640w, \/img\/remote\/\w+-320w.avif 320w/
+        );
         expect(jpg.type).to.equal("image/jpeg");
         expect(webp.type).to.equal("image/webp");
         //expect(avif.type).to.equal("image/avif");
