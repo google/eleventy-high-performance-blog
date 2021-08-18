@@ -44,7 +44,7 @@
     "shorthash": "0.0.2"
   },
   "dependencies": {
-    "@ampproject/toolbox-optimizer": "^2.7.5",
+    "@ampproject/toolbox-optimizer": "^2.8.3",
     "any-shell-escape": "^0.1.1",
     "clean-css": "^4.2.3",
     "concurrently": "^5.2.0",
