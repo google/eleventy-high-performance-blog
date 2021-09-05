@@ -52,7 +52,7 @@
     "csso": "^4.0.3",
     "datauri": "^3.0.0",
     "expect.js": "^0.3.1",
-    "ffmpeg-static": "^4.2.7",
+    "ffmpeg-static": "^4.4.0",
     "hasha": "^5.2.0",
     "html-minifier": "^4.0.0",
     "image-size": "^0.8.3",
