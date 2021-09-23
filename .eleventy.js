@@ -163,11 +163,9 @@ module.exports = function (eleventyConfig) {
     return array.slice(0, n);
   });
 
-  const now = new Date();
-  const isDevelopment = process.env.ELEVENTY_ENV === 'development';
-  const livePosts = p => isDevelopment || (p.date <= now && !p.data.draft);
+  
   eleventyConfig.addCollection("posts", function(collectionApi) {
-    return collectionApi.getFilteredByTag("posts").filter(_ => livePosts(_));
+    return collectionApi.getFilteredByTag("posts");
   });
   eleventyConfig.addCollection("tagList", require("./_11ty/getTagList"));
   eleventyConfig.addPassthroughCopy("img");

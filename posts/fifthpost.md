@@ -6,4 +6,4 @@ date: 2021-06-22
 layout: layouts/post.njk
 ---
 
-TBD...
+This is a draft post explicitly set to ``` permalink: false ``` , which prevents it to be rendered by eleventy
