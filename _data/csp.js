@@ -27,7 +27,7 @@
  * or the comments at the end of the `CSP` const below.
  */
 
-const isDev = require("./isdevelopment");
+const isDev = require("./isdevelopment")();
 
 const SELF = quote("self");
 const UNSAFE_INLINE = quote("unsafe-inline");

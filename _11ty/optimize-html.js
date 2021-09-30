@@ -19,7 +19,7 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-const isDev = require("../_data/isdevelopment");
+const isDev = require("../_data/isdevelopment")();
 const chokidar = require("chokidar");
 const minify = require("html-minifier").minify;
 const AmpOptimizer = require("@ampproject/toolbox-optimizer");
