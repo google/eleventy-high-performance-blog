@@ -19,6 +19,8 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+const isDev = require("../_data/isdevelopment");
+const chokidar = require("chokidar");
 const minify = require("html-minifier").minify;
 const AmpOptimizer = require("@ampproject/toolbox-optimizer");
 const ampOptimizer = AmpOptimizer.create({
@@ -28,6 +30,7 @@ const ampOptimizer = AmpOptimizer.create({
 });
 const PurgeCSS = require("purgecss").PurgeCSS;
 const csso = require("csso");
+const { join } = require("path");
 
 /**
  * Inlines the CSS.
@@ -79,7 +82,16 @@ const purifyCss = async (rawContent, outputPath) => {
     const after = csso.minify(purged[0].css).css;
     //console.log("CSS reduction", before.length - after.length);
 
-    content = content.replace("</head>", `<style>${after}</style></head>`);
+    // in watch/serve mode, reference the stylesheet. As we bypass 11ty rebuild,
+    // Browsersync will reload only the css file, which is really fast
+    if (isDev) {
+      content = content.replace("</head>", `<link rel="stylesheet" href="/css/main.css"></head>`);
+      await require('util').promisify(require('fs').writeFile)("_site/css/main.css", after, {
+        encoding: "utf-8",
+      });
+    } else {
+      content = content.replace("</head>", `<style>${after}</style></head>`);
+    }
   }
   return content;
 };
@@ -110,9 +122,30 @@ const optimizeAmp = async (rawContent, outputPath) => {
   return content;
 };
 
+const initCssWatcher = () => {
+  console.log(this);
+  const watcher = chokidar.watch("./css/*", {
+    persistent: true
+  });
+  const reload = (path) => {
+    var bs = require("browser-sync");
+    require('fs').copyFileSync(path, join("_site", path));
+    bs.reload(path);
+    if(bs.has('eleventyServer'))
+      bs.get('eleventyServer').reload();
+    else if(bs.instances.length > 0)
+      bs.instances[0].reload([join("_site", path)]);
+  }
+  watcher
+    .on('add', reload)
+    .on('change', reload);
+}
+
 module.exports = {
   initArguments: {},
   configFunction: async (eleventyConfig, pluginOptions = {}) => {
+    initCssWatcher();
+
     eleventyConfig.addTransform("purifyCss", purifyCss);
     eleventyConfig.addTransform("minifyHtml", minifyHtml);
     eleventyConfig.addTransform("optimizeAmp", optimizeAmp);
