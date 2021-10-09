@@ -1,6 +1,6 @@
 ---
-title: This is my fifth post.
-description: Draft
+title: This is my sixth post.
+description: Draft post from the future
 date: 2099-06-23
 layout: layouts/post.njk
 ---
