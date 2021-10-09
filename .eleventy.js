@@ -43,6 +43,7 @@
 const { DateTime } = require("luxon");
 const { promisify } = require("util");
 const fs = require("fs");
+const path = require("path");
 const hasha = require("hasha");
 const readFile = promisify(fs.readFile);
 const stat = promisify(fs.stat);
@@ -79,7 +80,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addNunjucksAsyncFilter(
     "addHash",
     function (absolutePath, callback) {
-      readFile(`_site${absolutePath}`, {
+      readFile(path.join(".", absolutePath), {
         encoding: "utf-8",
       })
         .then((content) => {
@@ -88,7 +89,11 @@ module.exports = function (eleventyConfig) {
         .then((hash) => {
           callback(null, `${absolutePath}?hash=${hash.substr(0, 10)}`);
         })
-        .catch((error) => callback(error));
+        .catch((error) => {
+          callback(
+            new Error(`Failed to addHash to '${absolutePath}': ${error}`)
+          );
+        });
     }
   );
 
