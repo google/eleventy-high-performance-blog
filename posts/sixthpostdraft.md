@@ -1,9 +1,8 @@
 ---
 title: This is my fifth post.
 description: Draft
-date: 2021-06-22
+date: 2099-06-23
 layout: layouts/post.njk
-draft: true
 ---
 
-this is a draft post by setting ``` draft: true ```
+this is a draft post set to future using the ``` date ``` property on the frontmatter, the post would only be built/generated when the date will gets passed

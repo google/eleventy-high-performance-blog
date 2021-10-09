@@ -10,10 +10,10 @@ const existsSync = require("fs").existsSync;
  * They suck, because they need to be changed when the hardcoded post changes.
  * They are useful because I tend to break the things they test all the time.
  */
-   
+
   describe("Draft posts", () => {
      describe("draft post", () => {
-        const DRAFT_POST = "_site/posts/sixthpostdraft/index.html";
+        const DRAFT_POST = "_site/posts/fifthpost/index.html";
         
         it("w. draft: true should NOT be rendered", () => {
             var draftfileexists = false;
@@ -29,7 +29,7 @@ const existsSync = require("fs").existsSync;
         });
      });
      describe("draft post from future", () => {
-      const DRAFT_POST_FUTURE = "_site/posts/seventhpost/index.html";
+      const DRAFT_POST_FUTURE = "_site/posts/sixthpostdraft/index.html";
       
       it("should NOT be rendered", () => {
           var draftpostfutureexists = false;
