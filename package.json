@@ -5,7 +5,7 @@
   "description": "A starter repository for a blog web site using the Eleventy static site generator.",
   "scripts": {
     "build-ci": "npm run js-build && eleventy && npm run test",
-    "build": "npm run clean && npm run js-build && eleventy && npm run test",
+    "build": "npm run clean && npm run build-ci",
     "watch": "concurrently \"npm run serve\" \"npm run js-build-watch\" \"npm run test-watch\"",
     "serve": "npm run clean && eleventy --serve",
     "js-build": "rollup -c rollup.config.js",
