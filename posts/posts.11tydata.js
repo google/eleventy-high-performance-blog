@@ -4,8 +4,9 @@ const isDev = require("../_data/isdevelopment")();
 function showDraft(data) {
   if (isDev) return true;
   const isDraft = "draft" in data && data.draft !== false;
-  const isFutureDate = data.page.date > todaysDate;
-  return !isDraft && !isFutureDate;
+  const isPostInFuture =
+    "scheduled" in data ? data.scheduled > todaysDate : false;
+  return !isDraft && !isPostInFuture;
 }
 
 module.exports = () => {
