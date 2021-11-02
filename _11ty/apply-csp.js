@@ -73,13 +73,13 @@ const addCspHash = async (rawContent, outputPath) => {
     const filePathPrettyURL = filePath.slice(0, -10); // blog/index.html ->  /blog/
     try {
       const headers = fs.readFileSync(headersPath, { encoding: "utf-8" });
-      const regExp = /(# \[custom headers\]\n)([\s\S]*)(# \[end custom headers\])/;
+      const regExp = /(# \[csp headers\]\n)([\s\S]*)(# \[end csp headers\])/;
       const match = headers.match(regExp);
       if (!match) {
-        throw `Check your _headers file. I couldn't find the text block for the custom headers:
-          # [custom headers]
+        throw `Check your _headers file. I couldn't find the text block for the csp headers:
+          # [csp headers]
           # this text will be replaced by apply-csp.js plugin
-          # [end custom headers]`;
+          # [end csp headers]`;
       }
       const oldCustomHeaders = headers.match(regExp)[2].toString();
       const CSPPolicy = `Content-Security-Policy: ${CSP.apply().regular.replace("HASHES", hashes.join(" "))}`;
@@ -89,7 +89,7 @@ const addCspHash = async (rawContent, outputPath) => {
         "\n", filePathPrettyURL, "\n  ", CSPPolicy);
       fs.writeFileSync(headersPath, headers.replace(regExp, `$1${newCustomHeaders}\n$3`));
     } catch (error) {
-      console.log("[apply-csp] Something went wrong with the creation of the headers\n", error);
+      console.log("[apply-csp] Something went wrong with the creation of the csp headers\n", error);
     }
   }
 

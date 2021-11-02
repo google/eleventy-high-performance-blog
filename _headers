@@ -12,6 +12,6 @@
 /favicon.svg
   cache-control: public,max-age=3600
 
-# [custom headers]
+# [csp headers]
 # this text will be replaced by apply-csp.js plugin
-# [end custom headers]
+# [end csp headers]
