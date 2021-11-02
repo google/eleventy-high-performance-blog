@@ -65,6 +65,20 @@ const addCspHash = async (rawContent, outputPath) => {
       hashes.push.apply(hashes, AUTO_RELOAD_SCRIPTS);
     }
 
+    // write CSP meta tag only for 404.html
+    // this guarantees at least a minimum csp policy for pages not found
+    if (outputPath === "_site/404.html") {
+      const csp = dom.window.document.querySelector(
+        "meta[http-equiv='Content-Security-Policy']"
+      );
+      if (csp) {
+        csp.setAttribute(
+          "content",
+          csp.getAttribute("content").replace("HASHES", hashes.join(" "))
+        );
+      }
+    }
+
     content = dom.serialize();
 
     // write CSP Policy in headers file
@@ -84,9 +98,13 @@ const addCspHash = async (rawContent, outputPath) => {
       const oldCustomHeaders = headers.match(regExp)[2].toString();
       const CSPPolicy = `Content-Security-Policy: ${CSP.apply().regular.replace("HASHES", hashes.join(" "))}`;
       // write headers for full path (/blog/index.html) and pretty url (/blog/)
-      const newCustomHeaders = oldCustomHeaders.concat(
-        "\n", filePath, "\n  ", CSPPolicy,
-        "\n", filePathPrettyURL, "\n  ", CSPPolicy);
+      // 404.html require a different pattern.
+      const newCustomHeaders = (outputPath != "_site/404.html")
+        ? oldCustomHeaders.concat(
+          "\n", filePath, "\n  ", CSPPolicy,
+          "\n", filePathPrettyURL, "\n  ", CSPPolicy)
+        : oldCustomHeaders.concat(
+          "\n", "/404.html", "\n  ", CSPPolicy)
       fs.writeFileSync(headersPath, headers.replace(regExp, `$1${newCustomHeaders}\n$3`));
     } catch (error) {
       console.log("[apply-csp] Something went wrong with the creation of the csp headers\n", error);

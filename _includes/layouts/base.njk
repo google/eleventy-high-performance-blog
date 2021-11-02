@@ -8,6 +8,9 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% if page.url=="/404.html" %}
+    <meta http-equiv="Content-Security-Policy" content="{{ csp.regular | safe }}">
+    {% endif %}
     {% if isdevelopment %}
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     {% else %}
