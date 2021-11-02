@@ -197,8 +197,10 @@ module.exports = function (eleventyConfig) {
 
   // Browsersync Overrides
   eleventyConfig.setBrowserSyncConfig({
+    // read CSP headers from _headers file, add it to response
     middleware: function (req, res, next) {
       const url = new URL(req.originalUrl, `http://${req.headers.host}/)`);
+      // add csp headers only for html pages (incluse pretty urls)
       if (url.pathname.endsWith("/") || url.pathname.endsWith(".html")) {
         const pathNameEscaped = url.pathname.replace(/[.*+?^${}()\/|[\]\\]/g, '\\$&');
         // add CSP Policy
@@ -211,7 +213,7 @@ module.exports = function (eleventyConfig) {
             res.setHeader("Content-Security-Policy", match[2]);
           }
         } catch (error) {
-          console.log("[setBrowserSyncConfig] Something went wrong with the creation of the headers\n", error);
+          console.log("[setBrowserSyncConfig] Something went wrong with the creation of the csp headers\n", error);
         }
       }
       next();
