@@ -16,6 +16,7 @@ const GA_ID = require("../_data/googleanalytics.js")();
 describe("check build output for a generic post", () => {
   describe("sample post", () => {
     const POST_FILENAME = "_site/posts/firstpost/index.html";
+    const POST_RELATIVEFILENAME = "/posts/firstpost/index.html";
     const URL = metadata.url;
     const POST_URL = URL + "/posts/firstpost/";
 
@@ -90,7 +91,18 @@ describe("check build output for a generic post", () => {
       expect(count).to.equal(1);
     });
 
-    // TODO: Check for a good CPS (_headers file)
+    it("should have a good CSP", () => {
+      const pathNameEscaped = POST_RELATIVEFILENAME.replace(/[.*+?^${}()\/|[\]\\]/g, '\\$&');
+      assert(existsSync("./_site/_headers"),"_header exists");
+      const headers = readFileSync("./_site/_headers", { encoding: "utf-8" });
+      const pattern = "(" + pathNameEscaped + "\n  Content-Security-Policy: )(.*)";
+      const match = headers.match(new RegExp(pattern));
+      const csp = match ? match[2] : false;
+      assert(match,"There is a CSP header");
+      expect(csp).to.contain(";object-src 'none';");
+      expect(csp).to.match(/^default-src 'self';/);
+
+    });
 
     it("should have accessible buttons", () => {
       const buttons = doc.querySelectorAll("button");
