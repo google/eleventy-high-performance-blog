@@ -163,7 +163,7 @@ module.exports = function (eleventyConfig) {
     return array.slice(0, n);
   });
 
-  
+
   eleventyConfig.addCollection("posts", function(collectionApi) {
     return collectionApi.getFilteredByTag("posts");
   });
@@ -173,7 +173,6 @@ module.exports = function (eleventyConfig) {
   // We need to copy cached.js only if GA is used
   eleventyConfig.addPassthroughCopy(GA_ID ? "js" : "js/*[!cached].*");
   eleventyConfig.addPassthroughCopy("fonts");
-  eleventyConfig.addPassthroughCopy("_headers");
 
   // We need to rebuild upon JS change to update the CSP.
   eleventyConfig.addWatchTarget("./js/");
@@ -197,6 +196,27 @@ module.exports = function (eleventyConfig) {
 
   // Browsersync Overrides
   eleventyConfig.setBrowserSyncConfig({
+    // read CSP headers from _headers file, add it to response
+    middleware: function (req, res, next) {
+      const url = new URL(req.originalUrl, `http://${req.headers.host}/)`);
+      // add csp headers only for html pages (incluse pretty urls)
+      if (url.pathname.endsWith("/") || url.pathname.endsWith(".html")) {
+        const pathNameEscaped = url.pathname.replace(/[.*+?^${}()\/|[\]\\]/g, '\\$&');
+        // add CSP Policy
+        try {
+          let headers = fs.readFileSync("_site/_headers", { encoding: "utf-8" });
+          // don't use literals string to avoid double escape
+          const pattern = "(" + pathNameEscaped + "\n  Content-Security-Policy: )(.*)";
+          const match = headers.match(new RegExp(pattern));
+          if (match) {
+            res.setHeader("Content-Security-Policy", match[2]);
+          }
+        } catch (error) {
+          console.log("[setBrowserSyncConfig] Something went wrong with the creation of the csp headers\n", error);
+        }
+      }
+      next();
+    },
     callbacks: {
       ready: function (err, browserSync) {
         const content_404 = fs.readFileSync("_site/404.html");
@@ -210,6 +230,19 @@ module.exports = function (eleventyConfig) {
     },
     ui: false,
     ghostMode: false,
+  });
+
+  // Run me before the build starts
+  eleventyConfig.on('beforeBuild', () => {
+    // Copy _header to dist
+    // Don't use addPassthroughCopy to prevent apply-csp from running before the _header file has been copied
+    try {
+      const headers = fs.readFileSync("./_headers", { encoding: "utf-8" });
+      fs.mkdirSync("./_site", { recursive: true });
+      fs.writeFileSync("_site/_headers", headers);
+    } catch (error) {
+      console.log("[beforeBuild] Something went wrong with the _headers file\n", error);
+    }
   });
 
   return {
