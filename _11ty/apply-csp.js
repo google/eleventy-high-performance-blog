@@ -115,13 +115,57 @@ const addCspHash = async (rawContent, outputPath) => {
   return content;
 };
 
+function parseHeaders(headersFile) {
+  let currentFilename;
+  let headers = {};
+  for (let line of headersFile.split(/\n+/)) {
+    if (!line) continue;
+    if (/^\S/.test(line)) {
+      currentFilename = line;
+      headers[currentFilename] = [];
+    } else {
+      line = line.trim();
+      const h = line.split(/:\s+/);
+      headers[currentFilename][h[0]] = h[1];
+    }
+  }
+  return headers;
+}
+
 module.exports = {
   initArguments: {},
   configFunction: async (eleventyConfig, pluginOptions = {}) => {
     eleventyConfig.addTransform("csp", addCspHash);
   },
+  parseHeaders: parseHeaders,
+  cspDevMiddleware: function (req, res, next) {
+    const url = new URL(req.originalUrl, `http://${req.headers.host}/)`);
+    // add csp headers only for html pages (include pretty urls)
+    if (url.pathname.endsWith("/") || url.pathname.endsWith(".html")) {
+      let headers;
+      try {
+        headers = parseHeaders(
+          fs.readFileSync("_site/_headers", {
+            encoding: "utf-8",
+          })
+        )[url.pathname];
+      } catch (error) {
+        console.error(
+          "[setBrowserSyncConfig] Something went wrong with the creation of the csp headers\n",
+          error
+        );
+      }
+      if (headers) {
+        const csp = headers["Content-Security-Policy"];
+        if (csp) {
+          res.setHeader("Content-Security-Policy", csp);
+        }
+      }
+    }
+    next();
+  },
 };
 
 function isDevelopmentMode() {
-  return /serve/.test(process.argv.join());
+  return /serve|dev/.test(process.argv.join());
 }
