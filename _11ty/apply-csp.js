@@ -68,9 +68,9 @@ const addCspHash = async (rawContent, outputPath) => {
     content = dom.serialize();
 
     // write CSP Policy in headers file
-    const headersPath = "./_site/_headers";
-    const filePath = outputPath.replace("_site/", "/"); // _site/blog/index.html ->  /blog/index.html
-    const filePathPrettyURL = filePath.slice(0, -10); // blog/index.html ->  /blog/
+    const headersPath = "./_site/.htaccess";
+    const filePath = outputPath.replace("_site/", "/"); // _site/index.html ->  /index.html
+    const filePathPrettyURL = filePath.slice(0, -10); // blog/index.html ->  /blog/ TODO**
     try {
       const headers = fs.readFileSync(headersPath, { encoding: "utf-8" });
       const regExp = /(# \[csp headers\]\n)([\s\S]*)(# \[end csp headers\])/;
@@ -145,7 +145,7 @@ module.exports = {
       let headers;
       try {
         headers = parseHeaders(
-          fs.readFileSync("_site/_headers", {
+          fs.readFileSync("_site/.htaccess", {
             encoding: "utf-8",
           })
         )[url.pathname];
