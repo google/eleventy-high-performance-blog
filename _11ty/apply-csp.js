@@ -67,16 +67,17 @@ const addCspHash = async (rawContent, outputPath) => {
 
     content = dom.serialize();
 
-    // write CSP Policy in headers file
+    // write CSP Policy in .htaccess file
     const headersPath = "./_site/.htaccess";
-    const filePath = outputPath.replace("_site/", "/"); // _site/index.html ->  /index.html
-    const filePathPrettyURL = filePath.slice(0, -10); // blog/index.html ->  /blog/ TODO**
+    const filePath = outputPath.replace("_site/", "/"); // _site/blog/index.html ->  /blog/index.html
+    const filePathPrettyURL = filePath.slice(0, -10); // blog/index.html ->  /blog/
+
     try {
       const headers = fs.readFileSync(headersPath, { encoding: "utf-8" });
       const regExp = /(# \[csp headers\]\n)([\s\S]*)(# \[end csp headers\])/;
       const match = headers.match(regExp);
       if (!match) {
-        throw `Check your _headers file. I couldn't find the text block for the csp headers:
+        throw `Check your .htaccess file. I couldn't find the text block for the csp headers:
           # [csp headers]
           # this text will be replaced by apply-csp.js plugin
           # [end csp headers]`;

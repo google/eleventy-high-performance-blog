@@ -93,9 +93,9 @@ describe("check build output for a generic post", () => {
     });
 
     it("should have a good CSP", () => {
-      assert(existsSync("./_site/_headers"), "_header exists");
+      assert(existsSync("./_site/.htaccess"), ".htaccess exists");
       const headers = parseHeaders(
-        readFileSync("./_site/_headers", { encoding: "utf-8" })
+        readFileSync("./_site/.htaccess", { encoding: "utf-8" })
       );
       POST_PATH;
       expect(headers).to.have.key(POST_PATH);
