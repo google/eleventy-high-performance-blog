@@ -1,11 +1,11 @@
 {
-  "title": "Title of the website. Update me.",
-  "url": "https://update-me.com",
-  "domain": "update-me.com",
+  "title": "DPCG, Co. Technical SEO",
+  "url": "https://dev.denverprophit.us",
+  "domain": "dev.denverprophit.us",
   "description": "Description of the website. Update me.",
-  "genre": "Insert a schema.org genre",
-  "webmaster": "webmaster email address",
-  "timezone": "Insert timezone America/New_York",
+  "genre": "Technical SEO",
+  "webmaster": "webmaster@denverprophit.us",
+  "timezone": "America/New_York",
   "googleAnalyticsId": "GA ID. Update me. Note, that this is not compatible with the not-yet-commonly used version 4 of Google Analytics",
   "sendWebVitals": false,
   "feed": {
