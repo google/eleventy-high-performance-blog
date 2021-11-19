@@ -66,7 +66,6 @@ const addCspHash = async (rawContent, outputPath) => {
     }
 
     content = dom.serialize();
-
     // write CSP Policy in .htaccess file
     const headersPath = "./_site/.htaccess";
     const filePath = outputPath.replace("_site/", "/"); // _site/blog/index.html ->  /blog/index.html
