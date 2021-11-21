@@ -1,0 +1,6 @@
+Nunjucks 👷:
+- any: '_includes/layouts/**/*.njk'
+Data 🖥:
+- any: '_data/**/*.js'
+CSS 🎨:
+- any: 'css/**/*.css'
