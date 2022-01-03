@@ -255,11 +255,6 @@ addEventListener("click", (e) => {
   fn(handler);
 });
 
-// There is a race condition here if an image loads faster than this JS file. But
-// - that is unlikely
-// - it only means potentially more costly layouts for that image.
-// - And so it isn't worth the querySelectorAll it would cost to synchronously check
-//   load state.
 function removeBlurredImage(img) {
   // Ensure the browser doesn't try to draw the placeholder when the real image is present.
   img.style.backgroundImage = "none";
