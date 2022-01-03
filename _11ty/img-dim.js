@@ -59,10 +59,11 @@ const processImage = async (img, outputPath) => {
     img.setAttribute("width", dimensions.width);
     img.setAttribute("height", dimensions.height);
   }
-  if (dimensions.type == "svg") {
+  const inputType = dimensions.type;
+  if (inputType == "svg") {
     return;
   }
-  if (dimensions.type == "gif") {
+  if (inputType == "gif") {
     const videoSrc = await gif2mp4(src);
     const video = img.ownerDocument.createElement(
       /AMP/i.test(img.tagName) ? "amp-video" : "video"
@@ -81,6 +82,7 @@ const processImage = async (img, outputPath) => {
     img.parentElement.replaceChild(video, img);
     return;
   }
+  const fallbackType = inputType == "png" ? "png" : "jpeg";
   if (img.tagName == "IMG") {
     img.setAttribute("decoding", "async");
     img.setAttribute("loading", "lazy");
@@ -98,8 +100,8 @@ const processImage = async (img, outputPath) => {
     avif.setAttribute("type", "image/avif");
     await setSrcset(webp, src, "webp");
     webp.setAttribute("type", "image/webp");
-    const fallback = await setSrcset(jpeg, src, "jpeg");
-    jpeg.setAttribute("type", "image/jpeg");
+    const fallback = await setSrcset(jpeg, src, fallbackType);
+    jpeg.setAttribute("type", `image/${fallbackType}`);
     picture.appendChild(avif);
     picture.appendChild(webp);
     picture.appendChild(jpeg);
@@ -107,7 +109,7 @@ const processImage = async (img, outputPath) => {
     picture.appendChild(img);
     img.setAttribute("src", fallback);
   } else if (!img.getAttribute("srcset")) {
-    const fallback = await setSrcset(img, src, "jpeg");
+    const fallback = await setSrcset(img, src, fallbackType);
     img.setAttribute("src", fallback);
   }
 };
