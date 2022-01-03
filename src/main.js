@@ -76,7 +76,9 @@ function prefetch(e) {
    * @return {string} url without fragment
    */
   const removeUrlFragment = (url) => url.split("#")[0];
-  if (removeUrlFragment(window.location.href) === removeUrlFragment(e.target.href)) {
+  if (
+    removeUrlFragment(window.location.href) === removeUrlFragment(e.target.href)
+  ) {
     return;
   }
   var l = document.createElement("link");
@@ -152,14 +154,14 @@ const sendWebVitals = document.currentScript.getAttribute("data-cwv-src");
 
 if (/web-vitals.js/.test(sendWebVitals)) {
   dynamicScriptInject(`${window.location.origin}/js/web-vitals.js`)
-  .then(() => {
-    webVitals.getCLS(sendToGoogleAnalytics);
-    webVitals.getFID(sendToGoogleAnalytics);
-    webVitals.getLCP(sendToGoogleAnalytics);
-  })
-  .catch((error) => {
-    console.error(error);
-  });
+    .then(() => {
+      webVitals.getCLS(sendToGoogleAnalytics);
+      webVitals.getFID(sendToGoogleAnalytics);
+      webVitals.getLCP(sendToGoogleAnalytics);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 }
 
 addEventListener(
@@ -258,14 +260,22 @@ addEventListener("click", (e) => {
 // - it only means potentially more costly layouts for that image.
 // - And so it isn't worth the querySelectorAll it would cost to synchronously check
 //   load state.
+function removeBlurredImage(img) {
+  // Ensure the browser doesn't try to draw the placeholder when the real image is present.
+  img.style.backgroundImage = "none";
+}
 document.body.addEventListener(
   "load",
   (e) => {
     if (e.target.tagName != "IMG") {
       return;
     }
-    // Ensure the browser doesn't try to draw the placeholder when the real image is present.
-    e.target.style.backgroundImage = "none";
+    removeBlurredImage(e.target);
   },
   /* capture */ "true"
 );
+for (let img of document.querySelectorAll("img")) {
+  if (img.complete) {
+    removeBlurredImage(img);
+  }
+}
