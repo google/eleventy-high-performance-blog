@@ -82,6 +82,9 @@ const processImage = async (img, outputPath) => {
     img.parentElement.replaceChild(video, img);
     return;
   }
+  // When the input is a PNG, we keep the fallback image a PNG because JPEG does
+  // not support transparency. However, we still optimize to AVIF/WEBP in a lossy
+  // fashion. It may be worth adding a feature to opt-out of lossy optimization.
   const fallbackType = inputType == "png" ? "png" : "jpeg";
   if (img.tagName == "IMG") {
     img.setAttribute("decoding", "async");
