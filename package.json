@@ -13,7 +13,7 @@
     "debug": "DEBUG=* eleventy && npm run test",
     "test": "mocha test/test*.js",
     "test-watch": "mocha test/test*.js --watch",
-    "clean" : "rm -Rf ./_site/posts/*"
+    "clean": "rm -Rf ./_site/posts/*"
   },
   "pre-push": [
     "build"
@@ -49,7 +49,7 @@
     "@ampproject/toolbox-optimizer": "^2.8.3",
     "any-shell-escape": "^0.1.1",
     "clean-css": "^4.2.3",
-    "concurrently": "^5.2.0",
+    "concurrently": "^7.0.0",
     "csp-hash-generator": "0.0.3",
     "csso": "^4.0.3",
     "datauri": "^3.0.0",
