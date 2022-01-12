@@ -37,7 +37,7 @@
     "fs-extra": "^8.1.0",
     "jsdom": "^15.1.1",
     "luxon": "^1.21.3",
-    "markdown-it": "^8.4.2",
+    "markdown-it": "^12.3.2",
     "markdown-it-anchor": "^5.2.5",
     "node-fetch": "^2.6.1",
     "pre-commit": "^1.2.2",
