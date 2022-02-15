@@ -39,7 +39,7 @@
     "luxon": "^1.21.3",
     "markdown-it": "^12.3.2",
     "markdown-it-anchor": "^5.2.5",
-    "node-fetch": "^2.6.1",
+    "node-fetch": "^2.6.7",
     "pre-commit": "^1.2.2",
     "pre-push": "^0.1.1",
     "rollup-plugin-terser": "^6.1.0",
