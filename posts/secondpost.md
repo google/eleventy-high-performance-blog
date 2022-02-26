@@ -7,6 +7,7 @@ tags:
   - number-2
 layout: layouts/post.njk
 ---
+
 Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.
 
 ## Section Header
@@ -25,3 +26,7 @@ Capitalize on low hanging fruit to identify a ballpark value added activity to b
 # Test Relative Local Image
 
 ![Test Share SVG](../../img/doener.jpg)
+
+# Test PNG
+
+![Png By @clipartmax.com](https://www.clipartmax.com/png/full/0-9896_film-clipart-free-to-use-public-domain-movie-clip-art-directors-board.png)

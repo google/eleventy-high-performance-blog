@@ -28,7 +28,7 @@
   },
   "homepage": "https://github.com/11ty/eleventy-base-blog#readme",
   "devDependencies": {
-    "@11ty/eleventy": "^0.12.1",
+    "@11ty/eleventy": "^1.0.0",
     "@11ty/eleventy-navigation": "^0.1.3",
     "@11ty/eleventy-plugin-rss": "^1.0.7",
     "@11ty/eleventy-plugin-syntaxhighlight": "^3.0.1",
@@ -39,14 +39,14 @@
     "fs-extra": "^8.1.0",
     "jsdom": "^15.1.1",
     "luxon": "^1.21.3",
-    "markdown-it": "^12.3",
     "markdown-it-abbr": "^1.0.4",
-    "markdown-it-anchor": "^8.3",
     "markdown-it-attrs": "^4.0.0",
     "markdown-it-bracketed-spans": "^1.0.1",
     "markdown-it-container": "^3.0.0",
     "markdown-it-footnote": "^3.0.3",
     "markdown-it-plain-text": "^0.2.1",
+    "markdown-it": "^12.3.2",
+    "markdown-it-anchor": "^5.2.5",
     "node-fetch": "^2.6.7",
     "pre-commit": "^1.2.2",
     "pre-push": "^0.1.1",
@@ -57,7 +57,7 @@
     "@ampproject/toolbox-optimizer": "^2.8.3",
     "any-shell-escape": "^0.1.1",
     "clean-css": "^4.2.3",
-    "concurrently": "^6.4.0",
+    "concurrently": "^7.0.0",
     "csp-hash-generator": "0.0.3",
     "csso": "^4.0.3",
     "datauri": "^3.0.0",
@@ -74,6 +74,7 @@
     "querystring": "^0.2.0",
     "rollup": "^2.23.0",
     "sharp": "^0.29.0",
+    "touch": "^3.1.0",
     "twitter": "^1.7.1"
   }
 }
