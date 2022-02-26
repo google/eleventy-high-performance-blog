@@ -39,7 +39,7 @@
     "fs-extra": "^8.1.0",
     "jsdom": "^15.1.1",
     "luxon": "^1.21.3",
-    "markdown-it": "^12.2",
+    "markdown-it": "^12.3",
     "markdown-it-abbr": "^1.0.4",
     "markdown-it-anchor": "^8.3",
     "markdown-it-attrs": "^4.0.0",
