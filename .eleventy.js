@@ -188,6 +188,15 @@ module.exports = function (eleventyConfig) {
     }
   });
 
+  // After the build touch any file in the test directory to do a test run.
+  eleventyConfig.on("afterBuild", async () => {
+    const files = await readdir("test");
+    for (const file of files) {
+      touch(`test/${file}`);
+      break;
+    }
+  });
+
   return {
     templateFormats: ["md", "njk", "html", "liquid"],
 
