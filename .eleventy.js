@@ -134,7 +134,7 @@ module.exports = function (eleventyConfig) {
   }); 
   
   // issue: 76
-   eleventyConfig.addCollection("posts", function(collectionApi) {
+   eleventyConfig.addCollection("technical-seo", function(collectionApi) {
     return collectionApi.getFilteredByGlob("technical-seo/*.md");
   });
   
