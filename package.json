@@ -4,15 +4,13 @@
   "license": "MIT",
   "description": "A starter repository for a blog web site using the Eleventy static site generator.",
   "scripts": {
-    "build-ci": "npm run js-build && node_modules/.bin/eleventy && npm run test",
+    "build-ci": "npm run js-build && node_modules/.bin/eleventy",
     "build": "npm run clean && npm run build-ci",
-    "watch": "concurrently \"npm run serve\" \"npm run js-build-watch\" \"npm run test-watch\"",
+    "watch": "concurrently \"npm run serve\" \"npm run js-build-watch\"",
     "serve": "npm run clean && node_modules/.bin/eleventy --serve",
     "js-build": "node_modules/.bin/rollup -c rollup.config.js",
     "js-build-watch": "node_modules/.bin/rollup -c rollup.config.js -w",
-    "debug": "DEBUG=* node_modules/.bin/eleventy && npm run test",
-    "test": "node_modules/.bin/mocha test/test*.js",
-    "test-watch": "node_modules/.bin/mocha test/test*.js --watch",
+    "debug": "DEBUG=* node_modules/.bin/eleventy,
     "clean": "rm -Rf ./_site/posts/*"
   },
   "pre-push": [
