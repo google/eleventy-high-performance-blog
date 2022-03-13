@@ -16,7 +16,6 @@ const markdownItAnchor = require("markdown-it-anchor");
 const localImages = require("./third_party/eleventy-plugin-local-images/.eleventy.js");
 const CleanCSS = require("clean-css");
 const GA_ID = require("./_data/metadata.json").googleAnalyticsId;
-const { cspDevMiddleware } = require("./_11ty/apply-csp.js");
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(pluginRss);
@@ -34,7 +33,6 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(require("./_11ty/img-dim.js"));
   eleventyConfig.addPlugin(require("./_11ty/json-ld.js"));
   eleventyConfig.addPlugin(require("./_11ty/optimize-html.js"));
-  eleventyConfig.addPlugin(require("./_11ty/apply-csp.js"));
   eleventyConfig.setDataDeepMerge(true);
   eleventyConfig.addLayoutAlias("post", "layouts/post.njk");
   eleventyConfig.addNunjucksAsyncFilter(
@@ -129,17 +127,17 @@ module.exports = function (eleventyConfig) {
     return array.slice(0, n);
   });
 
-  eleventyConfig.addCollection("posts", function (collectionApi) {
-    return collectionApi.getFilteredByTag("posts");
-  }); 
+  eleventyConfig.addCollection("technical-seo", function(collectionApi) {
+    return collectionApi.getFilteredByGlob("**/technical-seo/*.md").sort(function(a, b) {
+      //return a.date - b.date; // sort by date - ascending
+      return b.date - a.date; // sort by date - descending
+    });
+});
   
-  // issue: 76
-   eleventyConfig.addCollection("technical-seo", function(collectionApi) {
-    return collectionApi.getFilteredByGlob("technical-seo/*.md");
-  });
-  
+
   eleventyConfig.addCollection("tagList", require("./_11ty/getTagList"));
   eleventyConfig.addPassthroughCopy("img");
+  eleventyConfig.addPassthroughCopy("technical-seo/images/*.jpg");
   eleventyConfig.addPassthroughCopy("css");
   // We need to copy cached.js only if GA is used
   eleventyConfig.addPassthroughCopy(GA_ID ? "js" : "js/*[!cached].*");
@@ -167,7 +165,6 @@ module.exports = function (eleventyConfig) {
 
   // Browsersync Overrides
   eleventyConfig.setBrowserSyncConfig({
-    middleware: cspDevMiddleware,
     callbacks: {
       ready: function (err, browserSync) {
         const content_404 = fs.readFileSync("_site/404.html");
@@ -182,8 +179,6 @@ module.exports = function (eleventyConfig) {
     ui: false,
     ghostMode: false,
   });
-
-
 
   // After the build touch any file in the test directory to do a test run.
   eleventyConfig.on("afterBuild", async () => {
