@@ -127,17 +127,40 @@ module.exports = function (eleventyConfig) {
     return array.slice(0, n);
   });
 
-  eleventyConfig.addCollection("technical-seo", function(collectionApi) {
-    return collectionApi.getFilteredByGlob("**/technical-seo/*.md").sort(function(a, b) {
+  eleventyConfig.addCollection("technical", function(collectionApi) {
+    return collectionApi.getFilteredByGlob("technical-seo/*.md").sort(function(a, b) {
+      //return a.date - b.date; // sort by date - ascending
+      return b.date - a.date; // sort by date - descending
+    });
+});
+
+  eleventyConfig.addCollection("content", function(collectionApi) {
+    return collectionApi.getFilteredByGlob("content-marketing/*.md").sort(function(a, b) {
       //return a.date - b.date; // sort by date - ascending
       return b.date - a.date; // sort by date - descending
     });
 });
   
+  eleventyConfig.addCollection("templates", function(collectionApi) {
+    return collectionApi.getFilteredByGlob("website-templates/*.md").sort(function(a, b) {
+      //return a.date - b.date; // sort by date - ascending
+      return b.date - a.date; // sort by date - descending
+    });
+});
+
+  eleventyConfig.addCollection("social", function(collectionApi) {
+    return collectionApi.getFilteredByGlob("social-marketing/*.md").sort(function(a, b) {
+      //return a.date - b.date; // sort by date - ascending
+      return b.date - a.date; // sort by date - descending
+    });
+});
 
   eleventyConfig.addCollection("tagList", require("./_11ty/getTagList"));
   eleventyConfig.addPassthroughCopy("img");
+  eleventyConfig.addPassthroughCopy("content-marketing/images/*.jpg");
+  eleventyConfig.addPassthroughCopy("social-media/images/*.jpg");
   eleventyConfig.addPassthroughCopy("technical-seo/images/*.jpg");
+  eleventyConfig.addPassthroughCopy("website-templates/images/*.jpg");
   eleventyConfig.addPassthroughCopy("css");
   // We need to copy cached.js only if GA is used
   eleventyConfig.addPassthroughCopy(GA_ID ? "js" : "js/*[!cached].*");
