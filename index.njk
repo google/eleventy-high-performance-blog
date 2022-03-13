@@ -3,7 +3,7 @@ title: Title. Update me.
 layout: layouts/home.njk
 description: Description. Update me.
 image: https://upload.wikimedia.org/wikipedia/en/a/a9/Example.jpg
-date: Last Modified
+date: 2020-01-08
 ---
 
 <p>
@@ -12,7 +12,13 @@ date: Last Modified
 </p>
 
 <div id="posts">
-  <h2>Posts</h2>
-  {% set postslist = collections.posts %}
+  <h2>Technical-SEO Post</h2>
+ {% set postslist = collections.technical %}
+  {% include "postslist.njk" %}
+</div>
+
+<div id="posts">
+  <h2>Content Marketing Post</h2>
+ {% set postslist = collections.content %}
   {% include "postslist.njk" %}
 </div>

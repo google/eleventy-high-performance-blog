@@ -96,12 +96,12 @@ Header set X-XSS-Protection "1; mode=block"
   <filesmatch "\.(json)$">
     Header set Cache-Control "max-age=2592000, private"
   </filesmatch>
+
+# [csp headers]
+# this text will be replaced by apply-csp.js plugin
+# [end csp headers]
 </IfModule>
 
 RewriteEngine on
   RewriteBase /
   RewriteRule ^.well-known/(host-meta|webfinger).* https://fed.brid.gy/$0  [redirect=302,last]
-
-# [csp headers]
-# this text will be replaced by apply-csp.js plugin
-# [end csp headers]

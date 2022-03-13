@@ -6,3 +6,4 @@ js/min.js.map
 .vscode/
 .netlify/
 export
+tmp/

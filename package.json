@@ -11,7 +11,7 @@
     "js-build": "node_modules/.bin/rollup -c rollup.config.js",
     "js-build-watch": "node_modules/.bin/rollup -c rollup.config.js -w",
     "debug": "DEBUG=* node_modules/.bin/eleventy",
-    "clean": "rm -Rf ./_site/posts/*"
+    "clean": "rm -Rf ./_site/*"
   },
   "pre-push": [
     "build"
@@ -37,14 +37,14 @@
     "fs-extra": "^8.1.0",
     "jsdom": "^15.1.1",
     "luxon": "^1.21.3",
+    "markdown-it": "^12.3.2",
     "markdown-it-abbr": "^1.0.4",
+    "markdown-it-anchor": "^5.2.5",
     "markdown-it-attrs": "^4.0.0",
     "markdown-it-bracketed-spans": "^1.0.1",
     "markdown-it-container": "^3.0.0",
     "markdown-it-footnote": "^3.0.3",
     "markdown-it-plain-text": "^0.2.1",
-    "markdown-it": "^12.3.2",
-    "markdown-it-anchor": "^5.2.5",
     "node-fetch": "^2.6.7",
     "pre-commit": "^1.2.2",
     "pre-push": "^0.1.1",
