@@ -72,9 +72,7 @@ exports.handler = function (event, context, callback) {
   const origin = event.headers["origin"] || event.headers["Origin"] || "";
   console.log(`Received ${event.httpMethod} request from, origin: ${origin}`);
 
-  const isOriginallowlisted =
-    originallowlist.indexOf(origin) >= 0 ||
-    origin.endsWith("-upbeat-shirley-608546.netlify.app") >= 0;
+  const isOriginallowlisted = originallowlist.indexOf(origin) >= 0;
   if (!isOriginallowlisted) {
     console.info("Bad origin", origin);
   }
