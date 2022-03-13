@@ -19,12 +19,12 @@
   "pre-commit": [],
   "repository": {
     "type": "git",
-    "url": "git://github.com/11ty/eleventy-base-blog.git"
+    "url": "git@github.com:denverprophitjr/yada-11ty-themes.git"
   },
   "bugs": {
-    "url": "https://github.com/11ty/eleventy-base-blog/issues"
+    "url": "https://github.com/denverprophitjr/yada-11ty-themes/issues"
   },
-  "homepage": "https://github.com/11ty/eleventy-base-blog#readme",
+  "homepage": "https://github.com/denverprophitjr/yada-11ty-themes#readme",
   "devDependencies": {
     "@11ty/eleventy": "^1.0.0",
     "@11ty/eleventy-navigation": "^0.1.3",

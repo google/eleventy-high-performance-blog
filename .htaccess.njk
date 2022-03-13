@@ -10,12 +10,8 @@ AddDefaultCharset UTF-8
 AddEncoding x-compress .Z
 AddEncoding x-gzip .gz .tgz
 SetEnv SERVER_ADMIN {{ metadata.webmaster }}
-
-<Files .htaccess>
-	Order allow,deny
-	Deny from all
-</Files>
-
+X-Frame-Options: SAMEORIGIN
+X-XSS-Protection: 1; mode=block
 
 <IfModule mod_deflate.c>
 AddOutputFilterByType DEFLATE text/html
@@ -96,10 +92,6 @@ Header set X-XSS-Protection "1; mode=block"
   <filesmatch "\.(json)$">
     Header set Cache-Control "max-age=2592000, private"
   </filesmatch>
-
-# [csp headers]
-# this text will be replaced by apply-csp.js plugin
-# [end csp headers]
 </IfModule>
 
 RewriteEngine on
