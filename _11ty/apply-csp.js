@@ -73,7 +73,7 @@ const addCspHash = async (rawContent, outputPath) => {
     const filePathPrettyURL = filePath.slice(0, -10); // blog/index.html ->  /blog/
     try {
       const headers = fs.readFileSync(headersPath, { encoding: "utf-8" });
-      const regExp = /(# \[csp headers\]\n)([\s\S]*)(# \[end csp headers\])/;
+      const regExp = /(# \[csp headers\][\r\n]+)([\s\S]*)(# \[end csp headers\])/;
       const match = headers.match(regExp);
       if (!match) {
         throw `Check your _headers file. I couldn't find the text block for the csp headers:
@@ -118,7 +118,7 @@ const addCspHash = async (rawContent, outputPath) => {
 function parseHeaders(headersFile) {
   let currentFilename;
   let headers = {};
-  for (let line of headersFile.split(/\n+/)) {
+  for (let line of headersFile.split(/[\r\n]+/)) {
     if (!line) continue;
     if (/^\S/.test(line)) {
       currentFilename = line;
