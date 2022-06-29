@@ -8,7 +8,7 @@ Based on the awesome [eleventy-base-blog](https://github.com/11ty/eleventy-base-
 
 ## Demo
 
-- [Netlify Demo](https://eleventy-high-performance-blog-sample.industrialempathy.com/)
+- [Demo](https://eleventy-high-performance-blog-sample.industrialempathy.com/)
 - [Original site this template was based on](https://www.industrialempathy.com/)
 
 ## Getting Started
@@ -96,7 +96,7 @@ npm run build
 #### Miscellaneous
 
 - Immutable URLs for JS.
-- Sets immutable caching headers for images, fonts, and JS (CSS is inlined). Currently implements for Netlify `_headers` file.
+- Sets immutable caching headers for images, fonts, and JS (CSS is inlined).
 - Minifies HTML and optimizes it for compression. Uses [html-minifier](https://www.npmjs.com/package/html-minifier) with aggressive options.
 - Uses [rollup](https://rollupjs.org/) to bundle JS and minifies it with [terser](https://terser.org/).
 - Prefetches same-origin navigations when a navigation is likely.
@@ -109,7 +109,7 @@ npm run build
 
 #### Analytics
 
-- Supports locally serving Google Analytics's JS and proxying it's hit requests to a Netlify proxy (other proxies could be easily added).
+- Supports locally serving Google Analytics's JS and proxying it's hit requests to a serverless function proxy (other proxies could be easily added).
 - Supports sending [Core Web Vitals](https://web.dev/vitals/) metrics to Google Analytics as [events](https://github.com/GoogleChrome/web-vitals#send-the-results-to-google-analytics).
 - Support for noscript hit requests.
 - Avoids blocking onload on analytics requests.
