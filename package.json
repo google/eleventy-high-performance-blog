@@ -33,7 +33,7 @@
     "@11ty/eleventy-plugin-rss": "^1.0.7",
     "@11ty/eleventy-plugin-syntaxhighlight": "^3.0.1",
     "eleventy-plugin-local-images": "^0.4.0",
-    "file-type": "^12.0.1",
+    "file-type": "^16.5.4",
     "fs-extra": "^8.1.0",
     "jsdom": "^15.1.1",
     "luxon": "^1.21.3",
