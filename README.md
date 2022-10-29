@@ -8,6 +8,8 @@ Based on the awesome [eleventy-base-blog](https://github.com/11ty/eleventy-base-
 
 ## Demo
 
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fgoogle%2Feleventy-high-performance-blog)
+
 - [Demo](https://eleventy-high-performance-blog-sample.industrialempathy.com/)
 - [Original site this template was based on](https://www.industrialempathy.com/)
 
