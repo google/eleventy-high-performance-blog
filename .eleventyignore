@@ -1,11 +1,12 @@
 .DS_Store
 .github/
+.vercel/
 .netlify/
-_site/
+\_site/
 node_modules/
 package-lock.json
 README.md
-_11ty/
+\_11ty/
 third_party
 functions
 test
