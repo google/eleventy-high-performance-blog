@@ -59,7 +59,7 @@
     "html-minifier": "^4.0.0",
     "image-size": "^0.8.3",
     "lru-cache": "^5.1.1",
-    "mocha": "^8.4.0",
+    "mocha": "^10.1.0",
     "phin": "^3.5.0",
     "purge-from-html": "^1.0.3",
     "purgecss": "^4.0.3",
