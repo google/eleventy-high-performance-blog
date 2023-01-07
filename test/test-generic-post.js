@@ -16,8 +16,7 @@ const { parseHeaders } = require("../_11ty/apply-csp");
 
 describe("check build output for a generic post", () => {
   describe("sample post", () => {
-    const POST_PATH = "/posts/firstpost/";
-    const POST_FILENAME = `_site${POST_PATH}index.html`;
+    const POST_FILENAME = "_site/posts/firstpost/index.html";
     const URL = metadata.url;
     const POST_URL = URL + POST_PATH;
 
@@ -93,13 +92,12 @@ describe("check build output for a generic post", () => {
     });
 
     it("should have a good CSP", () => {
-      assert(existsSync("./_site/_headers"), "_header exists");
-      const headers = parseHeaders(
-        readFileSync("./_site/_headers", { encoding: "utf-8" })
+      const csp = select(
+        "meta[http-equiv='Content-Security-Policy']",
+        "content"
       );
-      POST_PATH;
-      expect(headers).to.have.key(POST_PATH);
-      expect(headers).to.have.key(`${POST_PATH}index.html`);
+      expect(csp).to.contain(";object-src 'none';");
+      expect(csp).to.match(/^default-src 'self';/);
     });
 
     it("should have accessible buttons", () => {

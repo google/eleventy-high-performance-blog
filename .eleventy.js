@@ -180,6 +180,7 @@ module.exports = function (eleventyConfig) {
   // We need to copy cached.js only if GA is used
   eleventyConfig.addPassthroughCopy(GA_ID ? "js" : "js/*[!cached].*");
   eleventyConfig.addPassthroughCopy("fonts");
+  eleventyConfig.addPassthroughCopy("_headers");
 
   // We need to rebuild upon JS change to update the CSP.
   eleventyConfig.addWatchTarget("./js/");
@@ -203,7 +204,6 @@ module.exports = function (eleventyConfig) {
 
   // Browsersync Overrides
   eleventyConfig.setBrowserSyncConfig({
-    middleware: cspDevMiddleware,
     callbacks: {
       ready: function (err, browserSync) {
         const content_404 = fs.readFileSync("_site/404.html");
@@ -217,22 +217,6 @@ module.exports = function (eleventyConfig) {
     },
     ui: false,
     ghostMode: false,
-  });
-
-  // Run me before the build starts
-  eleventyConfig.on("beforeBuild", () => {
-    // Copy _header to dist
-    // Don't use addPassthroughCopy to prevent apply-csp from running before the _header file has been copied
-    try {
-      const headers = fs.readFileSync("./_headers", { encoding: "utf-8" });
-      fs.mkdirSync("./_site", { recursive: true });
-      fs.writeFileSync("_site/_headers", headers);
-    } catch (error) {
-      console.log(
-        "[beforeBuild] Something went wrong with the _headers file\n",
-        error
-      );
-    }
   });
 
   // After the build touch any file in the test directory to do a test run.
