@@ -5,7 +5,6 @@ const readFileSync = require("fs").readFileSync;
 const existsSync = require("fs").existsSync;
 const metadata = require("../_data/metadata.json");
 const GA_ID = require("../_data/googleanalytics.js")();
-const { parseHeaders } = require("../_11ty/apply-csp");
 
 /**
  * These tests kind of suck and they are kind of useful.
@@ -16,10 +15,9 @@ const { parseHeaders } = require("../_11ty/apply-csp");
 
 describe("check build output for a generic post", () => {
   describe("sample post", () => {
-    const POST_PATH = "/posts/firstpost/";
-    const POST_FILENAME = `_site${POST_PATH}index.html`;
+    const POST_FILENAME = "_site/posts/firstpost/index.html";
     const URL = metadata.url;
-    const POST_URL = URL + POST_PATH;
+    const POST_URL = URL + "/posts/firstpost/";
 
     if (!existsSync(POST_FILENAME)) {
       it("WARNING skipping tests because POST_FILENAME does not exist", () => {});
@@ -92,15 +90,16 @@ describe("check build output for a generic post", () => {
       expect(count).to.equal(1);
     });
 
+    /*
+    // Update me. Comment in if you turned on the CSP support.
     it("should have a good CSP", () => {
-      assert(existsSync("./_site/_headers"), "_header exists");
-      const headers = parseHeaders(
-        readFileSync("./_site/_headers", { encoding: "utf-8" })
+      const csp = select(
+        "meta[http-equiv='Content-Security-Policy']",
+        "content"
       );
-      POST_PATH;
-      expect(headers).to.have.key(POST_PATH);
-      expect(headers).to.have.key(`${POST_PATH}index.html`);
-    });
+      expect(csp).to.contain(";object-src 'none';");
+      expect(csp).to.match(/^default-src 'self';/);
+    });*/
 
     it("should have accessible buttons", () => {
       const buttons = doc.querySelectorAll("button");
