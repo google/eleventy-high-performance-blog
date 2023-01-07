@@ -102,33 +102,6 @@ module.exports = {
   configFunction: async (eleventyConfig, pluginOptions = {}) => {
     eleventyConfig.addTransform("csp", addCspHash);
   },
-  parseHeaders: parseHeaders,
-  cspDevMiddleware: function (req, res, next) {
-    const url = new URL(req.originalUrl, `http://${req.headers.host}/)`);
-    // add csp headers only for html pages (include pretty urls)
-    if (url.pathname.endsWith("/") || url.pathname.endsWith(".html")) {
-      let headers;
-      try {
-        headers = parseHeaders(
-          fs.readFileSync("_site/_headers", {
-            encoding: "utf-8",
-          })
-        )[url.pathname];
-      } catch (error) {
-        console.error(
-          "[setBrowserSyncConfig] Something went wrong with the creation of the csp headers\n",
-          error
-        );
-      }
-      if (headers) {
-        const csp = headers["Content-Security-Policy"];
-        if (csp) {
-          res.setHeader("Content-Security-Policy", csp);
-        }
-      }
-    }
-    next();
-  },
 };
 
 function isDevelopmentMode() {

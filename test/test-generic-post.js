@@ -5,7 +5,6 @@ const readFileSync = require("fs").readFileSync;
 const existsSync = require("fs").existsSync;
 const metadata = require("../_data/metadata.json");
 const GA_ID = require("../_data/googleanalytics.js")();
-const { parseHeaders } = require("../_11ty/apply-csp");
 
 /**
  * These tests kind of suck and they are kind of useful.
@@ -91,6 +90,8 @@ describe("check build output for a generic post", () => {
       expect(count).to.equal(1);
     });
 
+    /*
+    // Update me. Comment in if you turned on the CSP support.
     it("should have a good CSP", () => {
       const csp = select(
         "meta[http-equiv='Content-Security-Policy']",
@@ -98,7 +99,7 @@ describe("check build output for a generic post", () => {
       );
       expect(csp).to.contain(";object-src 'none';");
       expect(csp).to.match(/^default-src 'self';/);
-    });
+    });*/
 
     it("should have accessible buttons", () => {
       const buttons = doc.querySelectorAll("button");
