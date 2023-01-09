@@ -36,7 +36,7 @@
     "file-type": "^16.5.4",
     "fs-extra": "^8.1.0",
     "jsdom": "^16.5.0",
-    "luxon": "^1.21.3",
+    "luxon": "^2.5.2",
     "markdown-it": "^12.3.2",
     "markdown-it-anchor": "^5.2.5",
     "node-fetch": "^2.6.7",
