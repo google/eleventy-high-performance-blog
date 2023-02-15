@@ -615,8 +615,12 @@ table {
 pre {
   font-family: Consolas, Monaco, Andale Mono, Ubuntu Mono, monospace;
 }
+pre:has(code:not([class])) {
+  background: #2d2d2d;
+}
 pre code:not([class]) {
-  padding: 1.5em;
+  color: #ccc;
+  padding: 0;
   overflow-x: scroll;
 }
 code,
