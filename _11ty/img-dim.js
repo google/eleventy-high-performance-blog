@@ -50,7 +50,7 @@ const processImage = async (img, outputPath) => {
   }
   let dimensions;
   try {
-    dimensions = await sizeOf("_site/" + src);
+    dimensions = await sizeOf(path.resolve(__dirname, `../_site/${src}`));
   } catch (e) {
     console.warn(e.message, src);
     return;
