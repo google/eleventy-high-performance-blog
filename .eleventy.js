@@ -201,21 +201,6 @@ module.exports = function (eleventyConfig) {
   });
   eleventyConfig.setLibrary("md", markdownLibrary);
 
-  // Browsersync Overrides
-  eleventyConfig.setBrowserSyncConfig({
-    callbacks: {
-      ready: function (err, browserSync) {
-        browserSync.addMiddleware("*", (req, res) => {
-          // Provides the 404 content without redirect.
-          res.write(fs.readFileSync("_site/404.html"));
-          res.end();
-        });
-      },
-    },
-    ui: false,
-    ghostMode: false,
-  });
-
   // After the build touch any file in the test directory to do a test run.
   eleventyConfig.on("afterBuild", async () => {
     const files = await readdir("test");
