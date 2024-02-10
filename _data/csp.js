@@ -27,8 +27,10 @@
  * or the comments at the end of the `CSP` const below.
  */
 
-const SELF = quote("self");
+const isDev = require("./isdevelopment")();
 
+const SELF = quote("self");
+const UNSAFE_INLINE = quote("unsafe-inline");
 const CSP = {
   regular: serialize([
     // By default only talk to same-origin
@@ -39,7 +41,9 @@ const CSP = {
     // If you need to add an external host for scripts you need to add an item like 'https://code.jquery.com/jquery-3.6.0.slim.min.js' to this list.
     ["script-src", SELF, /* Replaced by csp.js plugin */ "HASHES"],
     // Inline CSS is allowed.
-    ["style-src", quote("unsafe-inline")],
+    ["style-src", UNSAFE_INLINE],
+    // in serve mode, reference the css file for fast reload
+    ["style-src-elem", isDev ? SELF : UNSAFE_INLINE],
     // Images may also come from data-URIs.
     ["img-src", SELF, "data:"],
 
